@@ -21,7 +21,7 @@ All studies here are currently **macro-level** — systems, structures, framewor
 
 ## What's Here
 
-### 🔴 DIRE-X — Live Product
+### DIRE-X — Live Product
 **Dynamic Intelligence & Risk Engine**  
 A gamified geopolitics and supply chain simulation built to solve Smart India Hackathon 2025's problem statement: *"Gamifying the learning experience for kids."*
 
