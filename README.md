@@ -110,11 +110,10 @@ If you want to know whether I can do something, here's where to look:
 | Can you reframe a problem? | GeoRisk Tracker — turned a fraud patch into a trust-model redesign |
 | Do you think beyond the brief? | EMP modular architecture — asked to integrate, built to be portable |
 | Can you build a business case? | ANIM-E — ₹120–150 Cr ROI model, competitive matrix, 25-slide pitch |
-| Do you understand governance? | Namibia — sovereignty protections, SPV structures, liability boundaries |
 | Do you have user empathy? | Majuli — 54 scenes written for children as the primary audience |
 | Can you take something end-to-end? | Majuli: research → screenplay → promotional brief → poster direction |
 | Can you ship a product? | DIRE-X — live at dire-x.vercel.app, built solo, ~15,000 lines of code |
-| Do you understand AI's limits? | Used LLMs as stress-testers across all research; documented where they fail |
+| Do you understand AI's limits? | Used LLMs as stress-testers across all research |
 
 ---
 
