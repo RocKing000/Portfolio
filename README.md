@@ -64,21 +64,6 @@ Two distinct products under one brand:
 - **B2B Content Infrastructure Platform** — 3-system architecture with integrated intelligence layer, stakeholder personas across 5 types, competitive positioning matrix
 - **Enterprise pitch deck** — 25 slides; ROI model quantifying ₹120–150 Cr annual value unlock through content duplication reduction and asset reuse
 
-#### `/sagar-raja-products`
-Five independently specified products under a single holding company structure. Each document contains: canonical brand definition · product classification tables · material/formulation architecture · IP ownership boundaries · single-line positioning statement.
-
-| Product | Domain |
-|---------|--------|
-| STRIKER™ | Adaptive military-duty protective apparel |
-| RIDER™ | Premium electric performance sedan |
-| RASM | Plant-based nutrition substrate |
-| GEO™ | Hybrid analog-digital geological watch |
-| SR-C6™ | Industrial carbon black platform |
-
-**Holding structure:** Sagar-Raja (ADGM parent) · Estonia (EU operations) · Switzerland (IP custodianship) · Singapore (APAC hub)
-
-**What this proves:** Product specification discipline across unrelated industries — the same documentation rigour regardless of domain.
-
 ---
 
 ### 📁 `/authored` — Authored Works
