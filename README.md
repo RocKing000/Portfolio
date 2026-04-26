@@ -46,7 +46,6 @@ Three unsolicited government proposals written as independent research — no br
 |----------|-------------------|
 | Bahrain Water Recovery Proposal | Industrial waste-to-water system for MWWUP; recovery cost modelled at $0.30–0.45/m³ vs $5.90/m³ conventional desalination |
 | Saudi Arabia Water Recovery Proposal | Same framework adapted for MEWA; financial projections, PPP structures, implementation roadmaps |
-| Namibia Strategic Partnership Proposal | Sovereign development partnership — 100% private capex, zero state burden, SPV governance, capability multiplication framing |
 
 Research base includes independent study of global trade corridors across Indo-Pacific, Eurasian, and Asia-Europe routes, continental SEZ design, and sovereign infrastructure frameworks.
 
