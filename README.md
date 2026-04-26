@@ -28,7 +28,7 @@ A gamified geopolitics and supply chain simulation built to solve Smart India Ha
 **Live:** [dire-x.vercel.app](https://dire-x.vercel.app)
 
 Built solo. Full-stack: React/Vite (Vercel) · Node.js game server (Render) · Python FastAPI scoring engine (Render) · PostgreSQL (Supabase).  
-Models 92 countries · 80+ companies · 15 strategic resources · 7 crisis types · 84 API endpoints · 20 simulation engines · ~15,000 lines of code.
+Models 92 countries · 80+ companies · 15 strategic resources · 7 crisis types · 84 API endpoints · 20 simulation engines.
 
 Core differentiator: **SRES (Strategic Resource Evaluation Score)** — a proprietary multi-dimensional risk index giving each company a live, resource-weighted score across supply, demand, geopolitical, and environmental pressures simultaneously.
 
