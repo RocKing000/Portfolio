@@ -1,6 +1,6 @@
-# Licensing — Eagle Strategic Suite (ESS)
+# Licensing: Eagle Strategic Suite (ESS)
 
-The Eagle Strategic Suite bundle provides access to Organisation Intelligence and Alignment Intelligence. It is designed for institutional clients assessing portfolio companies against a defined structural standard.
+The Eagle Strategic Suite (ESS) bundle provides access to Organisation Intelligence and Alignment Intelligence. It is designed for institutional clients assessing portfolio companies against a defined structural standard.
 
 ---
 
@@ -32,4 +32,4 @@ Contact research@trinetra.life. Include a description of the portfolio and the i
 
 ## Upgrading
 
-ESS clients may upgrade to the Eagle Portfolio Suite (EPS) at any time to add Portfolio Intelligence — cross-portfolio structural pattern analysis, correlated risk mapping, and portfolio-level synthesis. See [portfolio-intelligence/licensing.md](../portfolio-intelligence/licensing.md).
+ESS clients may upgrade to the Eagle Portfolio Suite (EPS) at any time to add Portfolio Intelligence: cross-portfolio structural pattern analysis, correlated risk mapping, and portfolio-level synthesis. See [portfolio-intelligence/licensing.md](../portfolio-intelligence/licensing.md).

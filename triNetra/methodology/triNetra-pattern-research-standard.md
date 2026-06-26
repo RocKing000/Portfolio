@@ -1,6 +1,6 @@
 # triNetra Pattern Research Standard (TPRS)
 
-All triNetra research engagements are conducted under the triNetra Pattern Research Standard. The TPRS governs the integrity of the research process from problem intake through to delivery.
+All triNetra research engagements are conducted under the triNetra Pattern Research Standard (TPRS). The TPRS governs the integrity of the research process from problem intake through to delivery.
 
 ---
 
@@ -33,7 +33,7 @@ What it does not produce: implementation plans, vendor shortlists, technology ro
 
 triNetra does not implement systems. It does not recommend vendors. It does not produce strategy decks. It does not maintain ongoing management relationships with assessed organisations.
 
-It derives the structural pattern beneath a problem and hands the organisation a governed framework it can maintain independently. This is not a limitation — it is the standard that makes the research credible.
+It derives the structural pattern beneath a problem and hands the organisation a governed framework it can maintain independently. This is not a limitation. It is the standard that makes the research credible.
 
 ---
 

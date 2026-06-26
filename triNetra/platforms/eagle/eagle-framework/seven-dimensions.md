@@ -8,7 +8,7 @@ The Eagle Framework evaluates deployed systems across seven dimensions. Each dim
 
 **What it evaluates:** Whether every output the system produces can be traced to specific, identifiable evidence inputs.
 
-A system that cannot attribute its outputs to evidence cannot be audited. When a decision is challenged — by a regulator, a court, or an affected party — the organisation must be able to show not just what the system decided, but what evidence that decision was based on. Evidence Attribution measures whether that traceability is structurally built into the system, not reconstructed after the fact.
+A system that cannot attribute its outputs to evidence cannot be audited. When a decision is challenged by a regulator, a court, or an affected party, the organisation must be able to show not just what the system decided, but what evidence that decision was based on. Evidence Attribution measures whether that traceability is structurally built into the system, not reconstructed after the fact.
 
 ---
 
@@ -30,7 +30,7 @@ A system that states high confidence in outputs that are frequently wrong is str
 
 ## 4. Counterfactual Accountability
 
-**What it evaluates:** Whether the system can account for decisions it did not make — specifically, what would have changed if a key input had been different.
+**What it evaluates:** Whether the system can account for decisions it did not make, specifically what would have changed if a key input had been different.
 
 Counterfactual Accountability is a structural requirement for fairness and discrimination analysis. If a system cannot produce a credible counterfactual account, it cannot demonstrate that its outputs are free from structural bias. This dimension evaluates whether counterfactual reasoning is architecturally supported, not whether the system happens to produce fair outputs.
 
@@ -38,7 +38,7 @@ Counterfactual Accountability is a structural requirement for fairness and discr
 
 ## 5. Human Oversight Readiness
 
-**What it evaluates:** Whether meaningful human oversight of system outputs is structurally enabled — not merely permitted in policy.
+**What it evaluates:** Whether meaningful human oversight of system outputs is structurally enabled, not merely permitted in policy.
 
 A human oversight requirement that is not structurally supported by the system's architecture is not an oversight mechanism. Human Oversight Readiness evaluates whether the system produces outputs in forms that human reviewers can actually evaluate, whether review triggers are defined, and whether override mechanisms are implemented and logged.
 
@@ -48,7 +48,7 @@ A human oversight requirement that is not structurally supported by the system's
 
 **What it evaluates:** Whether a structural failure, harmful output, or unexpected behaviour can be reconstructed after it occurs with sufficient granularity to identify root cause.
 
-Incident Reconstruction Capability is the forensic dimension. When something goes wrong — and in high-consequence systems, things will go wrong — the organisation must be able to reconstruct what happened, why, and at which structural layer the failure originated. Systems that do not support this reconstruction cannot be governed in the aftermath of failure.
+Incident Reconstruction Capability is the forensic dimension. When something goes wrong, and in high-consequence systems things will go wrong, the organisation must be able to reconstruct what happened, why, and at which structural layer the failure originated. Systems that do not support this reconstruction cannot be governed in the aftermath of failure.
 
 ---
 

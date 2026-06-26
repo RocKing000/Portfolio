@@ -10,13 +10,13 @@ The Eagle Framework aligns to Articles 9, 13, 14, and 17 of the EU AI Act, which
 
 | Eagle Dimension | EU AI Act Alignment |
 |---|---|
-| Evidence Attribution | Article 13 — Transparency and provision of information to users |
-| Decision Traceability | Article 13 — Transparency; Article 9 — Risk management system |
-| Confidence Calibration | Article 9 — Risk management system; accuracy, robustness, cybersecurity |
-| Counterfactual Accountability | Article 9 — Non-discrimination requirements; Article 13 — Limitations and known risks |
-| Human Oversight Readiness | Article 14 — Human oversight |
-| Incident Reconstruction Capability | Article 17 — Quality management system; post-market monitoring |
-| Audit Trail Completeness | Article 17 — Quality management system; Article 9 — Logging and record-keeping |
+| Evidence Attribution | Article 13: Transparency and provision of information to users |
+| Decision Traceability | Article 13: Transparency; Article 9: Risk management system |
+| Confidence Calibration | Article 9: Risk management system; accuracy, robustness, cybersecurity |
+| Counterfactual Accountability | Article 9: Non-discrimination requirements; Article 13: Limitations and known risks |
+| Human Oversight Readiness | Article 14: Human oversight |
+| Incident Reconstruction Capability | Article 17: Quality management system; post-market monitoring |
+| Audit Trail Completeness | Article 17: Quality management system; Article 9: Logging and record-keeping |
 
 ---
 
@@ -52,4 +52,4 @@ The Eagle Framework aligns to the OECD AI Principles covering transparency and e
 
 An Eagle Score and Assessment Report do not constitute regulatory compliance certification. They provide a structured, evidence-grounded assessment of a system's structural readiness for compliance, identifying the specific structural gaps that need to be addressed.
 
-Organisations using the Eagle Insight Platform have a structured basis for regulatory engagement: a documented assessment conducted by an independent party using a defined methodology aligned to the applicable regulatory frameworks.
+Organisations using the Eagle Insight Platform (EIP) have a structured basis for regulatory engagement: a documented assessment conducted by an independent party using a defined methodology aligned to the applicable regulatory frameworks.

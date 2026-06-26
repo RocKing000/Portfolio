@@ -2,9 +2,9 @@
 
 > Are we aligned. Where are the gaps. What diverges. What needs to evolve.
 
-Alignment Intelligence enables institutional clients to define their investment criteria and structural expectations once — then evaluate portfolio companies against that standard consistently across every assessment cycle.
+Alignment Intelligence enables institutional clients to define their investment criteria and structural expectations once. It then evaluates portfolio companies against that standard consistently across every assessment cycle.
 
-Available in the ESS and EPS bundles.
+Available in the Eagle Strategic Suite (ESS) and Eagle Portfolio Suite (EPS) bundles.
 
 ---
 
@@ -22,7 +22,7 @@ Available in the ESS and EPS bundles.
 | Document | Purpose |
 |---|---|
 | [what-you-receive.md](what-you-receive.md) | Full specification of deliverables |
-| [reference-manifest.md](reference-manifest.md) | The Reference Manifest — how institutional criteria are encoded |
+| [reference-manifest.md](reference-manifest.md) | The Reference Manifest: how institutional criteria are encoded |
 | [how-it-works.md](how-it-works.md) | End-to-end process for institutional clients |
 | [licensing.md](licensing.md) | ESS pricing and bundle details |
 

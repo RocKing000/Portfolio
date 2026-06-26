@@ -8,20 +8,22 @@ RiskOpsBench 1.0 is a domain-agnostic benchmark corpus and scoring engine for ev
 
 Standard AI benchmarks measure output accuracy on well-defined tasks under clean conditions. RiskOpsBench evaluates reasoning quality under the conditions that make high-consequence deployments structurally different from benchmark environments:
 
-- **Uncertainty** — incomplete or ambiguous information where the correct answer is not determinable from available inputs
-- **Partial observability** — the system cannot access the full state of the environment it is operating in
-- **Conflicting signals** — inputs that point in contradictory directions
-- **Adversarial obfuscation** — deliberate attempts to manipulate system outputs through prompt construction or input manipulation
+| Condition | Description |
+|---|---|
+| **Uncertainty** | Incomplete or ambiguous information where the correct answer is not determinable from available inputs |
+| **Partial observability** | The system cannot access the full state of the environment it is operating in |
+| **Conflicting signals** | Inputs that point in contradictory directions |
+| **Adversarial obfuscation** | Deliberate attempts to manipulate system outputs through prompt construction or input manipulation |
 
 ---
 
 ## Scoring
 
-**TERS — Total Epistemic Reasoning Score**  
+**Total Epistemic Reasoning Score (TERS)**
 A composite score measuring the evaluated system's reasoning quality across all challenge types and difficulty partitions.
 
-**ECE — Expected Calibration Error**  
-A measure of the gap between the system's expressed confidence and its actual accuracy rate across the corpus. A system with high ECE is structurally miscalibrated: it expresses certainty in outputs that are frequently wrong.
+**Expected Calibration Error (ECE)**
+A measure of the gap between the system's expressed confidence and its actual accuracy rate across the corpus. A system with high ECE is structurally miscalibrated. It expresses certainty in outputs that are frequently wrong.
 
 No large language model is involved at any stage of corpus generation or scoring.
 

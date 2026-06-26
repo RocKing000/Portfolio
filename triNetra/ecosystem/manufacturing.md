@@ -11,11 +11,11 @@
 
 ## Purpose
 
-Manufacturing Insight Platform will apply the Eagle Framework to AI and decision systems operating in manufacturing contexts — process management, quality assurance, supply chain decision-making, and production optimisation.
+The Manufacturing Insight Platform (MIP) will apply the Eagle Framework to AI and decision systems operating in manufacturing contexts: process management, quality assurance, supply chain decision-making, and production optimisation.
 
-Manufacturing systems are structurally distinct from information systems: physical consequences of AI decision failures are immediate, irreversible, and often invisible until they propagate through the production chain. A quality system that misclassifies defects does not produce an incorrect data point. It produces defective product at scale, liability exposure, and supply chain disruption. The structural conditions that allow this to happen are assessable before the failure occurs.
+Manufacturing systems are structurally distinct from information systems. The physical consequences of AI decision failures are immediate, irreversible, and often invisible until they propagate through the production chain. A quality system that misclassifies defects does not produce an incorrect data point. It produces defective product at scale, liability exposure, and supply chain disruption. The structural conditions that allow this to happen are assessable before the failure occurs.
 
-The Manufacturing Insight Platform is being built to make those conditions visible and measurable.
+MIP is being built to make those conditions visible and measurable.
 
 ---
 

@@ -1,6 +1,6 @@
-# What You Receive — Portfolio Intelligence
+# What You Receive: Portfolio Intelligence
 
-Portfolio Intelligence produces three portfolio-level deliverables synthesised across all assessed companies in the EPS engagement.
+Portfolio Intelligence produces three portfolio-level deliverables synthesised across all assessed companies in the Eagle Portfolio Suite (EPS) engagement.
 
 ---
 
@@ -10,15 +10,15 @@ An analysis of structural patterns that repeat across multiple portfolio compani
 
 The pattern analysis distinguishes between:
 
-- **Isolated gaps** — present in one or a small number of companies, addressable through targeted engagement
-- **Recurring patterns** — present across multiple companies, indicating a systemic structural condition in the portfolio
-- **Correlated structures** — companies whose structural profiles are similar enough to produce correlated failure modes under the same external conditions
+- **Isolated gaps:** present in one or a small number of companies, addressable through targeted engagement
+- **Recurring patterns:** present across multiple companies, indicating a systemic structural condition in the portfolio
+- **Correlated structures:** companies whose structural profiles are similar enough to produce correlated failure modes under the same external conditions
 
 ---
 
 ## Correlated Risk Map
 
-A structured map of where structural risks are correlated across the portfolio. Identifies which companies share failure-mode proximity — meaning a structural failure in one company creates conditions that increase risk in correlated companies.
+A structured map of where structural risks are correlated across the portfolio. Identifies which companies share failure-mode proximity, meaning a structural failure in one company creates conditions that increase risk in correlated companies.
 
 The Correlated Risk Map gives the institutional client a basis for portfolio-level risk management that is structurally grounded rather than sector-classification-based.
 

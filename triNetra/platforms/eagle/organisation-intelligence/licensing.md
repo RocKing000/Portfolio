@@ -1,4 +1,4 @@
-# Licensing — Eagle Insight Platform (EIP)
+# Licensing: Eagle Insight Platform (EIP)
 
 The Eagle Insight Platform bundle provides access to Organisation Intelligence: a structural evaluation of a deployed system producing an Eagle Score, maturity level classification, and full Assessment Report.
 

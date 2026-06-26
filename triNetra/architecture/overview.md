@@ -28,17 +28,17 @@ Most AI governance and assessment tools are built as monolithic products: one to
 
 triNetra is built on a different model: a research ecosystem that produces domain-specific platforms. The distinction matters structurally.
 
-A **research ecosystem** conducts research into the structural conditions of high-consequence systems before it builds assessment instruments. The assessment instruments are derived from research, not designed speculatively. This means each platform is grounded in the actual structural requirements of its domain — not in a generalised governance framework retrofitted to the domain.
+A **research ecosystem** conducts research into the structural conditions of high-consequence systems before it builds assessment instruments. The assessment instruments are derived from research, not designed speculatively. This means each platform is grounded in the actual structural requirements of its domain, not in a generalised governance framework retrofitted to the domain.
 
-A **domain-specific Insight Platform** is a complete research instrument for one domain. It has its own domain taxonomy, manifest library, scoring parameters, regulatory alignment, and research agenda. It is not a configuration of a general-purpose tool. Eagle Insight Platform assesses AI and organisational intelligence systems. Energy Insight Platform will assess energy systems. They share the Eagle Framework as a methodological foundation, but their domain architecture is independently derived.
+A **domain-specific Insight Platform** is a complete research instrument for one domain. It has its own domain taxonomy, manifest library, scoring parameters, regulatory alignment, and research agenda. It is not a configuration of a general-purpose tool. Eagle Insight Platform (EIP) assesses AI and organisational intelligence systems. Energy Insight Platform will assess energy systems. They share the Eagle Framework as a methodological foundation, but their domain architecture is independently derived.
 
 ---
 
 ## Why Eagle Is the First Platform
 
-Eagle Insight Platform addresses AI and Organisational Intelligence because the structural conditions of AI governance are the most immediately consequential across every industry. Regulatory pressure (EU AI Act, NIST AI RMF, ISO 42001) is active. Institutional demand for structured, independent assessment is growing faster than the supply of credible assessment instruments.
+Eagle Insight Platform (EIP) addresses AI and Organisational Intelligence because the structural conditions of AI governance are the most immediately consequential across every industry. Regulatory pressure (EU AI Act, NIST AI RMF, ISO 42001) is active. Institutional demand for structured, independent assessment is growing faster than the supply of credible assessment instruments.
 
-The research required to build Eagle — the seven auditability dimensions, the scoring methodology, the 30-domain manifest library — simultaneously produces the methodological foundation for subsequent platforms. Energy systems, manufacturing systems, and infrastructure systems all share structural assessment requirements with AI systems, even if the domain-specific parameters differ.
+The research required to build Eagle encompasses the seven auditability dimensions, the scoring methodology, and the 30-domain manifest library. This body of research simultaneously produces the methodological foundation for subsequent platforms. Energy systems, manufacturing systems, and infrastructure systems all share structural assessment requirements with AI systems, even if the domain-specific parameters differ.
 
 Eagle is the first platform. It is not the only platform.
 
@@ -49,7 +49,7 @@ Eagle is the first platform. It is not the only platform.
 Every triNetra Insight Platform shares:
 
 - The Eagle Framework's seven auditability dimensions as the structural assessment foundation
-- The PaaF methodology as the research methodology
+- The Patterns as a Framework (PaaF) methodology as the research methodology
 - The triNetra Pattern Research Standard as the engagement integrity standard
 - The scoring architecture (Eagle Score, maturity levels) with domain-specific weighting parameters
 

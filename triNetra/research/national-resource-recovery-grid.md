@@ -13,9 +13,9 @@ Could India's four largest industrial ecosystems be connected through shared inf
 
 ## The Structural Argument
 
-India's four largest industrial ecosystems — steel, cement, power generation, and chemical manufacturing — each produce waste streams that are inputs for the others. Steel slag is a cement additive. Fly ash from power generation is a concrete filler. Carbon dioxide from cement kilns is a feedstock for chemical synthesis. Crop residue, burned at scale, is a gasification fuel.
+India's four largest industrial ecosystems: steel, cement, power generation, and chemical manufacturing, each produce waste streams that are inputs for the others. Steel slag is a cement additive. Fly ash from power generation is a concrete filler. Carbon dioxide from cement kilns is a feedstock for chemical synthesis. Crop residue, burned at scale, is a gasification fuel.
 
-These relationships exist but are not systematically exploited. The resource flows happen at the margins, driven by individual bilateral arrangements rather than integrated shared infrastructure. The National Resource Recovery Grid proposes a structural mechanism — shared infrastructure connecting these four ecosystems — that would convert currently wasted resource flows into productive inputs at national scale.
+These relationships exist but are not systematically exploited. The resource flows happen at the margins, driven by individual bilateral arrangements rather than integrated shared infrastructure. The National Resource Recovery Grid proposes a structural mechanism: shared infrastructure connecting these four ecosystems that would convert currently wasted resource flows into productive inputs at national scale.
 
 ---
 

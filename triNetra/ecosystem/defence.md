@@ -11,11 +11,11 @@
 
 ## Purpose
 
-Defence Insight Platform will apply the Eagle Framework to AI and decision systems operating in defence contexts — systems where the structural conditions of evaluation are maximally adversarial: partial observability, conflicting signals, deliberate obfuscation, and consequences that cannot be reversed.
+Defence Insight Platform will apply the Eagle Framework to AI and decision systems operating in defence contexts. These are systems where the structural conditions of evaluation are maximally adversarial: partial observability, conflicting signals, deliberate obfuscation, and consequences that cannot be reversed.
 
-The structural requirements for AI auditability in defence are not a stricter version of general AI governance requirements. They are structurally different. A defence AI system must demonstrate auditability not under ideal conditions, but under the conditions it is designed to operate in — which include adversarial actors specifically attempting to defeat the system's reasoning architecture. This requires an assessment methodology that evaluates structural resilience under adversarial conditions, not just nominal operational conditions.
+The structural requirements for AI auditability in defence are not a stricter version of general AI governance requirements. They are structurally different. A defence AI system must demonstrate auditability not under ideal conditions, but under the conditions it is designed to operate in. Those conditions include adversarial actors specifically attempting to defeat the system's reasoning architecture. This requires an assessment methodology that evaluates structural resilience under adversarial conditions, not just nominal operational conditions.
 
-The Eagle Framework's adversarial evaluation capability — built into the assessment engine from the outset — makes the Defence Insight Platform a natural extension of the research that produced Eagle.
+The Eagle Framework's adversarial evaluation capability, built into the assessment engine from the outset, makes the Defence Insight Platform a natural extension of the research that produced Eagle.
 
 ---
 

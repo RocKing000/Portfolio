@@ -1,4 +1,4 @@
-# What You Receive — Alignment Intelligence
+# What You Receive: Alignment Intelligence
 
 Alignment Intelligence produces three deliverables per portfolio company assessment: an Alignment Score, a Gap Analysis, and a Structural Divergence Analysis.
 
@@ -6,7 +6,7 @@ Alignment Intelligence produces three deliverables per portfolio company assessm
 
 ## Alignment Score
 
-A score representing how closely the assessed portfolio company meets the institutional criteria encoded in the Reference Manifest. The Alignment Score is comparable across assessments because both sides — the Reference Manifest and the Input Manifest — are evaluated using the same Eagle Framework dimensions.
+A score representing how closely the assessed portfolio company meets the institutional criteria encoded in the Reference Manifest. The Alignment Score is comparable across assessments because both sides of the evaluation, the Reference Manifest and the Input Manifest, are evaluated using the same Eagle Framework dimensions.
 
 ---
 
@@ -25,14 +25,14 @@ The Gap Analysis gives the institutional client a structured basis for portfolio
 
 ## Structural Divergence Analysis
 
-A comparison layer that identifies where the assessed system's structural design diverges from the expectations encoded in the Reference Manifest — not merely where it scores lower, but where its structural architecture conflicts with the investor's stated requirements.
+A comparison layer that identifies where the assessed system's structural design diverges from the expectations encoded in the Reference Manifest. This analysis identifies not merely where a company scores lower, but where its structural architecture conflicts with the investor's stated requirements.
 
-The Structural Divergence Analysis is the basis for ESS clients' portfolio engagement strategy: it identifies the structural conversations that need to happen before the next assessment cycle.
+The Structural Divergence Analysis is the basis for Eagle Strategic Suite (ESS) clients' portfolio engagement strategy: it identifies the structural conversations that need to happen before the next assessment cycle.
 
 ---
 
 ## Across the Portfolio
 
-For ESS clients assessing multiple portfolio companies against the same Reference Manifest, the deliverables are directly comparable. The same Eagle Framework dimensions, the same scoring methodology, the same Reference Manifest — applied to each company independently.
+For ESS clients assessing multiple portfolio companies against the same Reference Manifest, the deliverables are directly comparable. The same Eagle Framework dimensions, the same scoring methodology, and the same Reference Manifest are applied to each company independently.
 
-Portfolio-level synthesis across all companies is available in the EPS bundle. See [Portfolio Intelligence](../portfolio-intelligence/).
+Portfolio-level synthesis across all companies is available in the Eagle Portfolio Suite (EPS) bundle. See [Portfolio Intelligence](../portfolio-intelligence/).

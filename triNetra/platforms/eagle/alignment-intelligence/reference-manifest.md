@@ -8,7 +8,7 @@ The Reference Manifest is the mechanism by which an institutional client encodes
 
 A Reference Manifest is a structured document that defines what the institutional client requires of a portfolio company's AI systems across the seven Eagle Framework dimensions. It answers: what does a company need to demonstrate, at the structural level, to meet our criteria?
 
-The Reference Manifest is not a checklist. It is a structured specification of structural expectations — the evidence, traceability, oversight posture, and auditability requirements that the institution has determined are necessary for its investment thesis.
+The Reference Manifest is not a checklist. It is a structured specification of structural expectations: the evidence, traceability, oversight posture, and auditability requirements that the institution has determined are necessary for its investment thesis.
 
 ---
 
@@ -22,7 +22,7 @@ The process surfaces questions the institution may not have previously formalise
 
 ## How It Is Used
 
-Once defined, the Reference Manifest is applied consistently across every portfolio company assessment in the ESS or EPS engagement. Each company's Input Manifest is evaluated against the Reference Manifest, producing an Alignment Score and Gap Analysis specific to that company.
+Once defined, the Reference Manifest is applied consistently across every portfolio company assessment in the Eagle Strategic Suite (ESS) or Eagle Portfolio Suite (EPS) engagement. Each company's Input Manifest is evaluated against the Reference Manifest, producing an Alignment Score and Gap Analysis specific to that company.
 
 ---
 
@@ -34,7 +34,7 @@ The Reference Manifest accumulates institutional value over time. It can be:
 - **Refined** based on what assessments reveal across the portfolio
 - **Reused** across every new portfolio company without rework
 
-The library of Reference Manifests a firm builds over successive ESS or EPS cycles is the primary long-term asset of the Eagle Strategic Suite platform license. It represents the firm's institutionalised, evidence-grounded structural standard — independent of any individual analyst or portfolio manager.
+The library of Reference Manifests a firm builds over successive ESS or EPS cycles is the primary long-term asset of the Eagle Strategic Suite platform license. It represents the firm's institutionalised, evidence-grounded structural standard, independent of any individual analyst or portfolio manager.
 
 ---
 

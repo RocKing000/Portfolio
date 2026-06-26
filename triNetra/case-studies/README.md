@@ -1,8 +1,8 @@
 # Case Studies
 
-These case studies illustrate Eagle Insight Platform assessment output using published sample scenarios. They demonstrate what the platform produces, how findings are structured, and what structural improvement looks like across assessment cycles.
+These case studies illustrate Eagle Insight Platform (EIP) assessment output using published sample scenarios. They demonstrate what the platform produces, how findings are structured, and what structural improvement looks like across assessment cycles.
 
-All scenarios are from the Enterprise Cybersecurity domain — one of the 30 canonical high-risk domains in the Eagle Framework domain manifest library.
+All scenarios are from the Enterprise Cybersecurity domain, one of the 30 canonical high-risk domains in the Eagle Framework domain manifest library.
 
 Interactive versions of both samples are available on the triNetra website.
 

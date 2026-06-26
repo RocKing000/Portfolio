@@ -1,14 +1,14 @@
 # Methodology
 
-triNetra's research methodology is PaaF — Patterns as a Framework. It is the analytical foundation underlying the Eagle Insight Platform and all triNetra research engagements.
+triNetra's research methodology is Patterns as a Framework (PaaF). It is the analytical foundation underlying the Eagle Insight Platform (EIP) and all triNetra research engagements.
 
 ---
 
-## PaaF — Patterns as a Framework
+## PaaF: Patterns as a Framework
 
 PaaF is a recursive structural assessment methodology. It operates through cycles of observation, pattern extraction, structural interpretation, and evolution direction.
 
-The methodology is built on a single principle: observe first, derive second. Patterns are extracted from observed system reality — not from theoretical models, generic best practice, or industry benchmarks. The framework that emerges is specific to the system it was derived from.
+The methodology is built on a single principle: observe first, derive second. Patterns are extracted from observed system reality. They are not drawn from theoretical models, generic best practice, or industry benchmarks. The framework that emerges is specific to the system it was derived from.
 
 [See full four-phase specification →](paaf-four-phases.md)
 
@@ -16,7 +16,7 @@ The methodology is built on a single principle: observe first, derive second. Pa
 
 ## triNetra Pattern Research Standard (TPRS)
 
-All triNetra research engagements — including Eagle Insight Platform assessments — are conducted under the triNetra Pattern Research Standard. The TPRS governs the integrity of the research process: how evidence is gathered, how patterns are extracted, how findings are validated, and what triNetra will and will not produce.
+All triNetra research engagements, including EIP assessments, are conducted under the triNetra Pattern Research Standard (TPRS). The TPRS governs the integrity of the research process: how evidence is gathered, how patterns are extracted, how findings are validated, and what triNetra will and will not produce.
 
 [See engagement model →](triNetra-pattern-research-standard.md)
 

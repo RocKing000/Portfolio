@@ -26,7 +26,7 @@ Without the research, the assessment instrument does not exist.
 
 triNetra conducts research and operates an assessment platform. These are not contradictory. They are sequential and mutually reinforcing.
 
-The research produces the assessment instruments. The assessment engagements generate evidence that informs the research. A finding that a specific Eagle Framework dimension consistently produces ambiguous results in a specific domain is a research finding — it means the dimension's specification needs refinement for that domain. The research-platform cycle is how the instruments improve.
+The research produces the assessment instruments. The assessment engagements generate evidence that informs the research. A finding that a specific Eagle Framework dimension consistently produces ambiguous results in a specific domain is a research finding. It means the dimension's specification needs refinement for that domain. The research-platform cycle is how the instruments improve.
 
 ---
 

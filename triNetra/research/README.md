@@ -1,6 +1,6 @@
 # Research
 
-triNetra's research programme addresses systems where complexity exceeds current understanding. Research studies apply the PaaF methodology to open structural questions in complex systems — producing pattern-derived frameworks and structural analyses that serve as public evidence of the methodology's applicability.
+triNetra's research programme addresses systems where complexity exceeds current understanding. Research studies apply the Patterns as a Framework (PaaF) methodology to open structural questions in complex systems. Each study produces pattern-derived frameworks and structural analyses that serve as public evidence of the methodology's applicability.
 
 Current studies span circular economy systems, industrial ecology, and biotechnology.
 
@@ -18,7 +18,7 @@ Current studies span circular economy systems, industrial ecology, and biotechno
 
 ## Research and the Eagle Framework
 
-The Biotech Domain study is examining Eagle Framework applicability to biotechnology and AI-driven drug discovery — extending the Platform's high-consequence assessment methodology into a new domain.
+The Biotech Domain study examines Eagle Framework applicability to biotechnology and AI-driven drug discovery. This work extends the Platform's high-consequence assessment methodology into a new domain.
 
 ---
 

@@ -1,14 +1,26 @@
 # Eagle Insight Platform
 
-Eagle Insight Platform is triNetra's platform for AI and Organisational Intelligence. It is the first Insight Platform built on the triNetra research ecosystem.
+Eagle Insight Platform (EIP) is triNetra's platform for AI and Organisational Intelligence. It is the first Insight Platform built on the triNetra research ecosystem.
 
-The platform evaluates high-consequence decision-making systems across seven dimensions of the Eagle Framework, producing an Eagle Score from 0 to 100, a maturity level from Opaque to Assured, and a full Assessment Report. No AI system is involved at any stage of evaluation or scoring. The methodology is deterministic and mathematically verifiable.
+The platform evaluates high-consequence decision-making systems across seven dimensions of the Eagle Framework. It produces an Eagle Score from 0 to 100, a maturity level from Opaque to Assured, and a full Assessment Report. No AI system is involved at any stage of evaluation or scoring. The methodology is deterministic and mathematically verifiable.
+
+---
+
+## Three Questions
+
+Every engagement begins with three questions. Each question maps to an intelligence domain and a license bundle.
+
+| Buyer Question | Intelligence Domain | Bundle |
+|---|---|---|
+| What is this organisation? | [Organisation Intelligence](organisation-intelligence/) | EIP · Eagle Strategic Suite (ESS) · Eagle Portfolio Suite (EPS) |
+| Does it align with our investment thesis? | [Alignment Intelligence](alignment-intelligence/) | ESS · EPS |
+| Where should portfolio attention belong? | [Portfolio Intelligence](portfolio-intelligence/) | EPS |
 
 ---
 
 ## Intelligence Domains
 
-Eagle Insight Platform operates across three intelligence domains. Each domain is a distinct set of deliverables.
+EIP operates across three intelligence domains. Each domain is a distinct set of deliverables.
 
 | Domain | What It Answers | Bundle |
 |---|---|---|

@@ -2,9 +2,9 @@
 
 > What exists. What works. What breaks under pressure. Where does improvement matter most.
 
-Organisation Intelligence is the foundational domain of the Eagle Insight Platform. It evaluates a deployed system across seven dimensions of the Eagle Framework and produces a complete Assessment Report with an Eagle Score, maturity level classification, and a structured remediation roadmap.
+Organisation Intelligence is the foundational domain of the Eagle Insight Platform (EIP). It evaluates a deployed system across seven dimensions of the Eagle Framework and produces a complete Assessment Report with an Eagle Score, maturity level classification, and a structured remediation roadmap.
 
-Available in the EIP, ESS, and EPS bundles.
+Available in the EIP, Eagle Strategic Suite (ESS), and Eagle Portfolio Suite (EPS) bundles.
 
 ---
 

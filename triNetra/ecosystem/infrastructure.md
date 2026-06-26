@@ -11,9 +11,9 @@
 
 ## Purpose
 
-Infrastructure Insight Platform will apply the Eagle Framework to AI and decision systems operating in critical infrastructure contexts — telecommunications, water systems, transport networks, and public utilities.
+Infrastructure Insight Platform will apply the Eagle Framework to AI and decision systems operating in critical infrastructure contexts: telecommunications, water systems, transport networks, and public utilities.
 
-Critical infrastructure systems have a defining structural property: failure is not an event that affects one organisation. It is an event that affects populations. An AI system governing a water treatment decision, a telecommunications routing decision, or a transport control decision operates in a domain where the consequences of structural failure are public and irreversible. The governance requirements for these systems are correspondingly higher — and currently, the structural assessment instruments available for them are correspondingly weaker.
+Critical infrastructure systems have a defining structural property: failure is not an event that affects one organisation. It is an event that affects populations. An AI system governing a water treatment decision, a telecommunications routing decision, or a transport control decision operates in a domain where the consequences of structural failure are public and irreversible. The governance requirements for these systems are correspondingly higher. Currently, the structural assessment instruments available for them are correspondingly weaker.
 
 The Infrastructure Insight Platform is being built to address this gap.
 

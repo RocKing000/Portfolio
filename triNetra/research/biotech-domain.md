@@ -25,7 +25,7 @@ The Biotech Domain study examines the structural intersection of three areas:
 
 ## Why This Matters
 
-The biotech and drug discovery domain is entering a period of rapid AI deployment without an established structural auditability standard. Regulators — the FDA, EMA, and equivalent bodies — are developing guidance, but the structural assessment methodology for AI in this domain is not yet codified.
+The biotech and drug discovery domain is entering a period of rapid AI deployment without an established structural auditability standard. Regulators including the FDA, EMA, and equivalent bodies are developing guidance, but the structural assessment methodology for AI in this domain is not yet codified.
 
 The Biotech Domain study contributes to that codification: a pattern-derived, evidence-grounded structural framework for AI auditability in biotech, produced through the same methodology as the Eagle Framework itself.
 

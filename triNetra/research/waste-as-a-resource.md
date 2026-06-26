@@ -9,7 +9,7 @@
 
 Could an integrated municipal waste processing system simultaneously produce structural, metallic, polymeric, agricultural, and water outputs at scale?
 
-The study investigates whether a single integrated facility can recover value across five distinct output streams from the same waste input — rather than optimising for a single recovery pathway at the expense of the others.
+The study investigates whether a single integrated facility can recover value across five distinct output streams from the same waste input. The research examines whether this integrated approach is viable rather than optimising for a single recovery pathway at the expense of the others.
 
 ---
 
@@ -25,7 +25,7 @@ The study investigates whether a single integrated facility can recover value ac
 
 ## Why It Matters
 
-Most waste processing systems optimise for one recovery pathway. The structural question this study examines is whether integration across five pathways produces a facility that is more resource-efficient and more economically viable than five separate optimised facilities — or whether the integration cost exceeds the integration benefit.
+Most waste processing systems optimise for one recovery pathway. The structural question this study examines is whether integration across five pathways produces a facility that is more resource-efficient and more economically viable than five separate optimised facilities. The central determination is whether the integration cost exceeds the integration benefit.
 
 ---
 

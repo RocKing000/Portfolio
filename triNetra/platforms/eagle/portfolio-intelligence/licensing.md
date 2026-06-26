@@ -1,6 +1,6 @@
-# Licensing — Eagle Portfolio Suite (EPS)
+# Licensing: Eagle Portfolio Suite (EPS)
 
-The Eagle Portfolio Suite bundle provides access to all three Eagle Insight Platform intelligence domains: Organisation Intelligence, Alignment Intelligence, and Portfolio Intelligence.
+The Eagle Portfolio Suite bundle provides access to all three Eagle Insight Platform (EIP) intelligence domains: Organisation Intelligence, Alignment Intelligence, and Portfolio Intelligence.
 
 ---
 

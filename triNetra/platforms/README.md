@@ -1,8 +1,8 @@
 # Platforms
 
-triNetra develops domain-specific Insight Platforms. Each platform applies the PaaF methodology and the Eagle Framework to a distinct domain of high-consequence decision-making systems, enabling structured reasoning and producing decision-grade insights.
+triNetra develops domain-specific Insight Platforms. Each platform delivers structured reasoning and decision-grade insights to organisations operating in high-consequence decision-making environments. Platforms apply the Patterns as a Framework (PaaF) methodology and the Eagle Framework to a distinct domain, ensuring domain-appropriate taxonomy, scoring, and regulatory alignment.
 
-A platform is not a product feature or a software module. It is a complete research instrument — with its own domain taxonomy, manifest library, scoring parameters, and regulatory alignment — built on the shared Eagle Framework foundation.
+A platform is not a product feature or a software module. It is a complete research instrument with its own domain taxonomy, manifest library, scoring parameters, and regulatory alignment. Each platform is built on the shared Eagle Framework foundation.
 
 ---
 
@@ -10,7 +10,7 @@ A platform is not a product feature or a software module. It is a complete resea
 
 | Platform | Domain | Status |
 |---|---|---|
-| [Eagle Insight Platform](eagle/) | AI and Organisational Intelligence | Active — founding partner access until 01 January 2027 |
+| [Eagle Insight Platform](eagle/) | AI and Organisational Intelligence | Active: founding partner access until 01 January 2027 |
 
 ---
 

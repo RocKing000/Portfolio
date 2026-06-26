@@ -29,7 +29,7 @@ See [platforms/](platforms/) for full documentation of Eagle Insight Platform.
 
 ---
 
-## Eagle Insight Platform — Pricing
+## Eagle Insight Platform: Pricing
 
 | Bundle | Domains | Billing | Founding Rate | Standard Rate |
 |---|---|---|---|---|
@@ -45,15 +45,15 @@ Founding rates valid until 01 January 2027.
 
 | Section | Purpose |
 |---|---|
-| [platforms/](platforms/) | Eagle Insight Platform — three intelligence domains, full documentation |
-| [ecosystem/](ecosystem/) | All five platforms — active and research-phase |
+| [platforms/](platforms/) | Eagle Insight Platform: three intelligence domains, full documentation |
+| [ecosystem/](ecosystem/) | All five platforms: active and research-phase |
 | [architecture/](architecture/) | Why triNetra is built the way it is |
 | [research-philosophy/](research-philosophy/) | The principles governing the research and methodology |
-| [methodology/](methodology/) | PaaF (Patterns as a Framework), four phases, TPRS |
+| [methodology/](methodology/) | Patterns as a Framework (PaaF), four phases, TPRS |
 | [research/](research/) | Active and submitted research studies |
-| [case-studies/](case-studies/) | Eagle assessment output — structural change and evolution scenarios |
+| [case-studies/](case-studies/) | Eagle assessment output: structural change and evolution scenarios |
 | [roadmap/](roadmap/) | Research directions and access programme timelines |
-| [riskopsbench/](riskopsbench/) | RiskOpsBench 1.0 — AI reasoning benchmark and scoring engine |
+| [riskopsbench/](riskopsbench/) | RiskOpsBench 1.0: AI reasoning benchmark and scoring engine |
 | [contact.md](contact.md) | research@trinetra.life |
 
 ---

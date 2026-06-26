@@ -8,7 +8,7 @@ triNetra is not a consultancy. This is not a disclaimer. It is a structural desc
 
 A consultancy applies human expertise to a client's problem and produces recommendations the consultancy believes the client should implement. The quality of the output depends on the expertise and judgment of the consultants. The deliverable typically requires the client to engage the consultancy further to implement the recommendation.
 
-This model has genuine value. It also has a structural limitation: the consultant who diagnoses a problem and recommends a solution has an interest in the solution being implemented — ideally by the same firm. The diagnosis is not independent of the prescription.
+This model has genuine value. It also has a structural limitation: the consultant who diagnoses a problem and recommends a solution has an interest in the solution being implemented, ideally by the same firm. The diagnosis is not independent of the prescription.
 
 ---
 
@@ -32,7 +32,7 @@ An AI system's auditability assessment produced by a firm that also implements t
 
 The credibility of a structural assessment depends on the assessor having no interest in the outcome. triNetra's structural independence from implementation is not a limitation of scope. It is the source of the assessment's credibility.
 
-An institutional investor who uses a triNetra Alignment Intelligence assessment to evaluate a portfolio company needs to know that the assessment reflects the structural reality of that company — not the assessor's commercial interest in recommending services to that company.
+An institutional investor who uses a triNetra Alignment Intelligence assessment to evaluate a portfolio company needs to know that the assessment reflects the structural reality of that company, not the assessor's commercial interest in recommending services to that company.
 
 ---
 

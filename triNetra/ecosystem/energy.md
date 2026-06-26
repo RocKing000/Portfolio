@@ -11,11 +11,11 @@
 
 ## Purpose
 
-Energy Insight Platform will apply the Eagle Framework to AI and decision systems operating in energy sector contexts — grid operators, transition planners, infrastructure organisations, and energy market participants.
+Energy Insight Platform will apply the Eagle Framework to AI and decision systems operating in energy sector contexts: grid operators, transition planners, infrastructure organisations, and energy market participants.
 
-The energy sector is entering a period of structural complexity without precedent: simultaneous pressure from grid decarbonisation, distributed generation integration, demand volatility from electrification, and the deployment of AI in grid management and forecasting roles. These are high-consequence decision-making systems. Structural failure in an energy AI system does not produce an incorrect output. It produces a blackout, a safety incident, or a misallocated investment at grid scale.
+The energy sector is entering a period of structural complexity without precedent. Simultaneous pressure from grid decarbonisation, distributed generation integration, demand volatility from electrification, and the deployment of AI in grid management and forecasting roles creates high-consequence decision-making environments. Structural failure in an energy AI system does not produce an incorrect output. It produces a blackout, a safety incident, or a misallocated investment at grid scale.
 
-The Energy Insight Platform is being built to address these systems with the same structural rigour as Eagle Insight Platform addresses AI governance systems.
+Energy Insight Platform is being built to address these systems with the same structural rigour as Eagle Insight Platform (EIP) addresses AI governance systems.
 
 ---
 

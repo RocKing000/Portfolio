@@ -2,9 +2,9 @@
 
 > How does the portfolio perform as a system. Where are the correlated risks. What structural patterns repeat across investments.
 
-Portfolio Intelligence is the highest-tier domain of the Eagle Insight Platform. It synthesises Organisation Intelligence and Alignment Intelligence assessments across an entire portfolio to produce a portfolio-level structural view — one that individual company assessments cannot produce in isolation.
+Portfolio Intelligence is the highest-tier domain of the Eagle Insight Platform (EIP). It synthesises Organisation Intelligence and Alignment Intelligence assessments across an entire portfolio to produce a portfolio-level structural view. Individual company assessments cannot produce this view in isolation.
 
-Available exclusively in the EPS bundle.
+Available exclusively in the Eagle Portfolio Suite (EPS) bundle.
 
 ---
 
@@ -13,7 +13,7 @@ Available exclusively in the EPS bundle.
 - How does the portfolio perform structurally as a system, not just as a collection of companies?
 - Where are the correlated structural risks across investments?
 - What structural failure modes repeat across the portfolio?
-- Which companies are structurally proximate — and what does that mean for portfolio-level exposure?
+- Which companies are structurally proximate, and what does that mean for portfolio-level exposure?
 
 ---
 
