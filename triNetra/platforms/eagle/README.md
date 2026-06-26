@@ -13,7 +13,7 @@ Every engagement begins with three questions. Each question maps to an intellige
 | Buyer Question | Intelligence Domain | Bundle |
 |---|---|---|
 | What is this organisation? | [Organisation Intelligence](organisation-intelligence/) | EIP · Eagle Strategic Suite (ESS) · Eagle Portfolio Suite (EPS) |
-| Does it align with our investment thesis? | [Alignment Intelligence](alignment-intelligence/) | ESS · EPS |
+| Does it align with our investment objectives? | [Alignment Intelligence](alignment-intelligence/) | ESS · EPS |
 | Where should portfolio attention belong? | [Portfolio Intelligence](portfolio-intelligence/) | EPS |
 
 ---
@@ -42,7 +42,7 @@ EIP operates across three intelligence domains. Each domain is a distinct set of
 
 ## Access
 
-Founding partner access is available until 01 January 2027. Three license bundles: EIP (quarterly), ESS (annual), EPS (annual).
+Eagle Insight Platform is currently available through the Founding Validation Programme (invitation-only, until 01 January 2027). Platform Access: USD 3,999 (one-time). Insight Cycle: USD 999 per engagement. Enterprise bundle licensing (EIP, ESS, EPS) begins 01 January 2027.
 
 Contact research@trinetra.life to initiate engagement.  
 Full platform: [trinetra.life](https://trinetra.life)

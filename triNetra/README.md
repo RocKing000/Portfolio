@@ -29,7 +29,17 @@ See [platforms/](platforms/) for full documentation of Eagle Insight Platform.
 
 ---
 
-## Eagle Insight Platform: Pricing
+## Eagle Insight Platform: Access
+
+**Current access (until 01 January 2027):** Founding Validation Programme (invitation-only).
+
+| Item | Price | Notes |
+|---|---|---|
+| Platform Access | USD 3,999 | One-time |
+| Insight Cycle | USD 999 | Per engagement |
+| Founding Partner Reservation | Optional | Locks founding rates for post-2027 enterprise licensing |
+
+**Enterprise licensing (from 01 January 2027):**
 
 | Bundle | Domains | Billing | Founding Rate | Standard Rate |
 |---|---|---|---|---|
@@ -37,7 +47,7 @@ See [platforms/](platforms/) for full documentation of Eagle Insight Platform.
 | Eagle Strategic Suite (ESS) | Organisation + Alignment Intelligence | Annual | USD 99,999 | USD 149,999 |
 | Eagle Portfolio Suite (EPS) | Organisation + Alignment + Portfolio Intelligence | Annual | USD 199,999 | USD 249,999 |
 
-Founding rates valid until 01 January 2027.
+See [roadmap/2026.md](roadmap/2026.md) for current access detail. See [roadmap/2027.md](roadmap/2027.md) for enterprise licensing.
 
 ---
 

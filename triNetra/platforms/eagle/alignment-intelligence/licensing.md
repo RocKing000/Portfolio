@@ -13,14 +13,20 @@ The Eagle Strategic Suite (ESS) bundle provides access to Organisation Intellige
 
 ---
 
-## Pricing
+## Access
 
-| Rate | Price | Billing | Valid |
-|---|---|---|---|
-| Founding | USD 99,999 per year | Annual | Until 01 January 2027 |
-| Standard | USD 149,999 per year | Annual | From 01 January 2027 |
+Eagle Strategic Suite (ESS) is available as an enterprise bundle from 01 January 2027.
 
-Founding rates are available exclusively through direct engagement with the triNetra Research Studio before 01 January 2027.
+Until 01 January 2027, Organisation Intelligence and Alignment Intelligence assessments are available as individual Insight Cycles through the Founding Validation Programme (Platform Access USD 3,999 one-time + USD 999 per Insight Cycle). Contact research@trinetra.life to initiate.
+
+**Enterprise licensing (from 01 January 2027):**
+
+| Rate | Price | Billing |
+|---|---|---|
+| Founding | USD 99,999 per year | Annual |
+| Standard | USD 149,999 per year | Annual |
+
+Founding rates are available to Founding Validation Programme participants who hold a Founding Partner Reservation.
 
 ---
 
