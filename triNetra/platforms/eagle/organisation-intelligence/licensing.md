@@ -1,37 +1,43 @@
-# Licensing: Eagle Insight Platform (EIP)
+# Licensing: Eagle Insight Platform
 
-The Eagle Insight Platform bundle provides access to Organisation Intelligence: a structural evaluation of a deployed system producing an Eagle Score, maturity level classification, and full Assessment Report.
+Eagle Insight Platform is currently available through the Founding Validation Programme (invitation-only, until 01 January 2027). Enterprise bundle licensing begins 01 January 2027.
 
 ---
 
-## What Is Included
+## Founding Validation Programme (Current)
 
-- Organisation Intelligence assessments
+| Item | Price | Notes |
+|---|---|---|
+| Platform Access | USD 3,999 | One-time. Covers onboarding, Input Manifest template for your domain, and access to the triNetra Research Studio. |
+| Insight Cycle | USD 999 | Per engagement. Each Insight Cycle produces a full Assessment Report across all seven Eagle Framework dimensions. |
+| Founding Partner Reservation | Optional | Locks founding rates for post-2027 enterprise licensing. |
+
+To initiate: contact research@trinetra.life. No intake form, no qualification call.
+
+---
+
+## Enterprise Licensing (from 01 January 2027)
+
+| Bundle | Domains | Billing | Founding Rate | Standard Rate |
+|---|---|---|---|---|
+| Eagle Insight Platform (EIP) | Organisation Intelligence | Quarterly | USD 14,999 | USD 24,999 |
+| Eagle Strategic Suite (ESS) | Organisation + Alignment Intelligence | Annual | USD 99,999 | USD 149,999 |
+| Eagle Portfolio Suite (EPS) | Organisation + Alignment + Portfolio Intelligence | Annual | USD 199,999 | USD 249,999 |
+
+Founding rates are available to Founding Validation Programme participants who hold a Founding Partner Reservation.
+
+---
+
+## What Each Insight Cycle Includes
+
 - Input Manifest template for your domain (from the 30-domain library)
 - Assessment Report: Eagle Score, maturity level, dimension scores, findings register, contradiction register, remediation roadmap
-- Evaluation Package
+- Evaluation Package (retained by the evaluating party)
 
-Optional Research Artifacts (Change Analysis, Evolution Analysis, Executive Intelligence Dossier) are available at additional cost to active clients.
-
----
-
-## Pricing
-
-| Rate | Price | Billing | Valid |
-|---|---|---|---|
-| Founding | USD 14,999 per quarter | Quarterly | Until 01 January 2027 |
-| Standard | USD 24,999 per quarter | Quarterly | From 01 January 2027 |
-
-Founding rates are available exclusively through direct engagement with the triNetra Research Studio before 01 January 2027.
-
----
-
-## To Initiate
-
-Contact research@trinetra.life. Include the domain, the deployment context, and the system under assessment. No intake form, no qualification call.
+Optional Research Artifacts (Change Analysis, Evolution Analysis) are available at additional cost to active Insight Cycle clients.
 
 ---
 
 ## Upgrading
 
-EIP clients may upgrade to the Eagle Strategic Suite (ESS) at any time to add Alignment Intelligence. See [alignment-intelligence/licensing.md](../alignment-intelligence/licensing.md).
+Founding Validation Programme participants may add Alignment Intelligence or Portfolio Intelligence assessments as additional Insight Cycles. Enterprise bundle access begins 01 January 2027.
