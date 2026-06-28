@@ -5,42 +5,54 @@ research@trinetra.life · [LinkedIn](https://linkedin.com/in/shubham-agarwal-roc
 
 ---
 
-## triNetra — Research Ecosystem
-
-triNetra develops domain-specific Insight Platforms that enable structured reasoning across complex systems. Through independent research and structured methodologies, its platforms transform structured evidence into decision-grade insights.
-
-**Eagle Insight Platform** is the first — a platform for AI and Organisational Intelligence, evaluating high-consequence decision-making systems across seven auditability dimensions and producing a deterministic Eagle Score, maturity level classification, and full Assessment Report. No AI is involved in evaluation or scoring at any stage.
-
-Three bundles: EIP (quarterly) · ESS (annual) · EPS (annual). Founding rates until 01 January 2027.
-
-[triNetra/](triNetra/) · [trinetra.life](https://trinetra.life)
+The work here spans data science, ML engineering, enterprise architecture, multi-agent automation, applied competition, and building an independent research company. Each project represents a distinct phase. This repository is a record of that journey.
 
 ---
 
-## DIRE-X — Live Product
+## Data Science and Machine Learning
 
-**Dynamic Intelligence & Risk Engine**
+**[LOS — Loan Portfolio Analytics](los/)**  
+Five-model ML pipeline for loan portfolio risk analytics. Risk scoring, default prediction, collection prioritisation, bucket forecasting, and alert generation. Python FastAPI backend, scikit-learn, Angular frontend.
 
-A geopolitics and supply chain simulation built solo for Smart India Hackathon 2025. Full-stack: React/Vite · Node.js · Python FastAPI · PostgreSQL (Supabase). Models 92 countries, 80+ companies, 15 strategic resources, 7 crisis types, 84 API endpoints, 20 simulation engines.
-
-Core differentiator: **SRES (Strategic Resource Evaluation Score)** — a proprietary multi-dimensional risk index giving each entity a live, resource-weighted score across supply, demand, geopolitical, and environmental pressures simultaneously.
-
-[dire-x.vercel.app](https://dire-x.vercel.app)
+**[KYC Document Classification](kyc-classification/)**  
+Research prototype for multi-class document type recognition. Labelled image dataset across three tasks: document classifier, face verification, and OCR. Structured as a train/val/test split pipeline.
 
 ---
 
-## Authored — Cycle of Coexistence
+## Enterprise Engineering
 
-A dual-register philosophical manifesto running fiction and real-world business architecture in parallel, chapter by chapter. Two editions: International and Srishti Mandala (Vedic cosmology register, dedicated to the Hindu community).
+**[Solution Architecture — Enterprise AI Chatbot](solution-architecture/)**  
+Full-stack enterprise implementation: Python FastAPI AI service, C# .NET 8 API, Angular frontend, SQL Server. Covers hierarchy browsing, admin controls, dashboard builder, and Cypress test coverage.
 
-Neither register explains the other. They express the same architectural principle in different materials: the most durable systems are self-seeding, self-sustaining, and coexist with their environment by design.
-
-[authored/](authored/)
+**[SDLC Workflow — Multi-Agent Automation](sdlc-workflow/)**  
+Multi-agent SDLC automation platform with four agents (requirements, design, development, testing) communicating over gRPC, routed through a C# .NET Ocelot API gateway. Containerised infrastructure: ELK, Keycloak, MinIO, RabbitMQ, Redis, SQL Server.
 
 ---
 
-## Creative — The Hidden Chronicles: Majuli
+## Competition
 
+**[DIRE-X — Smart India Hackathon 2025](dire-x/)**  
+Geopolitics and supply chain risk simulation, built solo for Smart India Hackathon 2025. React/Vite · Node.js · Python FastAPI · Supabase. Models country-to-company supply chain dependencies and scores entity risk across geopolitical, supply, demand, and environmental dimensions.
+
+---
+
+## Company
+
+**[triNetra — Research Ecosystem](triNetra/)**  
+triNetra builds domain-specific Insight Platforms for structured reasoning across complex systems. Eagle Insight Platform is the first: a structural assessment platform for AI and Organisational Intelligence, evaluating decision-making systems across seven auditability dimensions and producing a deterministic Eagle Score and maturity classification. No AI is involved in evaluation or scoring at any stage.
+
+[trinetra.life](https://trinetra.life)
+
+---
+
+## Authored
+
+**[Cycle of Coexistence](authored/)**  
+Philosophical manifesto in two editions. Runs fiction and real-world business architecture in parallel, chapter by chapter. International edition and Srishti Mandala (Vedic cosmology register, dedicated to the Hindu community).
+
+---
+
+## Creative
+
+**[The Hidden Chronicles: Majuli](creative/majuli-hidden-chronicles/)**  
 Original screenplay series grounded in independent research into Assamese tribal culture (Mising · Deori · Sonowal Kachari), Majuli's geography, and Vaishnavite history. 54-scene opening sequence, full character bible, complete mythology system.
-
-[creative/majuli-hidden-chronicles/](creative/majuli-hidden-chronicles/)
