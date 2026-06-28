@@ -31,8 +31,8 @@ Multi-agent SDLC automation platform with four agents (requirements, design, dev
 
 ## Competition
 
-**[DIRE-X — Smart India Hackathon 2025](dire-x/)**  
-Geopolitics and supply chain risk simulation, built solo for Smart India Hackathon 2025. React/Vite · Node.js · Python FastAPI · Supabase. Models country-to-company supply chain dependencies and scores entity risk across geopolitical, supply, demand, and environmental dimensions.
+**[DIRE-X — Dynamic Intelligence & Risk Engine](dire-x/)**  
+Geopolitics and supply chain risk simulation built independently on a problem statement from Smart India Hackathon 2025. React/Vite · Node.js · Python FastAPI · Supabase. Models country-to-company supply chain dependencies and scores entity risk across geopolitical, supply, demand, and environmental dimensions.
 
 ---
 

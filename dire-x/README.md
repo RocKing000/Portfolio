@@ -1,6 +1,6 @@
 # DIRE-X — Dynamic Intelligence & Risk Engine
 
-Built solo for Smart India Hackathon 2025. A geopolitics and supply chain risk simulation that models country-to-company resource dependencies and scores entity risk across geopolitical, supply, demand, and environmental dimensions simultaneously.
+A geopolitics and supply chain risk simulation built independently on a problem statement from Smart India Hackathon 2025. Not submitted to the hackathon. Models country-to-company resource dependencies and scores entity risk across geopolitical, supply, demand, and environmental dimensions simultaneously.
 
 ---
 
@@ -12,7 +12,7 @@ The core scoring mechanism is SRES (Strategic Resource Evaluation Score): a mult
 
 ---
 
-## Scale (Hackathon Submission)
+## Scale
 
 - 92 countries modelled
 - 80+ companies across key sectors
