@@ -1,0 +1,154 @@
+<div class="signal-details-container">
+
+  <!-- Back -->
+  <button mat-button (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon> Back to Signals
+  </button>
+
+  <!-- Loading -->
+  <div *ngIf="loading()" class="loading-center">
+    <mat-spinner diameter="48"></mat-spinner>
+  </div>
+
+  <!-- Error -->
+  <mat-card *ngIf="error() && !loading()" class="error-card">
+    <mat-card-content>
+      <mat-icon>error</mat-icon> {{ error() }}
+    </mat-card-content>
+  </mat-card>
+
+  <ng-container *ngIf="signal() as s">
+
+    <!-- Header -->
+    <mat-card class="header-card">
+      <mat-card-content>
+        <div class="header-row">
+          <div class="header-badges">
+            <span class="severity-badge"
+                  [style.background-color]="severityColor(s.severity)">
+              {{ severityLabel(s.severity) }}
+            </span>
+            <span class="status-badge"
+                  [style.background-color]="statusColor(s.status)">
+              {{ s.status }}
+            </span>
+          </div>
+          <div class="header-actions">
+            <button mat-stroked-button (click)="openStatusUpdate()">
+              <mat-icon>update</mat-icon> Update Status
+            </button>
+            <button mat-stroked-button (click)="classify()">
+              <mat-icon>psychology</mat-icon> Classify
+            </button>
+          </div>
+        </div>
+
+        <h2 class="signal-title">{{ s.title }}</h2>
+        <p *ngIf="s.description" class="signal-desc">{{ s.description }}</p>
+
+        <div class="meta-grid">
+          <div class="meta-item">
+            <span class="meta-label">Type</span>
+            <span>{{ s.signalType }}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Source</span>
+            <span>{{ s.source }}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Priority</span>
+            <span>{{ s.priority }}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Assigned To</span>
+            <span>{{ s.assignedToName ?? 'Unassigned' }}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Created</span>
+            <span>{{ s.createdAt | date:'medium' }}</span>
+          </div>
+          <div class="meta-item" *ngIf="s.resolvedAt">
+            <span class="meta-label">Resolved</span>
+            <span>{{ s.resolvedAt | date:'medium' }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Timeline -->
+    <mat-card class="timeline-card">
+      <mat-card-header>
+        <mat-card-title>Timeline</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="timeline">
+          <div class="timeline-step" [class.done]="true">
+            <mat-icon>add_circle</mat-icon>
+            <div>
+              <div class="step-label">Created</div>
+              <div class="step-time">{{ s.createdAt | date:'short' }}</div>
+            </div>
+          </div>
+          <div class="timeline-step" [class.done]="s.status === 'IN_PROGRESS' || s.status === 'RESOLVED' || s.status === 'CLOSED'">
+            <mat-icon>hourglass_top</mat-icon>
+            <div>
+              <div class="step-label">In Progress</div>
+            </div>
+          </div>
+          <div class="timeline-step" [class.done]="s.status === 'RESOLVED' || s.status === 'CLOSED'">
+            <mat-icon>check_circle</mat-icon>
+            <div>
+              <div class="step-label">Resolved</div>
+              <div *ngIf="s.resolvedAt" class="step-time">{{ s.resolvedAt | date:'short' }}</div>
+            </div>
+          </div>
+          <div class="timeline-step" [class.done]="s.status === 'CLOSED'">
+            <mat-icon>lock</mat-icon>
+            <div>
+              <div class="step-label">Closed</div>
+              <div *ngIf="s.closedAt" class="step-time">{{ s.closedAt | date:'short' }}</div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Payload -->
+    <mat-card *ngIf="s.payload" class="json-card">
+      <mat-card-header>
+        <mat-card-title>Payload</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <pre class="json-viewer">{{ formatJson(s.payload) }}</pre>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- ML Outputs -->
+    <mat-card *ngIf="s.mlOutputs" class="json-card ml-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>psychology</mat-icon> ML Classification
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <pre class="json-viewer">{{ formatJson(s.mlOutputs) }}</pre>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Resolution Notes -->
+    <mat-card *ngIf="s.resolutionNotes" class="notes-card">
+      <mat-card-header><mat-card-title>Resolution Notes</mat-card-title></mat-card-header>
+      <mat-card-content>{{ s.resolutionNotes }}</mat-card-content>
+    </mat-card>
+
+    <!-- Comments -->
+    <mat-card class="comments-card">
+      <mat-card-header><mat-card-title>Comments</mat-card-title></mat-card-header>
+      <mat-card-content>
+        <app-signal-comments [signalId]="s.signalId" [comments]="s.comments">
+        </app-signal-comments>
+      </mat-card-content>
+    </mat-card>
+
+  </ng-container>
+</div>

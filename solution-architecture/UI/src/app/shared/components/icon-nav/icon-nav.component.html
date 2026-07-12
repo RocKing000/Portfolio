@@ -1,0 +1,19 @@
+<div class="icon-nav-bar" [class.collapsed]="collapsed()">
+  @for (item of navItems; track item.route) {
+    <a class="nav-btn"
+       [class.future]="item.future"
+       [routerLink]="item.route"
+       routerLinkActive="active"
+       [routerLinkActiveOptions]="{ exact: false }"
+       [matTooltip]="langSvc.t(item.labelKey)"
+       matTooltipPosition="below">
+      <mat-icon>{{ item.icon }}</mat-icon>
+    </a>
+  }
+</div>
+
+<button class="strip-arrow" (click)="toggle()" [class.pulsing]="collapsed()"
+        [attr.aria-label]="collapsed() ? 'Expand navigation bar' : 'Collapse navigation bar'">
+  @if (collapsed()) { <span class="strip-label">Features</span> }
+  <mat-icon>{{ collapsed() ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</mat-icon>
+</button>

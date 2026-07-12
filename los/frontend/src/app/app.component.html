@@ -1,0 +1,83 @@
+<div class="min-h-screen flex flex-col bg-gray-50">
+
+  <!-- Sticky Model Bar -->
+  <app-sticky-model-bar></app-sticky-model-bar>
+
+  <!-- Main layout: Sidebar + Content -->
+  <div class="flex flex-1">
+
+    <!-- Sidebar (desktop) -->
+    <aside class="hidden lg:flex flex-col w-56 bg-white border-r border-gray-200 min-h-screen sticky top-10 h-screen">
+      <!-- Spin Wheel + branding -->
+      <div class="flex flex-col items-center gap-3 px-4 py-5 border-b border-gray-100">
+        <app-spin-wheel></app-spin-wheel>
+        <div class="text-center mt-8">
+          <p class="font-bold text-gray-800 text-sm">LOS Dashboard</p>
+          <p class="text-xs text-gray-400">Loan Threat System</p>
+        </div>
+      </div>
+
+      <!-- Nav links -->
+      <nav class="flex-1 py-3 px-2 space-y-0.5">
+        <a *ngFor="let item of navItems"
+           [routerLink]="item.route"
+           class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer"
+           [class.bg-blue-50]="isActive(item.route)"
+           [class.text-blue-700]="isActive(item.route)"
+           [class.font-medium]="isActive(item.route)"
+           [class.text-gray-600]="!isActive(item.route)"
+           [class.hover:bg-gray-50]="!isActive(item.route)">
+          <span class="text-base">{{item.icon}}</span>
+          <span>{{item.label}}</span>
+        </a>
+      </nav>
+
+      <!-- Footer -->
+      <div class="p-4 border-t border-gray-100 text-xs text-gray-400">
+        <p class="font-medium">JLG Microfinance</p>
+        <p>Oct 2025 – Mar 2026</p>
+      </div>
+    </aside>
+
+    <!-- Mobile header -->
+    <div class="lg:hidden fixed top-10 left-0 right-0 z-30 bg-white border-b border-gray-200 px-4 py-2 flex items-center gap-3">
+      <button (click)="sidebarOpen = !sidebarOpen"
+              class="p-1.5 rounded-lg hover:bg-gray-100 text-gray-600">☰</button>
+      <span class="font-semibold text-gray-800 text-sm">LOS Dashboard</span>
+    </div>
+
+    <!-- Mobile sidebar drawer -->
+    <div *ngIf="sidebarOpen"
+         class="lg:hidden fixed inset-0 z-50 flex">
+      <div class="fixed inset-0 bg-black/40" (click)="sidebarOpen = false"></div>
+      <aside class="relative w-60 bg-white shadow-xl flex flex-col">
+        <div class="p-4 border-b border-gray-100 flex items-center justify-between">
+          <p class="font-bold text-gray-800">LOS Menu</p>
+          <button (click)="sidebarOpen = false" class="text-gray-400">✕</button>
+        </div>
+        <nav class="flex-1 py-3 px-2 space-y-0.5">
+          <a *ngFor="let item of navItems"
+             [routerLink]="item.route"
+             (click)="sidebarOpen = false"
+             class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer"
+             [class.bg-blue-50]="isActive(item.route)"
+             [class.text-blue-700]="isActive(item.route)"
+             [class.font-medium]="isActive(item.route)"
+             [class.text-gray-600]="!isActive(item.route)">
+            <span class="text-base">{{item.icon}}</span>
+            <span>{{item.label}}</span>
+          </a>
+        </nav>
+      </aside>
+    </div>
+
+    <!-- Page content -->
+    <main class="flex-1 min-w-0 overflow-y-auto lg:mt-0 mt-14">
+      <!-- Hero metrics -->
+      <app-hero-section [summary]="data.summary$ | async"></app-hero-section>
+      <!-- Routed module views -->
+      <router-outlet></router-outlet>
+    </main>
+
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="comments-container">
+
+  <!-- Add Comment Form -->
+  <div class="add-comment" [formGroup]="form">
+    <mat-form-field appearance="outline" class="comment-field">
+      <mat-label>Add a comment</mat-label>
+      <textarea matInput formControlName="commentText" rows="2"
+                placeholder="Type your comment..."></textarea>
+      <mat-error *ngIf="form.get('commentText')?.hasError('required')">Required</mat-error>
+    </mat-form-field>
+
+    <div class="comment-actions">
+      <mat-checkbox formControlName="isInternal" color="primary">
+        Internal only
+      </mat-checkbox>
+      <button mat-flat-button color="primary"
+              (click)="submit()" [disabled]="saving()">
+        <mat-spinner *ngIf="saving()" diameter="16" class="inline-spinner"></mat-spinner>
+        <mat-icon *ngIf="!saving()">send</mat-icon>
+        <span>Post</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Comments List -->
+  <div *ngIf="localComments().length === 0" class="empty-comments">
+    <mat-icon>chat_bubble_outline</mat-icon>
+    <span>No comments yet</span>
+  </div>
+
+  <div class="comment-list">
+    <div *ngFor="let c of localComments()" class="comment-item">
+      <div class="avatar">{{ initials(c.userName) }}</div>
+      <div class="comment-body">
+        <div class="comment-header">
+          <span class="comment-author">{{ c.userName ?? 'Unknown' }}</span>
+          <span class="comment-time">{{ c.createdAt | date:'short' }}</span>
+          <mat-chip *ngIf="c.isInternal" class="internal-chip">Internal</mat-chip>
+        </div>
+        <div class="comment-text">{{ c.commentText }}</div>
+      </div>
+    </div>
+  </div>
+
+</div>

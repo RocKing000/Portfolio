@@ -1,0 +1,179 @@
+<div class="dashboard-page">
+
+  <!-- Page header -->
+  <div class="page-header">
+    <h1 class="page-title">
+      <mat-icon>insert_chart</mat-icon>
+      Analytics Dashboard
+    </h1>
+
+    <div class="controls-row">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="control-field">
+        <mat-label>Period</mat-label>
+        <mat-select [formControl]="periodCtrl">
+          <mat-option value="DAY">Today</mat-option>
+          <mat-option value="WEEK">This Week</mat-option>
+          <mat-option value="MONTH">This Month</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="control-field">
+        <mat-label>Top N</mat-label>
+        <mat-select [formControl]="topNCtrl">
+          <mat-option [value]="5">5</mat-option>
+          <mat-option [value]="10">10</mat-option>
+          <mat-option [value]="20">20</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="control-field">
+        <mat-label>From</mat-label>
+        <input matInput [matDatepicker]="fromPicker" [formControl]="fromDateCtrl" />
+        <mat-datepicker-toggle matIconSuffix [for]="fromPicker"></mat-datepicker-toggle>
+        <mat-datepicker #fromPicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="control-field">
+        <mat-label>To</mat-label>
+        <input matInput [matDatepicker]="toPicker" [formControl]="toDateCtrl" />
+        <mat-datepicker-toggle matIconSuffix [for]="toPicker"></mat-datepicker-toggle>
+        <mat-datepicker #toPicker></mat-datepicker>
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" (click)="loadData()" [disabled]="loading()">
+        <mat-icon>refresh</mat-icon>
+        Refresh
+      </button>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="loading-overlay">
+      <mat-spinner diameter="48"></mat-spinner>
+      <p>Loading analytics</p>
+    </div>
+  } @else {
+
+    <!-- KPI cards -->
+    <div class="kpi-grid">
+      <mat-card class="kpi-card">
+        <mat-card-content>
+          <div class="kpi-icon searches"><mat-icon>search</mat-icon></div>
+          <div class="kpi-value">{{ totalSearches | number }}</div>
+          <div class="kpi-label">Total Searches</div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="kpi-card">
+        <mat-card-content>
+          <div class="kpi-icon errors"><mat-icon>bug_report</mat-icon></div>
+          <div class="kpi-value">{{ totalErrors | number }}</div>
+          <div class="kpi-label">Errors Identified</div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="kpi-card">
+        <mat-card-content>
+          <div class="kpi-icon duration"><mat-icon>timer</mat-icon></div>
+          <div class="kpi-value">{{ avgDuration | number:'1.0-0' }}ms</div>
+          <div class="kpi-label">Avg Search Duration</div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="kpi-card">
+        <mat-card-content>
+          <div class="kpi-icon top"><mat-icon>trending_up</mat-icon></div>
+          <div class="kpi-value kpi-code">{{ topError }}</div>
+          <div class="kpi-label">Top Error Code</div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Trend chart -->
+    <mat-card class="chart-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>bar_chart</mat-icon>
+          Trending Errors (Top 8)
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        @if (trending().length === 0) {
+          <div class="empty-state">
+            <mat-icon>bar_chart</mat-icon>
+            <p>No trending data available</p>
+          </div>
+        } @else {
+          <div class="chart-container">
+            <canvas #trendChart></canvas>
+          </div>
+        }
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Table -->
+    <mat-card class="table-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>format_list_bulleted</mat-icon>
+          Top Errors Detail
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        @if (trending().length === 0) {
+          <div class="empty-state">
+            <mat-icon>table_chart</mat-icon>
+            <p>No data to display</p>
+          </div>
+        } @else {
+          <table mat-table [dataSource]="tableSource" matSort class="analytics-table w-full">
+
+            <ng-container matColumnDef="errorCode">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Code</th>
+              <td mat-cell *matCellDef="let row">
+                <span class="table-code">{{ row.errorCode }}</span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="errorName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Error Name</th>
+              <td mat-cell *matCellDef="let row">{{ row.errorName }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="totalSearches">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Searches</th>
+              <td mat-cell *matCellDef="let row">{{ row.totalSearches | number }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="totalViews">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Views</th>
+              <td mat-cell *matCellDef="let row">{{ row.totalViews | number }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="helpfulnessPercentage">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Helpfulness</th>
+              <td mat-cell *matCellDef="let row">
+                <div class="helpfulness-bar">
+                  <div class="bar-track">
+                    <div class="bar-fill"
+                         [style.width.%]="row.helpfulnessPercentage"
+                         [class.high]="row.helpfulnessPercentage >= 70"
+                         [class.medium]="row.helpfulnessPercentage >= 40 && row.helpfulnessPercentage < 70"
+                         [class.low]="row.helpfulnessPercentage < 40">
+                    </div>
+                  </div>
+                  <span class="bar-label">{{ row.helpfulnessPercentage | number:'1.0-0' }}%</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          </table>
+        }
+      </mat-card-content>
+    </mat-card>
+
+  }
+</div>

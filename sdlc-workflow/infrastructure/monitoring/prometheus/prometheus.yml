@@ -1,0 +1,69 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    environment: development
+    suite: sdlc-automation
+
+alerting:
+  alertmanagers: []
+
+rule_files: []
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  - job_name: "sdlc-gateway"
+    static_configs:
+      - targets: ["gateway:80"]
+    metrics_path: /metrics
+
+  - job_name: "sdlc-session-service"
+    static_configs:
+      - targets: ["session-service:5001"]
+    metrics_path: /metrics
+
+  - job_name: "sdlc-audit-service"
+    static_configs:
+      - targets: ["audit-service:5002"]
+    metrics_path: /metrics
+
+  - job_name: "sdlc-document-service"
+    static_configs:
+      - targets: ["document-service:5003"]
+    metrics_path: /metrics
+
+  - job_name: "sdlc-anonymization-service"
+    static_configs:
+      - targets: ["anonymization-service:5004"]
+    metrics_path: /metrics
+
+  - job_name: "sdlc-agent-component1"
+    static_configs:
+      - targets: ["agent-component1:8000"]
+    metrics_path: /metrics
+
+  - job_name: "sdlc-agent-component2"
+    static_configs:
+      - targets: ["agent-component2:8000"]
+    metrics_path: /metrics
+
+  - job_name: "sdlc-agent-component3"
+    static_configs:
+      - targets: ["agent-component3:8000"]
+    metrics_path: /metrics
+
+  - job_name: "sdlc-agent-component4"
+    static_configs:
+      - targets: ["agent-component4:8000"]
+    metrics_path: /metrics
+
+  - job_name: "rabbitmq"
+    static_configs:
+      - targets: ["rabbitmq:15692"]
+
+  - job_name: "redis"
+    static_configs:
+      - targets: ["redis:6379"]

@@ -1,0 +1,66 @@
+<div class="admin-page">
+  <div class="page-header">
+    <div>
+      <a routerLink="/admin" class="back-link">← Admin</a>
+      <h1>Error Library</h1>
+    </div>
+    <button mat-flat-button color="primary" (click)="openCreate()">
+      <mat-icon>add</mat-icon> New Error
+    </button>
+  </div>
+
+  @if (loading) {
+    <div class="loading-center"><mat-spinner diameter="40"></mat-spinner></div>
+  } @else {
+    <table mat-table [dataSource]="errors" class="data-table">
+
+      <ng-container matColumnDef="errorCode">
+        <th mat-header-cell *matHeaderCellDef>Code</th>
+        <td mat-cell *matCellDef="let row"><code>{{ row.errorCode }}</code></td>
+      </ng-container>
+
+      <ng-container matColumnDef="errorTitle">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td mat-cell *matCellDef="let row">
+          <span class="value-cell" [matTooltip]="row.errorTitle">{{ row.errorTitle | slice:0:60 }}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="severity">
+        <th mat-header-cell *matHeaderCellDef>Severity</th>
+        <td mat-cell *matCellDef="let row">
+          <span [class]="'severity-' + row.severity">{{ row.severity }}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef>Category</th>
+        <td mat-cell *matCellDef="let row"><span class="chip">{{ row.category }}</span></td>
+      </ng-container>
+
+      <ng-container matColumnDef="tenantCode">
+        <th mat-header-cell *matHeaderCellDef>Tenant</th>
+        <td mat-cell *matCellDef="let row">{{ row.tenantCode }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row" class="actions-cell">
+          <button mat-icon-button matTooltip="Edit" (click)="openEdit(row)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="Delete" color="warn" (click)="delete(row)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    @if (errors.length === 0) {
+      <div class="empty">No errors found.</div>
+    }
+  }
+</div>

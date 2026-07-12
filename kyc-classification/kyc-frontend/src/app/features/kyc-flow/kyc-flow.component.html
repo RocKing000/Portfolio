@@ -1,0 +1,33 @@
+<!-- ── KYC Flow Orchestrator ─────────────────────────────────────────── -->
+<div class="kyc-flow">
+
+  <!-- Progress stepper -->
+  <app-progress-stepper [currentStep]="currentStep()"></app-progress-stepper>
+
+  <!-- Step content -->
+  <div class="kyc-flow__content">
+    @switch (currentStep()) {
+
+      @case ('document') {
+        <app-document-scanner
+          (scanComplete)="onDocumentScanned($event)"
+          (scanFailed)="onDocumentFailed($event)">
+        </app-document-scanner>
+      }
+
+      @case ('face') {
+        <app-face-capture
+          [documentFaceImage]="documentFaceImage"
+          (captureComplete)="onFaceCaptured($event)"
+          (captureFailed)="onFaceFailed($event)">
+        </app-face-capture>
+      }
+
+      @case ('result') {
+        <app-kyc-result [session]="session"></app-kyc-result>
+      }
+
+    }
+  </div>
+
+</div>

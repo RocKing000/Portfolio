@@ -1,0 +1,88 @@
+<!-- ── Document Scanner ──────────────────────────────────────────────── -->
+<div class="doc-scanner">
+
+  <!-- Camera view -->
+  @if (!showResult()) {
+    <div class="doc-scanner__camera">
+      <video #videoRef
+             class="camera-feed"
+             autoplay
+             playsinline
+             muted>
+      </video>
+
+      <!-- Guide overlay -->
+      <app-document-overlay
+        [isDetected]="documentDetected()"
+        [confidence]="detectionConfidence()"
+        [handDetected]="handDetected()">
+      </app-document-overlay>
+
+      <!-- Top instruction -->
+      <div class="doc-scanner__topbar">
+        <span class="camera-instruction" [class.camera-instruction--warning]="handDetected()">
+          @if (handDetected()) {
+            Remove hand — lay card flat on surface
+          } @else if (documentDetected()) {
+            Document detected — hold still…
+          } @else {
+            Place your ID card inside the frame
+          }
+        </span>
+      </div>
+
+      <!-- Bottom controls -->
+      <div class="doc-scanner__controls">
+        <!-- Status indicator -->
+        <app-status-indicator [status]="currentStatus$ | async"></app-status-indicator>
+
+        <!-- Manual capture button -->
+        <button class="capture-btn"
+                [disabled]="processing()"
+                (click)="onManualCapture()"
+                title="Capture manually">
+          @if (processing()) {
+            <div class="spinner spinner--white"></div>
+          } @else {
+            <div class="capture-btn__inner"></div>
+          }
+        </button>
+
+        <p class="doc-scanner__hint">
+          Auto-scanning · Tap to capture manually
+        </p>
+      </div>
+    </div>
+  }
+
+  <!-- Result view -->
+  @if (showResult()) {
+    <div class="doc-scanner__result">
+      <div class="doc-scanner__result-header">
+        @if (scanResult()?.success) {
+          <div class="doc-scanner__success-icon">&#10003;</div>
+          <h3>Document Scanned!</h3>
+          <p>Review the details below and confirm.</p>
+        } @else {
+          <div class="doc-scanner__fail-icon">&#33;</div>
+          <h3>Scan Incomplete</h3>
+          <p>{{ scanResult()?.failed_at_step ? 'Failed at: ' + scanResult()!.failed_at_step : 'Could not read document.' }}</p>
+        }
+      </div>
+
+      <app-result-card [result]="scanResult()"></app-result-card>
+
+      <div class="doc-scanner__result-actions">
+        <button class="btn btn--outline btn--full" (click)="onRetry()">
+          Retake
+        </button>
+        @if (scanResult()?.success) {
+          <button class="btn btn--primary btn--full" (click)="onAcceptResult()">
+            Continue
+          </button>
+        }
+      </div>
+    </div>
+  }
+
+</div>

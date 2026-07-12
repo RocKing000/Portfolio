@@ -1,0 +1,158 @@
+@use 'variables' as v;
+
+.kyc-result {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background: v.$surface;
+
+  // ── Status banner ─────────────────────────────────────────────────────────
+  &__banner {
+    padding: v.$space-8 v.$space-4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: v.$space-2;
+    text-align: center;
+
+    &.status--approved {
+      background: linear-gradient(135deg, v.$success, darken(v.$success, 12%));
+      color: white;
+    }
+    &.status--rejected {
+      background: linear-gradient(135deg, v.$danger, darken(v.$danger, 12%));
+      color: white;
+    }
+    &.status--review {
+      background: linear-gradient(135deg, v.$warning, darken(v.$warning, 12%));
+      color: white;
+    }
+    &.status--progress {
+      background: linear-gradient(135deg, v.$primary, v.$primary-light);
+      color: white;
+    }
+  }
+
+  &__status-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    font-size: v.$font-size-3xl;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  &__status-label {
+    color: white;
+    margin: 0;
+    font-size: v.$font-size-2xl;
+  }
+
+  &__session-id {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: v.$font-size-xs;
+    margin: 0;
+    font-family: monospace;
+  }
+
+  // ── Body ──────────────────────────────────────────────────────────────────
+  &__body {
+    flex: 1;
+    padding: v.$space-5 v.$space-4;
+    display: flex;
+    flex-direction: column;
+    gap: v.$space-4;
+  }
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: v.$space-3;
+  }
+
+  &__section-title {
+    font-size: v.$font-size-sm;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: v.$text-muted;
+  }
+
+  &__check-row {
+    display: flex;
+    align-items: center;
+    gap: v.$space-3;
+    padding: v.$space-3;
+    background: white;
+    border-radius: v.$border-radius-sm;
+    box-shadow: v.$shadow-sm;
+
+    > div { flex: 1; }
+    > div p { margin: 0; }
+
+    &--sub {
+      margin-left: v.$space-6;
+      background: v.$surface-dark;
+      box-shadow: none;
+    }
+  }
+
+  &__check-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(v.$danger, 0.1);
+    color: v.$danger;
+    font-size: v.$font-size-base;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    &--ok {
+      background: rgba(v.$success, 0.1);
+      color: v.$success;
+    }
+  }
+
+  &__fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: v.$space-3;
+    padding: v.$space-3;
+    background: white;
+    border-radius: v.$border-radius-sm;
+    box-shadow: v.$shadow-sm;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: v.$space-1;
+  }
+
+  // ── Actions ───────────────────────────────────────────────────────────────
+  &__actions {
+    padding: v.$space-4;
+    display: flex;
+    gap: v.$space-3;
+    background: white;
+    border-top: 1px solid v.$border-color;
+  }
+}
+
+.field-value--mono {
+  font-family: 'Courier New', monospace;
+  font-size: v.$font-size-base;
+  letter-spacing: 0.06em;
+}
+
+@keyframes pop-in {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}

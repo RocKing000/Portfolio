@@ -1,0 +1,216 @@
+@use 'variables' as v;
+
+.face-capture {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: v.$camera-bg;
+
+  // ── Camera (position step) ────────────────────────────────────────────────
+  &__camera {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+    background: black;
+  }
+
+  &__topbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    padding: v.$space-4;
+    background: linear-gradient(rgba(0,0,0,0.6), transparent);
+  }
+
+  &__controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: v.$space-3;
+    padding: v.$space-4 v.$space-4 v.$space-8;
+    background: linear-gradient(transparent, rgba(0,0,0,0.75));
+  }
+
+  &__hint {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: v.$font-size-xs;
+    margin: 0;
+  }
+
+  // ── Liveness step ─────────────────────────────────────────────────────────
+  &__liveness {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: black;
+  }
+
+  &__liveness-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__challenge-card {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(10px);
+    padding: v.$space-6 v.$space-4 v.$space-8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: v.$space-3;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  &__challenge-icon {
+    font-size: 48px;
+    line-height: 1;
+    animation: bounce 1s ease-in-out infinite;
+  }
+
+  &__challenge-text {
+    color: white;
+    font-size: v.$font-size-xl;
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+  }
+
+  &__challenge-sub {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: v.$font-size-sm;
+    margin: 0;
+  }
+
+  // ── Match loading ─────────────────────────────────────────────────────────
+  &__match-loading {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: v.$space-4;
+    background: v.$surface;
+    color: v.$text-secondary;
+
+    p { font-size: v.$font-size-lg; font-weight: 500; }
+  }
+
+  // ── Done step ─────────────────────────────────────────────────────────────
+  &__done {
+    flex: 1;
+    overflow-y: auto;
+    background: v.$surface;
+    padding: v.$space-6 v.$space-4;
+    display: flex;
+    flex-direction: column;
+    gap: v.$space-5;
+  }
+
+  &__comparison {
+    display: flex;
+    align-items: center;
+    gap: v.$space-3;
+    background: white;
+    border-radius: v.$border-radius;
+    padding: v.$space-4;
+    box-shadow: v.$shadow-md;
+  }
+
+  &__compare-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: v.$space-2;
+
+    img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: v.$border-radius-sm;
+      border: 2px solid v.$border-color;
+    }
+
+    span {
+      font-size: v.$font-size-xs;
+      font-weight: 600;
+      color: v.$text-muted;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+  }
+
+  &__compare-vs {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__match-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: v.$surface-dark;
+    color: v.$text-muted;
+    font-size: v.$font-size-lg;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--ok {
+      background: v.$success;
+      color: white;
+    }
+  }
+
+  &__score-card {
+    background: white;
+    border-radius: v.$border-radius;
+    padding: v.$space-5;
+    box-shadow: v.$shadow-md;
+    display: flex;
+    flex-direction: column;
+    gap: v.$space-3;
+
+    h3 { margin: 0; }
+  }
+
+  &__score {
+    display: flex;
+    flex-direction: column;
+    gap: v.$space-2;
+
+    > span { font-size: v.$font-size-sm; color: v.$text-muted; }
+  }
+
+  &__score-val {
+    font-size: v.$font-size-xl;
+    font-weight: 700;
+    color: v.$primary;
+    text-align: right;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}

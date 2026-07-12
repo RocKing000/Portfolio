@@ -1,0 +1,53 @@
+# render.yaml — DIRE-X full deployment on Render (free tier)
+# https://render.com/docs/render-yaml-reference
+
+services:
+  # ── Node.js game server ─────────────────────────────────────────────────────
+  - type: web
+    name: dire-x-api
+    env: node
+    region: oregon
+    plan: free
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 4000
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: CORS_ORIGIN
+        value: https://your-dire-x.vercel.app
+    autoDeploy: true
+
+  # ── FastAPI scoring backend ──────────────────────────────────────────────────
+  - type: web
+    name: dire-x-backend
+    runtime: python
+    region: oregon
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: REDIS_URL
+        value: ""
+      - key: APP_ENV
+        value: production
+      - key: LOG_LEVEL
+        value: info
+      - key: PYTHON_VERSION
+        value: "3.10.11"

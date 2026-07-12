@@ -1,0 +1,119 @@
+<div class="hierarchy-page">
+
+  <div class="hierarchy-layout">
+
+    <!-- Tree panel -->
+    <mat-card class="tree-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>account_tree</mat-icon> FAQ
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-form-field class="filter-field" appearance="outline" subscriptSizing="dynamic">
+          <mat-label>Filter</mat-label>
+          <mat-icon matPrefix>filter_list</mat-icon>
+          <input matInput [formControl]="filterCtrl" aria-label="Filter hierarchy" />
+        </mat-form-field>
+
+        @if (loading()) {
+          <div class="tree-loading">
+            <mat-spinner diameter="36"></mat-spinner>
+          </div>
+        } @else {
+          <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="hierarchy-tree">
+
+            <!-- Leaf node (ERROR type) -->
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+              <button mat-icon-button disabled aria-hidden="true"></button>
+              <button class="tree-node-btn error-node"
+                      [class.selected]="selectedNode()?.hierarchyId === node.hierarchyId"
+                      (click)="onNodeClick(node)"
+                      [attr.aria-label]="node.name">
+                <mat-icon class="node-icon error">{{ getNodeIcon(node.levelType) }}</mat-icon>
+                <span class="node-code">{{ node.code }}</span>
+                <span class="node-name">{{ node.name }}</span>
+              </button>
+            </mat-tree-node>
+
+            <!-- Branch node -->
+            <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+              <div class="mat-tree-node">
+                <button mat-icon-button matTreeNodeToggle
+                        [attr.aria-label]="'Toggle ' + node.name">
+                  <mat-icon>
+                    {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+                  </mat-icon>
+                </button>
+                <button class="tree-node-btn"
+                        [class]="getLevelClass(node.levelType)"
+                        (click)="onNodeClick(node)"
+                        [attr.aria-label]="node.name">
+                  <mat-icon class="node-icon" [class]="getLevelClass(node.levelType)">
+                    {{ getNodeIcon(node.levelType) }}
+                  </mat-icon>
+                  <span class="node-code">{{ node.code }}</span>
+                  <span class="node-name">{{ node.name }}</span>
+                  @if (node.childCount > 0) {
+                    <span class="child-badge">{{ node.childCount }}</span>
+                  }
+                </button>
+              </div>
+              <div [class.hidden]="!treeControl.isExpanded(node)" role="group">
+                <ng-container matTreeNodeOutlet></ng-container>
+              </div>
+            </mat-nested-tree-node>
+
+          </mat-tree>
+
+          @if (dataSource.data.length === 0) {
+            <div class="empty-state">
+              <mat-icon>search_off</mat-icon>
+              <p>No results match your filter</p>
+            </div>
+          }
+        }
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Detail panel -->
+    <div class="detail-panel">
+      @if (selectedNode()) {
+        <mat-card class="detail-card">
+          <mat-card-header>
+            <mat-card-title>
+              <span class="detail-code">{{ selectedNode()!.code }}</span>
+              {{ selectedNode()!.name }}
+            </mat-card-title>
+            <mat-card-subtitle>{{ selectedNode()!.fullPath }}</mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            <div class="detail-chips">
+              <mat-chip class="level-chip">{{ selectedNode()!.levelType }}</mat-chip>
+              @if (selectedNode()!.isActive) {
+                <mat-chip class="active-chip">Active</mat-chip>
+              }
+              @if ((selectedNode()!.errorCount ?? 0) > 0) {
+                <mat-chip>{{ selectedNode()!.errorCount }} resolutions</mat-chip>
+              }
+            </div>
+
+            @if (selectedNode()!.description) {
+              <mat-divider class="my-16"></mat-divider>
+              <h4 class="detail-section-title">Description</h4>
+              <p class="detail-body">{{ selectedNode()!.description }}</p>
+            }
+          </mat-card-content>
+        </mat-card>
+      } @else {
+        <div class="select-hint">
+          <mat-icon>touch_app</mat-icon>
+          <p>Click an error node in the tree to view details</p>
+        </div>
+      }
+    </div>
+
+  </div>
+</div>

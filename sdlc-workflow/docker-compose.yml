@@ -1,0 +1,590 @@
+version: "3.9"
+
+# =============================================================================
+# SDLC Automation Suite — Full Infrastructure Stack
+# =============================================================================
+# Services:
+#   Core:         sqlserver, rabbitmq, redis, minio, keycloak
+#   Observability: elasticsearch, logstash, kibana, prometheus, grafana
+#   Application:  gateway, session-service, audit-service,
+#                 document-service, anonymization-service, frontend
+#   Agents:       agent-component1 ... agent-component4
+# =============================================================================
+
+x-logging: &default-logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+x-healthcheck-defaults: &hc-defaults
+  interval: 30s
+  timeout: 10s
+  retries: 5
+  start_period: 60s
+
+networks:
+  sdlc-core:
+    driver: bridge
+  sdlc-observability:
+    driver: bridge
+  sdlc-agents:
+    driver: bridge
+
+volumes:
+  sqlserver-data:
+  rabbitmq-data:
+  redis-data:
+  minio-data:
+  elasticsearch-data:
+  grafana-data:
+  keycloak-data:
+  prometheus-data:
+
+services:
+
+  # ===========================================================================
+  # SQL SERVER
+  # ===========================================================================
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sdlc_sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: ${SQLSERVER_SA_PASSWORD}
+      MSSQL_PID: Developer
+    ports:
+      - "${HOST_SQLSERVER_PORT}:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+      - ./infrastructure/sqlserver:/docker-entrypoint-initdb.d
+    networks:
+      - sdlc-core
+    healthcheck:
+      <<: *hc-defaults
+      test: ["CMD", "/opt/mssql-tools18/bin/sqlcmd", "-S", "localhost",
+             "-U", "sa", "-P", "${SQLSERVER_SA_PASSWORD}",
+             "-Q", "SELECT 1", "-C"]
+    logging: *default-logging
+    restart: unless-stopped
+
+  # SQL Server initializer — runs schema scripts after server is ready
+  sqlserver-init:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sdlc_sqlserver_init
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    volumes:
+      - ./infrastructure/sqlserver:/scripts
+    networks:
+      - sdlc-core
+    environment:
+      SA_PASSWORD: ${SQLSERVER_SA_PASSWORD}
+      SQLSERVER_DB: ${SQLSERVER_DB}
+    entrypoint: >
+      bash -c "
+        sleep 10 &&
+        /opt/mssql-tools18/bin/sqlcmd -S sqlserver -U sa -P \"$$SA_PASSWORD\" -C
+          -Q \"IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'$$SQLSERVER_DB')
+               CREATE DATABASE [$$SQLSERVER_DB]\" &&
+        for f in /scripts/schema/*.sql; do
+          echo \"Applying $$f\" &&
+          /opt/mssql-tools18/bin/sqlcmd -S sqlserver -U sa -P \"$$SA_PASSWORD\"
+            -d \"$$SQLSERVER_DB\" -i \"$$f\" -C;
+        done &&
+        echo 'Schema init complete'
+      "
+    restart: on-failure
+
+  # ===========================================================================
+  # RABBITMQ
+  # ===========================================================================
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    container_name: sdlc_rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_VHOST}
+    ports:
+      - "${HOST_RABBITMQ_MGMT_PORT}:15672"
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+      - ./infrastructure/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+      - ./infrastructure/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
+    networks:
+      - sdlc-core
+      - sdlc-agents
+    healthcheck:
+      <<: *hc-defaults
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+    logging: *default-logging
+    restart: unless-stopped
+
+  # ===========================================================================
+  # REDIS
+  # ===========================================================================
+  redis:
+    image: redis:7.2-alpine
+    container_name: sdlc_redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+    ports:
+      - "${HOST_REDIS_PORT}:6379"
+    volumes:
+      - redis-data:/data
+      - ./infrastructure/redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    networks:
+      - sdlc-core
+      - sdlc-agents
+    healthcheck:
+      <<: *hc-defaults
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+    logging: *default-logging
+    restart: unless-stopped
+
+  # ===========================================================================
+  # MINIO (Object Storage)
+  # ===========================================================================
+  minio:
+    image: minio/minio:latest
+    container_name: sdlc_minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    ports:
+      - "${HOST_MINIO_API_PORT}:9000"
+      - "${HOST_MINIO_CONSOLE_PORT}:9001"
+    volumes:
+      - minio-data:/data
+    networks:
+      - sdlc-core
+    healthcheck:
+      <<: *hc-defaults
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+    logging: *default-logging
+    restart: unless-stopped
+
+  # MinIO bucket initializer
+  minio-init:
+    image: minio/mc:latest
+    container_name: sdlc_minio_init
+    depends_on:
+      minio:
+        condition: service_healthy
+    volumes:
+      - ./infrastructure/minio/init.sh:/init.sh:ro
+    networks:
+      - sdlc-core
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+      MINIO_BUCKET_PLANS: ${MINIO_BUCKET_PLANS}
+      MINIO_BUCKET_DOCUMENTS: ${MINIO_BUCKET_DOCUMENTS}
+      MINIO_BUCKET_CODE: ${MINIO_BUCKET_CODE}
+      MINIO_BUCKET_AUDIT: ${MINIO_BUCKET_AUDIT}
+    entrypoint: ["/bin/sh", "/init.sh"]
+    restart: on-failure
+
+  # ===========================================================================
+  # KEYCLOAK (Identity Server)
+  # ===========================================================================
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0
+    container_name: sdlc_keycloak
+    command: start-dev --import-realm
+    environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_DB: dev-mem
+      KC_HEALTH_ENABLED: "true"
+    ports:
+      - "${HOST_KEYCLOAK_PORT}:8080"
+    volumes:
+      - ./infrastructure/keycloak:/opt/keycloak/data/import:ro
+    networks:
+      - sdlc-core
+    healthcheck:
+      <<: *hc-defaults
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/health/ready || exit 1"]
+      start_period: 90s
+    logging: *default-logging
+    restart: unless-stopped
+
+  # ===========================================================================
+  # ELASTICSEARCH
+  # ===========================================================================
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTIC_VERSION}
+    container_name: sdlc_elasticsearch
+    environment:
+      - discovery.type=single-node
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - xpack.security.enabled=true
+      - xpack.security.http.ssl.enabled=false
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+      - bootstrap.memory_lock=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+      - ./infrastructure/elk/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+    networks:
+      - sdlc-observability
+    healthcheck:
+      <<: *hc-defaults
+      test: ["CMD-SHELL",
+             "curl -s -u elastic:${ELASTIC_PASSWORD} http://localhost:9200/_cluster/health | grep -vq '\"status\":\"red\"'"]
+      start_period: 90s
+    logging: *default-logging
+    restart: unless-stopped
+
+  # ===========================================================================
+  # LOGSTASH
+  # ===========================================================================
+  logstash:
+    image: docker.elastic.co/logstash/logstash:${ELASTIC_VERSION}
+    container_name: sdlc_logstash
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    environment:
+      LS_JAVA_OPTS: "-Xms512m -Xmx512m"
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+    volumes:
+      - ./infrastructure/elk/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./infrastructure/elk/logstash/pipeline:/usr/share/logstash/pipeline:ro
+    networks:
+      - sdlc-observability
+      - sdlc-core
+    healthcheck:
+      <<: *hc-defaults
+      test: ["CMD-SHELL", "curl -f http://localhost:9600 || exit 1"]
+    logging: *default-logging
+    restart: unless-stopped
+
+  # ===========================================================================
+  # KIBANA
+  # ===========================================================================
+  kibana:
+    image: docker.elastic.co/kibana/kibana:${ELASTIC_VERSION}
+    container_name: sdlc_kibana
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    environment:
+      ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
+      ELASTICSEARCH_USERNAME: elastic
+      ELASTICSEARCH_PASSWORD: ${ELASTIC_PASSWORD}
+      KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD}
+    ports:
+      - "${HOST_KIBANA_PORT}:5601"
+    volumes:
+      - ./infrastructure/elk/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
+    networks:
+      - sdlc-observability
+    healthcheck:
+      <<: *hc-defaults
+      test: ["CMD-SHELL", "curl -f http://localhost:5601/api/status || exit 1"]
+      start_period: 120s
+    logging: *default-logging
+    restart: unless-stopped
+
+  # ===========================================================================
+  # PROMETHEUS
+  # ===========================================================================
+  prometheus:
+    image: prom/prometheus:v2.51.0
+    container_name: sdlc_prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention.time=30d"
+      - "--web.enable-lifecycle"
+    ports:
+      - "${HOST_PROMETHEUS_PORT}:9090"
+    volumes:
+      - prometheus-data:/prometheus
+      - ./infrastructure/monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    networks:
+      - sdlc-observability
+      - sdlc-core
+    logging: *default-logging
+    restart: unless-stopped
+
+  # ===========================================================================
+  # GRAFANA
+  # ===========================================================================
+  grafana:
+    image: grafana/grafana:10.4.0
+    container_name: sdlc_grafana
+    depends_on:
+      - prometheus
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD}
+      GF_SECURITY_ADMIN_USER: admin
+      GF_INSTALL_PLUGINS: grafana-clock-panel,grafana-simple-json-datasource
+    ports:
+      - "${HOST_GRAFANA_PORT}:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./infrastructure/monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+    networks:
+      - sdlc-observability
+    logging: *default-logging
+    restart: unless-stopped
+
+  # ===========================================================================
+  # APPLICATION SERVICES
+  # ===========================================================================
+
+  session-service:
+    build:
+      context: ./src/services/SessionService
+      dockerfile: Dockerfile
+    container_name: sdlc_session_service
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "5001:5001"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: "http://+:5001"
+      ConnectionStrings__SqlServer: "Server=sqlserver;Database=${SQLSERVER_DB};User Id=sa;Password=${SQLSERVER_SA_PASSWORD};TrustServerCertificate=True;"
+      RabbitMQ__Url: "amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672/${RABBITMQ_VHOST}"
+      Redis__Url: "redis://:${REDIS_PASSWORD}@redis:6379"
+      Minio__Endpoint: "minio:9000"
+      Minio__AccessKey: ${MINIO_ROOT_USER}
+      Minio__SecretKey: ${MINIO_ROOT_PASSWORD}
+      Minio__UseSSL: "false"
+      Minio__PlansBucket: ${MINIO_PLANS_BUCKET}
+      Keycloak__Authority: "http://keycloak:8080/realms/${KEYCLOAK_REALM}"
+    networks:
+      - sdlc-core
+    profiles:
+      - app
+    restart: unless-stopped
+
+  audit-service:
+    build:
+      context: ./src/services/AuditService
+      dockerfile: Dockerfile
+    container_name: sdlc_audit_service
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    ports:
+      - "5002:5002"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: "http://+:5002"
+      ConnectionStrings__SqlServer: "Server=sqlserver;Database=${SQLSERVER_DB};User Id=sa;Password=${SQLSERVER_SA_PASSWORD};TrustServerCertificate=True;"
+      RabbitMQ__Url: "amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672/${RABBITMQ_VHOST}"
+      Keycloak__Authority: "http://keycloak:8080/realms/${KEYCLOAK_REALM}"
+    networks:
+      - sdlc-core
+    profiles:
+      - app
+    restart: unless-stopped
+
+  document-service:
+    build:
+      context: ./src/services/DocumentService
+      dockerfile: Dockerfile
+    container_name: sdlc_document_service
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    ports:
+      - "5003:5003"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: "http://+:5003"
+      ConnectionStrings__SqlServer: "Server=sqlserver;Database=${SQLSERVER_DB};User Id=sa;Password=${SQLSERVER_SA_PASSWORD};TrustServerCertificate=True;"
+      Minio__Endpoint: "minio:9000"
+      Minio__AccessKey: ${MINIO_ROOT_USER}
+      Minio__SecretKey: ${MINIO_ROOT_PASSWORD}
+      Minio__UseSSL: "false"
+      Minio__PlansBucket: ${MINIO_PLANS_BUCKET}
+      Keycloak__Authority: "http://keycloak:8080/realms/${KEYCLOAK_REALM}"
+    networks:
+      - sdlc-core
+    profiles:
+      - app
+    restart: unless-stopped
+
+  gateway:
+    build:
+      context: ./src/gateway/SDLCGateway
+      dockerfile: Dockerfile
+    container_name: sdlc_gateway
+    depends_on:
+      - keycloak
+      - rabbitmq
+    ports:
+      - "${HOST_GATEWAY_PORT}:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      SQLSERVER_CONNECTION: "Server=sqlserver;Database=${SQLSERVER_DB};User Id=sa;Password=${SQLSERVER_SA_PASSWORD};TrustServerCertificate=True;"
+      KEYCLOAK_AUTHORITY: "http://keycloak:8080/realms/${KEYCLOAK_REALM}"
+    networks:
+      - sdlc-core
+    profiles:
+      - app
+    restart: unless-stopped
+
+  agent-component1:
+    build:
+      context: ./src/agents
+      dockerfile: component1/Dockerfile
+    container_name: sdlc_agent_c1
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "50051:50051"
+      - "8001:8000"
+    environment:
+      RABBITMQ_URL: "amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672/${RABBITMQ_VHOST}"
+      REDIS_URL: "redis://:${REDIS_PASSWORD}@redis:6379"
+      LLM_DEFAULT_PROVIDER: ${LLM_DEFAULT_PROVIDER}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+      MISTRAL_API_KEY: ${MISTRAL_API_KEY}
+      MINIO_ENDPOINT: "minio:9000"
+      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER}
+      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD}
+    networks:
+      - sdlc-core
+      - sdlc-agents
+    profiles:
+      - app
+    restart: unless-stopped
+
+  agent-component2:
+    build:
+      context: ./src/agents
+      dockerfile: component2/Dockerfile
+    container_name: sdlc_agent_c2
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "50052:50051"
+      - "8002:8000"
+    environment:
+      RABBITMQ_URL: "amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672/${RABBITMQ_VHOST}"
+      REDIS_URL: "redis://:${REDIS_PASSWORD}@redis:6379"
+      LLM_DEFAULT_PROVIDER: ${LLM_DEFAULT_PROVIDER}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+      MISTRAL_API_KEY: ${MISTRAL_API_KEY}
+      MINIO_ENDPOINT: "minio:9000"
+      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER}
+      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD}
+    networks:
+      - sdlc-core
+      - sdlc-agents
+    profiles:
+      - app
+    restart: unless-stopped
+
+  agent-component3:
+    build:
+      context: ./src/agents
+      dockerfile: component3/Dockerfile
+    container_name: sdlc_agent_c3
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "50053:50051"
+      - "8003:8000"
+    environment:
+      RABBITMQ_URL: "amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672/${RABBITMQ_VHOST}"
+      REDIS_URL: "redis://:${REDIS_PASSWORD}@redis:6379"
+      LLM_DEFAULT_PROVIDER: ${LLM_DEFAULT_PROVIDER}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+      MISTRAL_API_KEY: ${MISTRAL_API_KEY}
+      MINIO_ENDPOINT: "minio:9000"
+      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER}
+      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD}
+    networks:
+      - sdlc-core
+      - sdlc-agents
+    profiles:
+      - app
+    restart: unless-stopped
+
+  agent-component4:
+    build:
+      context: ./src/agents
+      dockerfile: component4/Dockerfile
+    container_name: sdlc_agent_c4
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "50054:50051"
+      - "8004:8000"
+    environment:
+      RABBITMQ_URL: "amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672/${RABBITMQ_VHOST}"
+      REDIS_URL: "redis://:${REDIS_PASSWORD}@redis:6379"
+      LLM_DEFAULT_PROVIDER: ${LLM_DEFAULT_PROVIDER}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+      MISTRAL_API_KEY: ${MISTRAL_API_KEY}
+      MINIO_ENDPOINT: "minio:9000"
+      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER}
+      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD}
+      FIX_COMPLEXITY_THRESHOLD: ${DEFAULT_FIX_COMPLEXITY_THRESHOLD_PERCENT}
+      MAX_FIX_ATTEMPTS: ${MAX_FIX_ATTEMPTS}
+    networks:
+      - sdlc-core
+      - sdlc-agents
+    profiles:
+      - app
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------------------
+  # Frontend — Angular SPA served via nginx
+  # ---------------------------------------------------------------------------
+  frontend:
+    build:
+      context: ./src/frontend/sdlc-ui
+      dockerfile: Dockerfile
+    container_name: sdlc_frontend
+    depends_on:
+      - gateway
+    ports:
+      - "4200:80"
+    networks:
+      - sdlc-core
+    profiles:
+      - app
+    restart: unless-stopped

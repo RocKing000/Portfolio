@@ -1,0 +1,63 @@
+<h2 mat-dialog-title>
+  <mat-icon>settings</mat-icon> Widget Configuration
+</h2>
+
+<mat-dialog-content [formGroup]="form">
+  <div class="config-form">
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Widget Title</mat-label>
+      <input matInput formControlName="title" placeholder="My Widget">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Data Source</mat-label>
+      <mat-select formControlName="dataSource">
+        <mat-option *ngFor="let d of dataSources" [value]="d">{{ d }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="two-col">
+      <mat-form-field appearance="outline">
+        <mat-label>Min Severity</mat-label>
+        <mat-select formControlName="severity">
+          <mat-option [value]="null">All</mat-option>
+          <mat-option *ngFor="let s of severities" [value]="s.value">{{ s.label }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Result Limit</mat-label>
+        <input matInput type="number" formControlName="limit" min="1" max="500">
+      </mat-form-field>
+    </div>
+
+    <div class="two-col">
+      <mat-form-field appearance="outline">
+        <mat-label>Period Type</mat-label>
+        <mat-select formControlName="periodType">
+          <mat-option *ngFor="let p of periodTypes" [value]="p">{{ p }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Refresh (seconds)</mat-label>
+        <input matInput type="number" formControlName="refreshInterval" min="10">
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Signal Type Filter</mat-label>
+      <input matInput formControlName="signalType" placeholder="Optional">
+    </mat-form-field>
+
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()" [disabled]="saving()">Cancel</button>
+  <button mat-flat-button color="primary" (click)="submit()" [disabled]="saving()">
+    <mat-spinner *ngIf="saving()" diameter="16" class="inline-spinner"></mat-spinner>
+    <span *ngIf="!saving()">Save</span>
+  </button>
+</mat-dialog-actions>

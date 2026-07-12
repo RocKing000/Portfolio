@@ -1,0 +1,141 @@
+<!-- ── KYC Result ──────────────────────────────────────────────────────── -->
+<div class="kyc-result">
+
+  <!-- Status banner -->
+  <div class="kyc-result__banner" [ngClass]="statusClass">
+    <div class="kyc-result__status-icon" [innerHTML]="statusIcon"></div>
+    <h2 class="kyc-result__status-label">{{ statusLabel }}</h2>
+    <p class="kyc-result__session-id">Session: {{ session.sessionId }}</p>
+  </div>
+
+  <div class="kyc-result__body">
+
+    <!-- Document verification -->
+    <div class="kyc-result__section">
+      <h4 class="kyc-result__section-title">Document Verification</h4>
+      @if (session.documentResult) {
+        <div class="kyc-result__check-row">
+          <span class="kyc-result__check-icon"
+                [class.kyc-result__check-icon--ok]="session.documentResult.success">
+            {{ session.documentResult.success ? '&#10003;' : '&#10007;' }}
+          </span>
+          <div>
+            <p class="field-value">
+              {{ session.documentResult.document_type | uppercase }}
+            </p>
+            @if (session.documentResult.extracted_data?.name) {
+              <p class="text-muted">{{ session.documentResult.extracted_data!.name }}</p>
+            }
+          </div>
+          <span class="badge"
+                [class.badge--success]="session.documentResult.success"
+                [class.badge--danger]="!session.documentResult.success">
+            {{ session.documentResult.success ? 'Verified' : 'Failed' }}
+          </span>
+        </div>
+
+        @if (session.documentResult.extracted_data) {
+          <div class="kyc-result__fields">
+            @if (session.documentResult.extracted_data.document_number) {
+              <div class="kyc-result__field">
+                <span class="field-label">Document No.</span>
+                <span class="field-value field-value--mono">
+                  {{ session.documentResult.extracted_data.document_number | maskNumber }}
+                </span>
+              </div>
+            }
+            @if (session.documentResult.extracted_data.dob) {
+              <div class="kyc-result__field">
+                <span class="field-label">Date of Birth</span>
+                <span class="field-value">{{ session.documentResult.extracted_data.dob }}</span>
+              </div>
+            }
+          </div>
+        }
+      } @else {
+        <p class="text-muted">Document not scanned.</p>
+      }
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Face verification -->
+    <div class="kyc-result__section">
+      <h4 class="kyc-result__section-title">Face Verification</h4>
+      @if (session.faceResult) {
+        <div class="kyc-result__check-row">
+          <span class="kyc-result__check-icon"
+                [class.kyc-result__check-icon--ok]="session.faceResult.face_detected">
+            {{ session.faceResult.face_detected ? '&#10003;' : '&#10007;' }}
+          </span>
+          <div>
+            <p class="field-value">Face Detection</p>
+            <p class="text-muted">
+              Confidence: {{ session.faceResult.confidence | percent:'1.0-0' }}
+            </p>
+          </div>
+          <span class="badge"
+                [class.badge--success]="session.faceResult.face_detected"
+                [class.badge--danger]="!session.faceResult.face_detected">
+            {{ session.faceResult.face_detected ? 'Detected' : 'Not Found' }}
+          </span>
+        </div>
+      } @else {
+        <p class="text-muted">Face not captured.</p>
+      }
+
+      <!-- Liveness -->
+      @if (session.livenessResult) {
+        <div class="kyc-result__check-row kyc-result__check-row--sub">
+          <span class="kyc-result__check-icon"
+                [class.kyc-result__check-icon--ok]="session.livenessResult.is_live">
+            {{ session.livenessResult.is_live ? '&#10003;' : '&#10007;' }}
+          </span>
+          <div>
+            <p class="field-value">Liveness Check</p>
+            <p class="text-muted">{{ session.livenessResult.message }}</p>
+          </div>
+          <span class="badge"
+                [class.badge--success]="session.livenessResult.is_live"
+                [class.badge--danger]="!session.livenessResult.is_live">
+            {{ session.livenessResult.is_live ? 'Live' : 'Failed' }}
+          </span>
+        </div>
+      }
+
+      <!-- Match -->
+      @if (session.matchResult) {
+        <div class="kyc-result__check-row kyc-result__check-row--sub">
+          <span class="kyc-result__check-icon"
+                [class.kyc-result__check-icon--ok]="session.matchResult.is_match">
+            {{ session.matchResult.is_match ? '&#10003;' : '&#10007;' }}
+          </span>
+          <div>
+            <p class="field-value">Face Match</p>
+            <p class="text-muted">
+              Score: {{ session.matchResult.similarity_score | percent:'1.0-0' }}
+              (threshold {{ session.matchResult.threshold | percent:'1.0-0' }})
+            </p>
+          </div>
+          <span class="badge"
+                [class.badge--success]="session.matchResult.is_match"
+                [class.badge--warning]="!session.matchResult.is_match">
+            {{ session.matchResult.is_match ? 'Match' : 'No Match' }}
+          </span>
+        </div>
+      }
+    </div>
+
+  </div>
+
+  <!-- Actions -->
+  <div class="kyc-result__actions">
+    <button class="btn btn--outline btn--full" (click)="downloadReport()">
+      Download Report
+    </button>
+    <button class="btn btn--primary btn--full" (click)="onStartOver()">
+      Start Over
+    </button>
+  </div>
+
+</div>

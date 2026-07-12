@@ -1,0 +1,242 @@
+{
+  "vhosts": [
+    { "name": "sdlc" }
+  ],
+  "exchanges": [
+    {
+      "name": "sdlc.components",
+      "vhost": "sdlc",
+      "type": "topic",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "sdlc.agents",
+      "vhost": "sdlc",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "sdlc.review",
+      "vhost": "sdlc",
+      "type": "fanout",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "sdlc.events",
+      "vhost": "sdlc",
+      "type": "topic",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "sdlc.dlx",
+      "vhost": "sdlc",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    }
+  ],
+  "queues": [
+    {
+      "name": "component1.input",
+      "vhost": "sdlc",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-dead-letter-exchange": "sdlc.dlx",
+        "x-dead-letter-routing-key": "component1.dead",
+        "x-message-ttl": 86400000
+      }
+    },
+    {
+      "name": "component1.output",
+      "vhost": "sdlc",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": { "x-dead-letter-exchange": "sdlc.dlx" }
+    },
+    {
+      "name": "component2.input",
+      "vhost": "sdlc",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-dead-letter-exchange": "sdlc.dlx",
+        "x-dead-letter-routing-key": "component2.dead",
+        "x-message-ttl": 86400000
+      }
+    },
+    {
+      "name": "component2.output",
+      "vhost": "sdlc",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": { "x-dead-letter-exchange": "sdlc.dlx" }
+    },
+    {
+      "name": "component3.input",
+      "vhost": "sdlc",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-dead-letter-exchange": "sdlc.dlx",
+        "x-dead-letter-routing-key": "component3.dead",
+        "x-message-ttl": 86400000
+      }
+    },
+    {
+      "name": "component3.output",
+      "vhost": "sdlc",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": { "x-dead-letter-exchange": "sdlc.dlx" }
+    },
+    {
+      "name": "component4.input",
+      "vhost": "sdlc",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-dead-letter-exchange": "sdlc.dlx",
+        "x-dead-letter-routing-key": "component4.dead",
+        "x-message-ttl": 86400000
+      }
+    },
+    {
+      "name": "component4.output",
+      "vhost": "sdlc",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": { "x-dead-letter-exchange": "sdlc.dlx" }
+    },
+    {
+      "name": "review.queue",
+      "vhost": "sdlc",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": { "x-dead-letter-exchange": "sdlc.dlx" }
+    },
+    {
+      "name": "audit.events",
+      "vhost": "sdlc",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "notification.events",
+      "vhost": "sdlc",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "approval.requests",
+      "vhost": "sdlc",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": { "x-dead-letter-exchange": "sdlc.dlx" }
+    },
+    {
+      "name": "llm.requests",
+      "vhost": "sdlc",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-dead-letter-exchange": "sdlc.dlx",
+        "x-max-priority": 10
+      }
+    },
+    {
+      "name": "dlx.dead-letters",
+      "vhost": "sdlc",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "sdlc.components",
+      "vhost": "sdlc",
+      "destination": "component1.input",
+      "destination_type": "queue",
+      "routing_key": "component.1.#",
+      "arguments": {}
+    },
+    {
+      "source": "sdlc.components",
+      "vhost": "sdlc",
+      "destination": "component2.input",
+      "destination_type": "queue",
+      "routing_key": "component.2.#",
+      "arguments": {}
+    },
+    {
+      "source": "sdlc.components",
+      "vhost": "sdlc",
+      "destination": "component3.input",
+      "destination_type": "queue",
+      "routing_key": "component.3.#",
+      "arguments": {}
+    },
+    {
+      "source": "sdlc.components",
+      "vhost": "sdlc",
+      "destination": "component4.input",
+      "destination_type": "queue",
+      "routing_key": "component.4.#",
+      "arguments": {}
+    },
+    {
+      "source": "sdlc.review",
+      "vhost": "sdlc",
+      "destination": "review.queue",
+      "destination_type": "queue",
+      "routing_key": "",
+      "arguments": {}
+    },
+    {
+      "source": "sdlc.events",
+      "vhost": "sdlc",
+      "destination": "audit.events",
+      "destination_type": "queue",
+      "routing_key": "audit.#",
+      "arguments": {}
+    },
+    {
+      "source": "sdlc.events",
+      "vhost": "sdlc",
+      "destination": "notification.events",
+      "destination_type": "queue",
+      "routing_key": "notify.#",
+      "arguments": {}
+    },
+    {
+      "source": "sdlc.dlx",
+      "vhost": "sdlc",
+      "destination": "dlx.dead-letters",
+      "destination_type": "queue",
+      "routing_key": "#",
+      "arguments": {}
+    }
+  ],
+  "policies": [
+    {
+      "vhost": "sdlc",
+      "name": "ha-all",
+      "pattern": ".*",
+      "definition": { "ha-mode": "all" },
+      "priority": 0,
+      "apply-to": "queues"
+    }
+  ]
+}

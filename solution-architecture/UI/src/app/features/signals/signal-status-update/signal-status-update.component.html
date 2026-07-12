@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>
+  <mat-icon>update</mat-icon> Update Signal Status
+</h2>
+
+<mat-dialog-content [formGroup]="form">
+
+  <p class="current-status">
+    Current status:
+    <strong>{{ statusLabels[data.currentStatus] ?? data.currentStatus }}</strong>
+  </p>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>New Status *</mat-label>
+    <mat-select formControlName="status">
+      <mat-option *ngFor="let s of allowedStatuses" [value]="s">
+        {{ statusLabels[s] ?? s }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="form.get('status')?.hasError('required')">Required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Resolution Notes</mat-label>
+    <textarea matInput formControlName="resolutionNotes" rows="3"
+              placeholder="Optional notes about this status change"></textarea>
+  </mat-form-field>
+
+  <p *ngIf="allowedStatuses.length === 0" class="no-transitions">
+    This signal cannot be transitioned further.
+  </p>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()" [disabled]="saving()">Cancel</button>
+  <button mat-flat-button color="primary"
+          (click)="submit()"
+          [disabled]="saving() || allowedStatuses.length === 0">
+    <mat-spinner *ngIf="saving()" diameter="18" class="inline-spinner"></mat-spinner>
+    <span *ngIf="!saving()">Update</span>
+  </button>
+</mat-dialog-actions>

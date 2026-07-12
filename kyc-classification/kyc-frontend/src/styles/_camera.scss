@@ -1,0 +1,179 @@
+@use 'variables' as v;
+
+// ── Camera container ──────────────────────────────────────────────────────────
+.camera-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  max-height: 600px;
+  background: v.$camera-bg;
+  overflow: hidden;
+  border-radius: v.$border-radius;
+
+  @media (max-width: v.$bp-mobile) {
+    max-height: 100dvh;
+    border-radius: 0;
+  }
+}
+
+// ── Video feed ────────────────────────────────────────────────────────────────
+.camera-feed {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  &--front {
+    transform: scaleX(-1); // mirror selfie camera
+  }
+}
+
+// ── Overlay canvas (sits above video, pointer-events: none) ───────────────────
+.overlay-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+// ── Camera UI controls layer ──────────────────────────────────────────────────
+.camera-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: v.$space-6 v.$space-4;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: v.$space-3;
+}
+
+.camera-instruction {
+  color: v.$text-on-dark;
+  font-size: v.$font-size-base;
+  font-weight: 500;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  padding: v.$space-2 v.$space-4;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.camera-top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: v.$space-4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), transparent);
+}
+
+// ── Capture button ────────────────────────────────────────────────────────────
+.capture-btn {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 4px solid white;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: v.$transition-fast;
+  backdrop-filter: blur(4px);
+
+  &:active {
+    transform: scale(0.92);
+    background: rgba(255, 255, 255, 0.4);
+  }
+
+  &__inner {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: white;
+    transition: v.$transition-fast;
+  }
+
+  &:hover &__inner {
+    background: v.$accent;
+  }
+
+  @media (max-width: v.$bp-mobile) {
+    width: 80px;
+    height: 80px;
+
+    &__inner {
+      width: 60px;
+      height: 60px;
+    }
+  }
+}
+
+// ── Switch camera button ───────────────────────────────────────────────────────
+.switch-camera-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  transition: v.$transition-fast;
+  font-size: 20px;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.6);
+    border-color: white;
+  }
+}
+
+// ── Scanning animations ───────────────────────────────────────────────────────
+@keyframes scan-line {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(500%); opacity: 0; }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+@keyframes corner-flash {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+
+@keyframes check-draw {
+  0%   { stroke-dashoffset: 100; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

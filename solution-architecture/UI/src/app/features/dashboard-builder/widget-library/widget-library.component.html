@@ -1,0 +1,52 @@
+<h2 mat-dialog-title>
+  <mat-icon>widgets</mat-icon> Widget Library
+</h2>
+
+<mat-dialog-content>
+
+  <!-- Category Filter -->
+  <div class="category-chips">
+    @for (cat of categories; track cat) {
+      <span class="cat-chip"
+            [class.active]="(selectedCategory() ?? 'ALL') === cat"
+            (click)="selectedCategory.set(cat === 'ALL' ? null : cat)">
+        {{ cat }}
+      </span>
+    }
+  </div>
+
+  <div *ngIf="loading()" class="loading-center">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <!-- Template grid -->
+  <div class="template-grid" *ngIf="!loading()">
+    @for (t of filteredTemplates; track t.templateId) {
+      <mat-card class="template-card" (click)="select(t)">
+        <mat-card-content>
+          <div class="template-icon">
+            <mat-icon>{{ widgetIcon(t.widgetType) }}</mat-icon>
+          </div>
+          <div class="template-name">{{ t.templateName }}</div>
+          <div class="template-type">{{ t.widgetType }}</div>
+          <p class="template-desc">{{ t.description }}</p>
+          @if (t.isPremium) {
+            <mat-chip class="premium-chip">Premium</mat-chip>
+          }
+        </mat-card-content>
+      </mat-card>
+    }
+
+    @if (filteredTemplates.length === 0) {
+      <div class="empty-state">
+        <mat-icon>widgets</mat-icon>
+        <p>No templates in this category</p>
+      </div>
+    }
+  </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancel</button>
+</mat-dialog-actions>

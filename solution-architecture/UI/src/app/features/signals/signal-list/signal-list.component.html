@@ -1,0 +1,150 @@
+<div class="signal-list-container">
+
+  <!-- Header -->
+  <mat-card class="header-card">
+    <mat-card-header>
+      <mat-icon mat-card-avatar>error_outline</mat-icon>
+      <mat-card-title>Signals</mat-card-title>
+      <mat-card-subtitle>
+        {{ signals().length }} open&nbsp;
+        <span *ngIf="critical().length" class="critical-badge">
+          {{ critical().length }} critical
+        </span>
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-actions align="end">
+      <button mat-stroked-button (click)="refresh()" [disabled]="loading()">
+        <mat-icon>refresh</mat-icon> Refresh
+      </button>
+      <button mat-flat-button color="primary" (click)="openCreate()">
+        <mat-icon>add</mat-icon> New Signal
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- Filters -->
+  <mat-card class="filter-card">
+    <mat-card-content>
+      <div class="filters-row">
+        <mat-form-field appearance="outline" class="filter-field">
+          <mat-label>Type</mat-label>
+          <mat-select [formControl]="typeFilter">
+            <mat-option [value]="null">All</mat-option>
+            <mat-option *ngFor="let t of signalTypes" [value]="t">{{ t }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="filter-field">
+          <mat-label>Min Severity</mat-label>
+          <mat-select [formControl]="severityFilter">
+            <mat-option [value]="null">All</mat-option>
+            <mat-option *ngFor="let s of severities" [value]="s.value">{{ s.label }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="filter-field">
+          <mat-label>Status</mat-label>
+          <mat-select [formControl]="statusFilter">
+            <mat-option [value]="null">All</mat-option>
+            <mat-option *ngFor="let st of statuses" [value]="st">{{ st }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-icon-button (click)="clearFilters()" matTooltip="Clear filters">
+          <mat-icon>filter_alt_off</mat-icon>
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Loading -->
+  <div *ngIf="loading()" class="loading-overlay">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <!-- Error -->
+  <mat-card *ngIf="error()" class="error-card">
+    <mat-card-content>
+      <mat-icon>error</mat-icon> {{ error() }}
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Table -->
+  <mat-card class="table-card">
+    <table mat-table [dataSource]="signals()" class="signal-table">
+
+      <!-- Severity -->
+      <ng-container matColumnDef="severity">
+        <th mat-header-cell *matHeaderCellDef>Sev</th>
+        <td mat-cell *matCellDef="let row">
+          <span class="severity-badge"
+                [style.background-color]="severityColor(row.severity)">
+            {{ severityLabel(row.severity) }}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Signal Type -->
+      <ng-container matColumnDef="signalType">
+        <th mat-header-cell *matHeaderCellDef>Type</th>
+        <td mat-cell *matCellDef="let row">{{ row.signalType }}</td>
+      </ng-container>
+
+      <!-- Source -->
+      <ng-container matColumnDef="source">
+        <th mat-header-cell *matHeaderCellDef>Source</th>
+        <td mat-cell *matCellDef="let row">{{ row.source }}</td>
+      </ng-container>
+
+      <!-- Title -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td mat-cell *matCellDef="let row" class="title-cell">{{ row.title }}</td>
+      </ng-container>
+
+      <!-- Status -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let row">
+          <span class="status-badge"
+                [style.background-color]="statusColor(row.status)">
+            {{ row.status }}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Created At -->
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef>Created</th>
+        <td mat-cell *matCellDef="let row">{{ row.createdAt | date:'short' }}</td>
+      </ng-container>
+
+      <!-- Actions -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button matTooltip="View details"
+                  (click)="viewSignal(row); $event.stopPropagation()">
+            <mat-icon>open_in_new</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="Update status"
+                  (click)="openStatusUpdate(row, $event)">
+            <mat-icon>update</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"
+          class="signal-row"
+          (click)="viewSignal(row)"></tr>
+    </table>
+
+    <div *ngIf="!loading() && signals().length === 0" class="empty-state">
+      <mat-icon>check_circle_outline</mat-icon>
+      <p>No signals match the current filters.</p>
+    </div>
+  </mat-card>
+
+</div>

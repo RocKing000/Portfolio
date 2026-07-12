@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>SDLCAgents.Grpc</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore"       Version="2.62.0" />
+    <PackageReference Include="Google.Protobuf"        Version="3.27.2" />
+    <PackageReference Include="Grpc.Tools"             Version="2.62.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Proto file shared with Python agents -->
+    <Protobuf Include="..\..\proto\sdlc_agents.proto"
+              GrpcServices="Both"
+              Link="Protos\sdlc_agents.proto" />
+  </ItemGroup>
+</Project>

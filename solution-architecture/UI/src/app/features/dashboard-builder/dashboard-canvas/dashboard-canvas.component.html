@@ -1,0 +1,69 @@
+<div class="canvas-container">
+
+  <!-- Toolbar -->
+  <mat-card class="canvas-toolbar">
+    <mat-card-content>
+      <div class="toolbar-row">
+        <div class="toolbar-left">
+          <mat-icon>dashboard</mat-icon>
+          <span class="layout-name">
+            {{ selectedLayout()?.layoutName ?? 'Dashboard' }}
+          </span>
+          <span *ngIf="selectedLayout()?.widgetCount as wc" class="widget-count">
+            {{ wc }} widget{{ wc !== 1 ? 's' : '' }}
+          </span>
+        </div>
+        <div class="toolbar-actions">
+          <button mat-stroked-button (click)="openWidgetLibrary()" [disabled]="!selectedLayout()">
+            <mat-icon>add</mat-icon> Add Widget
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Loading state -->
+  <div *ngIf="loading()" class="canvas-loading">
+    <mat-spinner diameter="48"></mat-spinner>
+    <p>Loading dashboard...</p>
+  </div>
+
+  <!-- Empty state (no layouts) -->
+  <mat-card *ngIf="!loading() && !selectedLayout()" class="empty-card">
+    <mat-card-content class="empty-state">
+      <mat-icon>dashboard_customize</mat-icon>
+      <h3>No Dashboard Layout</h3>
+      <p>You don't have any layouts yet. Create one to get started.</p>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Grid -->
+  <div *ngIf="layoutLoaded() && selectedLayout()" class="grid-container">
+    <div #gridContainer class="grid-stack">
+      @for (widget of widgets; track widget.widgetId) {
+        <div class="grid-stack-item"
+             [attr.data-widget-id]="widget.widgetId"
+             [attr.data-gs-x]="parsePosition(widget.position).col"
+             [attr.data-gs-y]="parsePosition(widget.position).row"
+             [attr.data-gs-w]="parsePosition(widget.position).width"
+             [attr.data-gs-h]="parsePosition(widget.position).height"
+             [attr.data-gs-min-w]="2"
+             [attr.data-gs-min-h]="2">
+          <div class="grid-stack-item-content">
+            <app-widget-wrapper
+              [widget]="widget"
+              (removeWidget)="removeWidget($event)"
+              (widgetUpdated)="onWidgetUpdated($event)">
+            </app-widget-wrapper>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div *ngIf="widgets.length === 0" class="no-widgets">
+      <mat-icon>widgets</mat-icon>
+      <p>Click <strong>Add Widget</strong> to populate your dashboard.</p>
+    </div>
+  </div>
+
+</div>

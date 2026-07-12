@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>VisionFramework.Client</AssemblyName>
+    <RootNamespace>VisionFramework.Client</RootNamespace>
+    <Version>1.0.0</Version>
+    <Description>
+      .NET client wrapper for the Vision Framework Python API.
+      Provides typed async methods for all KYC endpoints.
+    </Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- System.Text.Json is bundled with .NET 8, no extra package needed -->
+  </ItemGroup>
+
+</Project>

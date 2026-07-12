@@ -1,0 +1,29 @@
+# =============================================================================
+# SDLC Automation Suite — Python Agent Base Image
+# All component agent Dockerfiles use this as their build base
+# =============================================================================
+FROM python:3.12-slim AS base
+
+WORKDIR /app
+
+# System deps for Presidio (spacy) + grpcio
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        gcc g++ libffi-dev libssl-dev curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python deps
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Download spaCy model for Presidio PII detection
+RUN python -m spacy download en_core_web_lg
+
+# Copy full agents package
+COPY . /app/
+
+# Prometheus metrics port
+EXPOSE 8000
+
+# Health endpoint (served by each component's main.py)
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1

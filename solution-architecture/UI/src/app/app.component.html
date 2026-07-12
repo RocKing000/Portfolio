@@ -1,0 +1,28 @@
+<div class="app-shell">
+
+  @if (isAuthenticated()) {
+    <app-navbar (menuToggle)="toggleSidenav()"></app-navbar>
+  }
+
+  <mat-sidenav-container class="sidenav-container">
+
+    @if (isAuthenticated()) {
+      <mat-sidenav mode="side" [opened]="sidenavOpen()" class="app-sidenav">
+        <app-sidenav></app-sidenav>
+      </mat-sidenav>
+    }
+
+    <mat-sidenav-content class="main-content">
+      @if (isAuthenticated()) {
+        <app-icon-nav [collapsed]="!iconNavOpen()" (collapseToggle)="toggleIconNav()"></app-icon-nav>
+      }
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+
+  <!-- @if (isAuthenticated()) {
+    <app-chatbot></app-chatbot>
+  } -->
+
+</div>

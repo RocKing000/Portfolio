@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-dire-dark text-white font-sans antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0a0f1a;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #334155;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #1e293b #0a0f1a;
+  }
+}
+
+@layer components {
+  .glow-accent {
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3),
+      0 0 40px rgba(0, 212, 255, 0.1);
+  }
+
+  .glow-accent-sm {
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+  }
+
+  .glow-danger {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.3),
+      0 0 40px rgba(239, 68, 68, 0.1);
+  }
+
+  .glow-warning {
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.3),
+      0 0 40px rgba(255, 107, 53, 0.1);
+  }
+
+  .text-glow-accent {
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5),
+      0 0 20px rgba(0, 212, 255, 0.3);
+  }
+
+  .panel-border {
+    @apply border border-white/5;
+  }
+}
+
+@layer utilities {
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+}

@@ -1,0 +1,224 @@
+<div class="login-page" [style.visibility]="navigating() ? 'hidden' : 'visible'">
+
+  <!-- Left Panel - Branding -->
+  <div class="login-brand-panel">
+    <div class="brand-content">
+
+      <!-- SARGE Logo with Spear -->
+      <div class="brand-logo-large">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <defs>
+            <linearGradient id="loginBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#003D7A;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#0052A5;stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="loginSGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#E8F0FA;stop-opacity:1" />
+              <stop offset="50%" style="stop-color:#5A9FD4;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#1E6DBF;stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="loginSpearGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#FFB088;stop-opacity:1" />
+              <stop offset="50%" style="stop-color:#FF6B35;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#E55A2B;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="12" fill="url(#loginBgGrad)"/>
+          <rect x="8" y="8" width="48" height="48"
+                fill="none" stroke="#5A9FD4" stroke-width="1.5" opacity="0.4"/>
+          <rect x="30" y="14" width="4" height="36" fill="url(#loginSpearGrad)" rx="1"/>
+          <polygon points="32,8 28,14 36,14" fill="url(#loginSpearGrad)"/>
+          <polygon points="32,56 28,50 36,50" fill="url(#loginSpearGrad)"/>
+          <text x="32" y="44"
+                font-family="Outfit, sans-serif"
+                font-size="36" font-weight="800"
+                fill="url(#loginSGrad)"
+                text-anchor="middle"
+                stroke="#003D7A" stroke-width="0.5"
+                paint-order="stroke">S</text>
+        </svg>
+      </div>
+
+      <!-- Branding Text -->
+      <div class="brand-heading">
+        <h1 class="brand-name">SARGE</h1>
+        <p class="brand-tagline">Signal Analytics Engine</p>
+      </div>
+
+      <!-- Features -->
+      <div class="brand-features">
+        <div class="feature-item">
+          <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 6v6l4 2"></path>
+          </svg>
+          <div class="feature-text">
+            <h3>Real-Time Monitoring</h3>
+            <p>Live signal detection and analytics</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path>
+          </svg>
+          <div class="feature-text">
+            <h3>Multi-Product Platform</h3>
+            <p>FedMithra, Analytics and more</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <div class="feature-text">
+            <h3>Bank-Grade Security</h3>
+            <p>Enterprise encryption and access control</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="brand-footer">
+        <p class="footer-text">ExampleBank &nbsp;·&nbsp; Powered by SARGE</p>
+      </div>
+    </div>
+
+    <!-- Decorative Background -->
+    <div class="decorative-bg">
+      <div class="bg-circle bg-circle-1"></div>
+      <div class="bg-circle bg-circle-2"></div>
+    </div>
+  </div>
+
+  <!-- Right Panel - Login Form -->
+  <div class="login-form-panel">
+    <div class="form-container">
+
+      <!-- Form Header -->
+      <div class="form-header">
+        <h2 class="form-title">Welcome Back</h2>
+        <p class="form-subtitle">Sign in to SARGE Platform</p>
+      </div>
+
+      <!-- Login Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+
+        <!-- Username -->
+        <div class="form-group">
+          <label for="username" class="form-label">
+            <svg class="label-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            Username
+          </label>
+          <div class="input-wrapper" [class.has-error]="isFieldInvalid('username')">
+            <input id="username" type="text" formControlName="username"
+                   placeholder="Enter your username" class="form-input"
+                   autocomplete="username" />
+          </div>
+          @if (isFieldInvalid('username')) {
+            <span class="error-message">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"/>
+              </svg>
+              Username is required
+            </span>
+          }
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password" class="form-label">
+            <svg class="label-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            Password
+          </label>
+          <div class="input-wrapper" [class.has-error]="isFieldInvalid('password')">
+            <input id="password" [type]="showPassword ? 'text' : 'password'"
+                   formControlName="password" placeholder="Enter your password"
+                   class="form-input" autocomplete="current-password" />
+            <button type="button" class="password-toggle"
+                    (click)="togglePasswordVisibility()" tabindex="-1">
+              @if (showPassword) {
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                  <line x1="1" y1="1" x2="23" y2="23"></line>
+                </svg>
+              } @else {
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              }
+            </button>
+          </div>
+          @if (isFieldInvalid('password')) {
+            <span class="error-message">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"/>
+              </svg>
+              Password is required
+            </span>
+          }
+        </div>
+
+        <!-- Options Row -->
+        <div class="form-options">
+          <label class="checkbox-label">
+            <input type="checkbox" formControlName="rememberMe" class="checkbox-input" />
+            <span class="checkbox-custom"></span>
+            <span class="checkbox-text">Remember me</span>
+          </label>
+          <a href="#" class="forgot-link" (click)="$event.preventDefault()">Forgot password?</a>
+        </div>
+
+        <!-- Error alert -->
+        @if (loginError()) {
+          <div class="alert alert-error">
+            <svg class="alert-icon" width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"/>
+            </svg>
+            <span>{{ loginError() }}</span>
+          </div>
+        }
+
+        <!-- Submit -->
+        <button type="submit" class="submit-btn"
+                [disabled]="loginForm.invalid || isLoading()">
+          @if (isLoading()) {
+            <div class="btn-spinner"></div>
+            <span>Signing in</span>
+          } @else {
+            <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+              <polyline points="10 17 15 12 10 7"></polyline>
+              <line x1="15" y1="12" x2="3" y2="12"></line>
+            </svg>
+            <span>Sign In</span>
+          }
+        </button>
+
+      </form>
+
+      <div class="form-footer">
+        <p class="help-text">
+          Need help? Contact
+          <a href="mailto:support@federalbank.co.in" class="help-link">IT Support</a>
+        </p>
+      </div>
+
+    </div>
+
+    <div class="version-info">
+      <span>SARGE v2.0 &nbsp;·&nbsp; ExampleBank Limited</span>
+    </div>
+  </div>
+
+</div>

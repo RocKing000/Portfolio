@@ -1,0 +1,36 @@
+[
+  {
+    "articleId": "art-001",
+    "title": "CIBIL Score Low",
+    "issueCategory": "Credit",
+    "issueCode": "K-100",
+    "faqNumber": 1,
+    "problemDescription": "Customer CIBIL score below threshold for loan approval.",
+    "solutionSteps": "1. Pull CIBIL report\n2. Check for errors and dispute\n3. Wait 30 days for update",
+    "viewCount": 120,
+    "helpfulCount": 98,
+    "isActive": true
+  },
+  {
+    "articleId": "art-002",
+    "title": "API Connectivity Error",
+    "issueCategory": "Network",
+    "issueCode": "NET-500",
+    "problemDescription": "Cannot connect to upstream API endpoint.",
+    "solutionSteps": "1. Verify network connectivity\n2. Check DNS resolution\n3. Retry after 60 seconds",
+    "viewCount": 45,
+    "helpfulCount": 40,
+    "isActive": true
+  },
+  {
+    "articleId": "art-003",
+    "title": "Document Upload Failed",
+    "issueCategory": "Documents",
+    "issueCode": "DOC-101",
+    "problemDescription": "File upload returns a 413 error.",
+    "solutionSteps": "1. Check file size (max 5MB)\n2. Convert to PDF\n3. Retry upload",
+    "viewCount": 30,
+    "helpfulCount": 28,
+    "isActive": true
+  }
+]

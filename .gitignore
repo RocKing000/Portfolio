@@ -1,0 +1,56 @@
+# Dependencies
+node_modules/
+.angular/cache/
+
+# Build outputs
+dist/
+build/
+obj/
+bin/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.venv/
+env/
+
+# Environment / secrets
+.env
+*.env
+!.env.example
+
+# Data files
+*.csv
+*.xlsx
+*.xls
+*.pkl
+*.db
+*.sqlite
+data/
+data_backup/
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Build artifacts
+*.zip
+*.docx
+*.pdf
+*.ttf
+
+# Vercel
+.vercel/project.json

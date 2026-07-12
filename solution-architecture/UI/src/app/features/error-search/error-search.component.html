@@ -1,0 +1,255 @@
+<div class="search-page" [class.has-results]="errors().length > 0">
+
+  <!-- Page Hero -->
+  <div class="search-hero">
+    <h1 class="hero-title" [class.kannada-font]="langSvc.isKannada()">{{ langSvc.t('knowledge_base') }}</h1>
+    <p class="hero-subtitle" [class.kannada-font]="langSvc.isKannada()">{{ langSvc.t('hero_subtitle') }}</p>
+  </div>
+
+  <!-- Search Box -->
+  <div class="search-box-area">
+    <div class="search-box" [class.focused]="isSearchFocused">
+      <mat-icon class="search-icon">search</mat-icon>
+
+      <input class="search-input"
+             type="text"
+             [formControl]="searchCtrl"
+             [placeholder]="searchPlaceholder"
+             [class.kannada-font]="detectedLang() !== 'en'"
+             autocomplete="off"
+             aria-label="Error search input"
+             (focus)="isSearchFocused = true"
+             (blur)="isSearchFocused = false" />
+
+      @if (searchCtrl.value) {
+        <button class="clear-btn" (click)="clearSearch()" aria-label="Clear search">
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+    </div>
+
+    <!-- Typo indicator -->
+    @if (typoIndicator()) {
+      <div class="typo-indicator">
+        <span class="typo-label">Searched:</span>
+        <span class="typo-tag typed">
+          <mat-icon>warning_amber</mat-icon>
+          {{ typoIndicator()!.typed }}
+        </span>
+        <mat-icon class="typo-arrow">arrow_forward</mat-icon>
+        <span class="typo-tag matched">
+          <mat-icon>check_circle</mat-icon>
+          {{ typoIndicator()!.matched }}
+        </span>
+      </div>
+    }
+
+    <!-- Quick filters -->
+    <div class="quick-filters">
+      <span class="filter-label" [class.kannada-font]="langSvc.isKannada()">{{ langSvc.t('filter_common') }}</span>
+      @for (chip of quickChips; track chip.value) {
+        <button class="filter-chip" (click)="quickSearch(chip.value)">{{ langSvc.t(chip.key) }}</button>
+      }
+    </div>
+  </div>
+
+  <!-- Kannada auto-detection hint -->
+  @if (showKannadaHint) {
+    <div class="kannada-hint">
+      <span class="hint-icon">
+        <mat-icon>translate</mat-icon>
+      </span>
+      <span class="hint-text kannada-font">ಕನ್ನಡದಲ್ಲಿ ಟೈಪ್ ಮಾಡುತ್ತಿದ್ದೀರಾ?</span>
+      <span class="hint-sep">—</span>
+      <span class="hint-subtext">Kannada input works automatically.</span>
+      <button class="hint-action" (click)="switchToKannada()">Switch UI to Kannada</button>
+      <button class="hint-dismiss" (click)="dismissKannadaHint()" aria-label="Dismiss">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  }
+
+  <!-- Loading -->
+  @if (loading()) {
+    <div class="loading-state">
+      <div class="triple-spinner">
+        <div class="ring ring-1"></div>
+        <div class="ring ring-2"></div>
+        <div class="ring ring-3"></div>
+      </div>
+      <p class="loading-msg" [class.kannada-font]="langSvc.isKannada()">
+        {{ langSvc.t(isFirstSearchLoading() ? 'loading_ai_model' : 'loading_knowledge_base') }}
+      </p>
+      @if (isFirstSearchLoading()) {
+        <p class="loading-hint" [class.kannada-font]="langSvc.isKannada()">{{ langSvc.t('loading_ai_hint') }}</p>
+      }
+    </div>
+  }
+
+  <!-- Results -->
+  @if (!loading() && errors().length > 0) {
+    <div class="results-section">
+
+      <!-- Results meta -->
+      <div class="results-meta">
+        <span class="results-count">
+          <strong class="count-num">{{ errors().length }}</strong>
+          <span [class.kannada-font]="langSvc.isKannada()"> {{ langSvc.t('results_found') }}</span>
+        </span>
+      </div>
+
+      <!-- Result cards (accordion styled as cards) -->
+      <mat-accordion multi class="results-list">
+        @for (err of errors(); track err.mappingId; let i = $index) {
+
+          <mat-expansion-panel class="result-card" [expanded]="i === 0">
+            <!-- Card header -->
+            <mat-expansion-panel-header collapsedHeight="auto" expandedHeight="auto">
+              <mat-panel-title>
+                <div class="card-header-row">
+                  <div class="card-codes">
+                    <span class="error-code-badge">{{ err.errorCode }}</span>
+                    <span class="relevance-chip" [class]="getRelevanceBadge(err.relevanceScore).cls">
+                      {{ langSvc.t(getRelevanceBadge(err.relevanceScore).labelKey) }}
+                    </span>
+                  </div>
+                  <h3 class="card-title" [class.kannada-font]="langSvc.isKannada()">{{ err.errorName }}</h3>
+                  <!-- Breadcrumb path -->
+                  <div class="breadcrumb-row">
+                    @for (crumb of getBreadcrumbs(err.hierarchyPath); track crumb; let last = $last) {
+                      <span class="breadcrumb-crumb" [class.kannada-font]="langSvc.isKannada()">{{ crumb }}</span>
+                      @if (!last) { <mat-icon class="breadcrumb-sep">chevron_right</mat-icon> }
+                    }
+                  </div>
+                </div>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <!-- Panel body -->
+            <div class="panel-body">
+
+              <!-- Problem -->
+              <div class="detail-section">
+                <div class="section-label" [class.kannada-font]="langSvc.isKannada()">
+                  <mat-icon>bug_report</mat-icon>
+                  {{ langSvc.t('problem_description') }}
+                </div>
+                <p class="section-body" [class.kannada-font]="langSvc.isKannada()">{{ err.problemDescription }}</p>
+              </div>
+
+              <!-- Solution steps -->
+              <div class="detail-section solution-section">
+                <div class="section-label-row">
+                  <div class="section-label" [class.kannada-font]="langSvc.isKannada()">
+                    <mat-icon>checklist</mat-icon>
+                    {{ langSvc.t('solution_steps') }}
+                  </div>
+                  <button class="copy-btn"
+                          (click)="copyToClipboard(err.solutionSteps); $event.stopPropagation()"
+                          [matTooltip]="langSvc.t('copy_steps_tooltip')"
+                          aria-label="Copy solution steps">
+                    <mat-icon>content_copy</mat-icon>
+                    <span [class.kannada-font]="langSvc.isKannada()">{{ langSvc.t('btn_copy') }}</span>
+                  </button>
+                </div>
+                <ol class="steps-list">
+                  @for (step of err.solutionSteps; track step; let n = $index) {
+                    <li class="step-item">
+                      <span class="step-num">{{ n + 1 }}</span>
+                      <span class="step-text" [class.kannada-font]="langSvc.isKannada()">{{ step }}</span>
+                    </li>
+                  }
+                </ol>
+              </div>
+
+              <!-- Prerequisites -->
+              @if (err.prerequisites) {
+                <div class="detail-section">
+                  <div class="section-label" [class.kannada-font]="langSvc.isKannada()">
+                    <mat-icon>rule</mat-icon>
+                    {{ langSvc.t('prerequisites') }}
+                  </div>
+                  <p class="section-body" [class.kannada-font]="langSvc.isKannada()">{{ err.prerequisites }}</p>
+                </div>
+              }
+
+              <!-- Expected outcome -->
+              @if (err.expectedOutcome) {
+                <div class="detail-section">
+                  <div class="section-label" [class.kannada-font]="langSvc.isKannada()">
+                    <mat-icon>verified</mat-icon>
+                    {{ langSvc.t('expected_outcome') }}
+                  </div>
+                  <p class="section-body" [class.kannada-font]="langSvc.isKannada()">{{ err.expectedOutcome }}</p>
+                </div>
+              }
+
+              <!-- Escalation notes -->
+              @if (err.escalationNotes) {
+                <div class="detail-section escalation-section">
+                  <div class="section-label escalation-label" [class.kannada-font]="langSvc.isKannada()">
+                    <mat-icon>escalator_warning</mat-icon>
+                    {{ langSvc.t('escalation_notes') }}
+                  </div>
+                  <p class="section-body" [class.kannada-font]="langSvc.isKannada()">{{ err.escalationNotes }}</p>
+                </div>
+              }
+
+              <!-- Feedback -->
+              <div class="feedback-row">
+                <span class="feedback-prompt" [class.kannada-font]="langSvc.isKannada()">{{ langSvc.t('was_helpful') }}</span>
+                @if (feedbackSent().has(err.errorCode)) {
+                  <span class="feedback-done" [class.kannada-font]="langSvc.isKannada()">
+                    <mat-icon>check_circle</mat-icon>
+                    {{ langSvc.t('feedback_submitted') }}
+                  </span>
+                } @else {
+                  <button class="feedback-btn helpful"
+                          (click)="onFeedback(err, true)"
+                          aria-label="Mark as helpful">
+                    <mat-icon>thumb_up</mat-icon>
+                    <span [class.kannada-font]="langSvc.isKannada()">{{ langSvc.t('btn_helpful') }}</span>
+                  </button>
+                  <button class="feedback-btn not-helpful"
+                          (click)="onFeedback(err, false)"
+                          aria-label="Mark as not helpful">
+                    <mat-icon>thumb_down</mat-icon>
+                    <span [class.kannada-font]="langSvc.isKannada()">{{ langSvc.t('btn_not_helpful') }}</span>
+                  </button>
+                }
+              </div>
+
+            </div>
+          </mat-expansion-panel>
+
+        }
+      </mat-accordion>
+
+    </div>
+  }
+
+  <!-- Empty: no results -->
+  @if (!loading() && errors().length === 0 && (searchCtrl.value?.trim()?.length ?? 0) >= 3) {
+    <div class="state-panel empty-results">
+      <div class="state-icon-wrap neutral">
+        <mat-icon>search_off</mat-icon>
+      </div>
+      <h3 class="state-title" [class.kannada-font]="langSvc.isKannada()">{{ langSvc.t('no_results_title') }}</h3>
+      <p class="state-msg" [class.kannada-font]="langSvc.isKannada()">
+        {{ langSvc.t('no_match_prefix') }} <em>"{{ searchCtrl.value }}"</em>. {{ langSvc.t('try_different') }}
+      </p>
+    </div>
+  }
+
+  <!-- Hint: start typing -->
+  @if (!loading() && (searchCtrl.value?.trim()?.length ?? 0) < 3) {
+    <div class="state-panel hint-state">
+      <div class="state-icon-wrap primary">
+        <mat-icon>lightbulb</mat-icon>
+      </div>
+      <h3 class="state-title" [class.kannada-font]="langSvc.isKannada()">{{ langSvc.t('hint_title') }}</h3>
+      <p class="state-msg" [class.kannada-font]="langSvc.isKannada()">{{ langSvc.t('hint_msg') }}</p>
+    </div>
+  }
+
+</div>

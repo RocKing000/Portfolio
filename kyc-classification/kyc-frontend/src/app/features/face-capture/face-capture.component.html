@@ -1,0 +1,133 @@
+<!-- ── Face Capture ──────────────────────────────────────────────────── -->
+<div class="face-capture">
+
+  <!-- STEP 1 — Position face -->
+  @if (faceStep() === 'position') {
+    <div class="face-capture__camera">
+      <video #videoRef
+             class="camera-feed camera-feed--front"
+             autoplay
+             playsinline
+             muted>
+      </video>
+
+      <app-face-overlay
+        [faceDetected]="faceDetected()"
+        [boundingBox]="faceBoundingBox()"
+        [landmarks]="landmarks()">
+      </app-face-overlay>
+
+      <div class="face-capture__topbar">
+        <span class="camera-instruction">
+          @if (faceDetected()) {
+            Hold still — verifying…
+          } @else {
+            Center your face in the oval
+          }
+        </span>
+      </div>
+
+      <div class="face-capture__controls">
+        <button class="capture-btn"
+                [disabled]="processing()"
+                (click)="onManualCapture()">
+          @if (processing()) {
+            <div class="spinner spinner--white"></div>
+          } @else {
+            <div class="capture-btn__inner"></div>
+          }
+        </button>
+        <p class="face-capture__hint">Auto-detecting · Tap to capture manually</p>
+      </div>
+    </div>
+  }
+
+  <!-- STEP 2 — Liveness challenge -->
+  @if (faceStep() === 'liveness') {
+    <div class="face-capture__liveness">
+      <video #videoRef
+             class="camera-feed camera-feed--front face-capture__liveness-video"
+             autoplay
+             playsinline
+             muted>
+      </video>
+
+      <div class="face-capture__challenge-card">
+        <div class="face-capture__challenge-icon"
+             [innerHTML]="challengeIcon(livenessChallenge())">
+        </div>
+        <h3 class="face-capture__challenge-text">
+          {{ challengeLabel(livenessChallenge()) }}
+        </h3>
+        <div class="progress-bar">
+          <div class="progress-bar__fill"
+               [style.width.%]="livenessProgress()">
+          </div>
+        </div>
+        <p class="face-capture__challenge-sub">
+          Collecting frames: {{ livenessProgress() }}%
+        </p>
+        @if (processing()) {
+          <div class="spinner" style="margin-top: 8px;"></div>
+        }
+      </div>
+    </div>
+  }
+
+  <!-- STEP 3 — Match result -->
+  @if (faceStep() === 'match') {
+    <div class="face-capture__match-loading">
+      <div class="spinner spinner--lg"></div>
+      <p>Comparing faces…</p>
+    </div>
+  }
+
+  <!-- STEP 4 — Done -->
+  @if (faceStep() === 'done') {
+    <div class="face-capture__done">
+      <!-- Side by side comparison -->
+      @if (documentFaceImage || selfieB64()) {
+        <div class="face-capture__comparison">
+          @if (documentFaceImage) {
+            <div class="face-capture__compare-item">
+              <img [src]="'data:image/jpeg;base64,' + documentFaceImage" alt="Document photo">
+              <span>Document</span>
+            </div>
+          }
+          <div class="face-capture__compare-vs">
+            @if (matchPassed()) {
+              <span class="face-capture__match-icon face-capture__match-icon--ok">&#10003;</span>
+            } @else {
+              <span class="face-capture__match-icon">~</span>
+            }
+          </div>
+          @if (selfieB64()) {
+            <div class="face-capture__compare-item">
+              <img [src]="'data:image/jpeg;base64,' + selfieB64()" alt="Your selfie">
+              <span>Selfie</span>
+            </div>
+          }
+        </div>
+      }
+
+      <!-- Match score -->
+      <div class="face-capture__score-card">
+        <h3>{{ matchPassed() ? 'Face Match Confirmed' : 'Verification Complete' }}</h3>
+        @if (matchScore() > 0) {
+          <div class="face-capture__score">
+            <span>Match score</span>
+            <div class="progress-bar">
+              <div class="progress-bar__fill"
+                   [class.progress-bar__fill--success]="matchPassed()"
+                   [class.progress-bar__fill--warning]="!matchPassed()"
+                   [style.width.%]="matchScore() * 100">
+              </div>
+            </div>
+            <span class="face-capture__score-val">{{ matchScore() | percent:'1.0-0' }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+</div>

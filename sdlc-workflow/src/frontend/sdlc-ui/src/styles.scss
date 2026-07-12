@@ -1,0 +1,39 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$primary:   mat.define-palette(mat.$indigo-palette, 600);
+$accent:    mat.define-palette(mat.$cyan-palette, A200);
+$warn:      mat.define-palette(mat.$red-palette);
+
+$theme: mat.define-light-theme((
+  color: (primary: $primary, accent: $accent, warn: $warn),
+  typography: mat.define-typography-config($font-family: 'Inter, sans-serif'),
+  density: 0
+));
+
+@include mat.all-component-themes($theme);
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #f4f6f9;
+  color: #1a1a2e;
+}
+
+/* Utility */
+.flex-spacer { flex: 1 1 auto; }
+.w-full      { width: 100%; }
+.mt-4        { margin-top: 1rem; }
+.mb-4        { margin-bottom: 1rem; }
+.p-4         { padding: 1rem; }
+
+/* Status chips */
+.chip-active   { background: #e8f5e9; color: #2e7d32; }
+.chip-paused   { background: #fff8e1; color: #f57f17; }
+.chip-complete { background: #e3f2fd; color: #1565c0; }
+.chip-error    { background: #ffebee; color: #c62828; }
+.chip-safe     { background: #fce4ec; color: #880e4f; }

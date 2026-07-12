@@ -1,0 +1,26 @@
+:host {
+  display: block;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.sidenav-container {
+  flex: 1;
+  overflow: hidden;
+}
+
+.app-sidenav {
+  width: 220px;
+  border-right: none;
+}
+
+.main-content {
+  background: var(--surface);
+  overflow-y: auto;
+}

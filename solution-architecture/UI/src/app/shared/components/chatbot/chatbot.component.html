@@ -1,0 +1,142 @@
+<!-- Floating toggle button -->
+<button class="chat-toggle" (click)="toggleChat()" [class.is-open]="isOpen()" aria-label="Toggle SARGE Assistant">
+  @if (isOpen()) {
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  } @else {
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+    <span class="toggle-badge">AI</span>
+  }
+</button>
+
+<!-- Chat window -->
+@if (isOpen()) {
+  <div class="chat-window">
+
+    <!-- Header -->
+    <div class="chat-header">
+      <div class="header-left">
+        <div class="bot-avatar">
+          <svg width="18" height="18" viewBox="0 0 32 32">
+            <rect width="32" height="32" rx="6" fill="rgba(255,255,255,0.15)"/>
+            <rect x="14" y="5" width="4" height="22" fill="#FFB088" rx="1"/>
+            <polygon points="16,2 13,5 19,5" fill="#FFB088"/>
+            <polygon points="16,30 13,27 19,27" fill="#FFB088"/>
+            <text x="16" y="21" font-family="Outfit,sans-serif" font-size="14" font-weight="800"
+                  fill="white" text-anchor="middle">S</text>
+          </svg>
+        </div>
+        <div class="header-text">
+          <span class="header-title" [class.kannada-font]="langSvc.isKannada()">{{ langSvc.t('chat_title') }}</span>
+          <span class="header-status" [class.kannada-font]="langSvc.isKannada()">{{ langSvc.t('chat_online') }}</span>
+        </div>
+      </div>
+      <button class="header-clear-btn" (click)="clearChat()" [title]="langSvc.t('chat_clear')" [attr.aria-label]="langSvc.t('chat_clear')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="1 4 1 10 7 10"></polyline>
+          <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Messages -->
+    <div class="chat-messages" #messagesContainer>
+      @for (msg of messages(); track msg.id) {
+        <div class="message" [class.user]="msg.role === 'user'" [class.assistant]="msg.role === 'assistant'">
+
+          <!-- Plain text message -->
+          @if (msg.type === 'text') {
+            <div class="message-bubble">{{ msg.content }}</div>
+          }
+
+          <!-- Search results -->
+          @if (msg.type === 'results') {
+            <div class="results-list">
+              @for (result of asResultData(msg.data).results; track $index) {
+                <div class="result-card">
+                  <div class="result-header">
+                    @if (result.category) {
+                      <span class="result-category">{{ result.category }}</span>
+                    }
+                    @if (result.errorCode) {
+                      <span class="result-code">{{ result.errorCode }}</span>
+                    }
+                    @if (result.severity) {
+                      <span class="result-severity sev-{{ result.severity.toLowerCase() }}">
+                        {{ result.severity }}
+                      </span>
+                    }
+                  </div>
+                  <p class="result-title">{{ result.errorTitle || result.errorCode }}</p>
+                  @if (result.solution) {
+                    <p class="result-solution">{{ result.solution }}</p>
+                  }
+                </div>
+              }
+            </div>
+          }
+
+          <!-- Interactive choices -->
+          @if (msg.type === 'choices') {
+            <div class="message-bubble">{{ msg.content }}</div>
+            <div class="choices-list">
+              @for (choice of asChoiceData(msg.data).choices; track choice.label) {
+                <button class="choice-btn" (click)="handleChoice(choice)">
+                  {{ choice.label }}
+                </button>
+              }
+            </div>
+          }
+
+          <div class="message-time">{{ msg.timestamp | date:'shortTime' }}</div>
+        </div>
+      }
+
+      @if (isProcessing()) {
+        <div class="message assistant">
+          <div class="message-bubble typing-bubble">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Input area -->
+    <div class="chat-footer">
+      <div class="input-row">
+        <input
+          class="chat-input"
+          type="text"
+          [ngModel]="userInput()"
+          (ngModelChange)="userInput.set($event)"
+          (keypress)="handleKeyPress($event)"
+          [placeholder]="langSvc.t('chat_placeholder')"
+          [class.kannada-font]="langSvc.isKannada()"
+          [disabled]="isProcessing()"
+          autocomplete="off"
+        />
+        <button class="send-btn"
+                (click)="sendMessage()"
+                [disabled]="!userInput().trim() || isProcessing()"
+                aria-label="Send message">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+
+      <div class="quick-actions">
+        <button class="quick-btn" [class.kannada-font]="langSvc.isKannada()" (click)="setQuickInput('Show me dashboard')">{{ langSvc.t('chat_quick_dashboard') }}</button>
+        <button class="quick-btn" (click)="setQuickInput('Search for K-100')">K-100</button>
+        <button class="quick-btn" (click)="setQuickInput('Search for CIBIL')">CIBIL</button>
+        <button class="quick-btn" (click)="setQuickInput('Search for ENACH')">ENACH</button>
+      </div>
+    </div>
+
+  </div>
+}

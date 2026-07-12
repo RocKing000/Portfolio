@@ -1,0 +1,115 @@
+.signal-details-container {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.loading-center {
+  display: flex;
+  justify-content: center;
+  padding: 48px;
+}
+
+.error-card mat-card-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ef4444;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.header-badges { display: flex; gap: 8px; align-items: center; }
+.header-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.severity-badge, .status-badge {
+  display: inline-block;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.signal-title {
+  margin: 8px 0 4px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.signal-desc {
+  color: rgba(0,0,0,.6);
+  margin: 0 0 12px;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.meta-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: rgba(0,0,0,.5);
+}
+
+.timeline {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 8px 0;
+}
+
+.timeline-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(0,0,0,.3);
+
+  mat-icon { font-size: 28px; height: 28px; width: 28px; }
+
+  .step-label { font-weight: 500; font-size: 13px; }
+  .step-time  { font-size: 11px; color: rgba(0,0,0,.5); }
+
+  &.done {
+    color: #10b981;
+    .step-label { color: rgba(0,0,0,.87); }
+  }
+}
+
+.json-viewer {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 12px;
+  overflow-x: auto;
+  white-space: pre;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.ml-card mat-card-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

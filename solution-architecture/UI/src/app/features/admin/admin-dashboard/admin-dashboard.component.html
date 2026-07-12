@@ -1,0 +1,21 @@
+<div class="admin-dashboard">
+  <div class="page-header">
+    <h1>System Administration</h1>
+    <p>Manage FedMithra V2 configuration and settings</p>
+  </div>
+
+  <div class="dashboard-grid">
+    @for (card of cards; track card.route) {
+      <mat-card class="admin-card" [routerLink]="card.route" [style.border-left-color]="card.color">
+        <div class="card-icon" [style.background-color]="card.color">
+          <mat-icon>{{ card.icon }}</mat-icon>
+        </div>
+        <div class="card-content">
+          <h2>{{ card.title }}</h2>
+          <p>{{ card.description }}</p>
+        </div>
+        <mat-icon class="arrow">arrow_forward</mat-icon>
+      </mat-card>
+    }
+  </div>
+</div>

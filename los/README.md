@@ -43,7 +43,6 @@ frontend/
     src/app/            ← Angular application
 distribute_data.py      ← Distributes processed data across targets
 enrich_from_files.py    ← Enriches records from monthly upload files
-fetch_last_month.py     ← Pulls the most recent monthly data snapshot
 ```
 
 ---

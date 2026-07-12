@@ -1,0 +1,279 @@
+@use 'variables' as v;
+@use 'camera';
+
+// ── Reset & base ──────────────────────────────────────────────────────────────
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  height: -webkit-fill-available;
+}
+
+body {
+  font-family: v.$font-family;
+  background: v.$surface;
+  color: v.$text-primary;
+  line-height: 1.5;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+}
+
+// ── Typography ────────────────────────────────────────────────────────────────
+h1, h2, h3, h4 {
+  font-weight: 700;
+  line-height: 1.25;
+  color: v.$text-primary;
+}
+
+h1 { font-size: v.$font-size-3xl; }
+h2 { font-size: v.$font-size-2xl; }
+h3 { font-size: v.$font-size-xl; }
+h4 { font-size: v.$font-size-lg; }
+
+p {
+  color: v.$text-secondary;
+  line-height: 1.6;
+}
+
+// ── Buttons ───────────────────────────────────────────────────────────────────
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: v.$space-2;
+  padding: v.$space-3 v.$space-6;
+  border-radius: v.$border-radius;
+  border: none;
+  font-family: v.$font-family;
+  font-size: v.$font-size-base;
+  font-weight: 600;
+  cursor: pointer;
+  transition: v.$transition-fast;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &--primary {
+    background: v.$primary;
+    color: white;
+
+    &:hover { background: v.$primary-light; }
+    &:active { background: v.$primary-dark; transform: scale(0.98); }
+  }
+
+  &--success {
+    background: v.$success;
+    color: white;
+
+    &:hover { background: v.$success-light; }
+  }
+
+  &--danger {
+    background: v.$danger;
+    color: white;
+  }
+
+  &--outline {
+    background: transparent;
+    color: v.$primary;
+    border: 2px solid v.$primary;
+
+    &:hover { background: rgba(v.$primary, 0.06); }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: v.$text-secondary;
+
+    &:hover { background: v.$surface-dark; color: v.$text-primary; }
+  }
+
+  &--lg {
+    padding: v.$space-4 v.$space-8;
+    font-size: v.$font-size-lg;
+    border-radius: v.$border-radius-lg;
+  }
+
+  &--full {
+    width: 100%;
+  }
+
+  @media (max-width: v.$bp-mobile) {
+    padding: v.$space-4 v.$space-6;
+    font-size: v.$font-size-lg;
+    min-height: 52px;
+  }
+}
+
+// ── Cards ─────────────────────────────────────────────────────────────────────
+.card {
+  background: v.$card-bg;
+  border-radius: v.$border-radius;
+  padding: v.$space-6;
+  box-shadow: v.$shadow-md;
+
+  &--flat {
+    box-shadow: none;
+    border: 1px solid v.$border-color;
+  }
+}
+
+// ── Badges ────────────────────────────────────────────────────────────────────
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-1;
+  padding: v.$space-1 v.$space-3;
+  border-radius: 20px;
+  font-size: v.$font-size-sm;
+  font-weight: 600;
+
+  &--success { background: rgba(v.$success, 0.12); color: v.$success; }
+  &--warning { background: rgba(v.$warning, 0.12); color: darken(v.$warning, 15%); }
+  &--danger  { background: rgba(v.$danger, 0.12);  color: v.$danger; }
+  &--primary { background: rgba(v.$primary, 0.10); color: v.$primary; }
+  &--neutral { background: v.$surface-dark; color: v.$text-secondary; }
+}
+
+// ── Form fields ───────────────────────────────────────────────────────────────
+.field-label {
+  font-size: v.$font-size-xs;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: v.$text-muted;
+  margin-bottom: v.$space-1;
+}
+
+.field-value {
+  font-size: v.$font-size-base;
+  font-weight: 500;
+  color: v.$text-primary;
+}
+
+// ── Layout utilities ──────────────────────────────────────────────────────────
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: v.$surface;
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 v.$space-4;
+}
+
+.spacer { flex: 1; }
+
+.text-center { text-align: center; }
+.text-success { color: v.$success; }
+.text-danger  { color: v.$danger; }
+.text-warning { color: v.$warning; }
+.text-muted   { color: v.$text-muted; }
+
+// ── Progress bar ──────────────────────────────────────────────────────────────
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: v.$surface-dark;
+  border-radius: 3px;
+  overflow: hidden;
+
+  &__fill {
+    height: 100%;
+    background: v.$primary;
+    border-radius: 3px;
+    transition: width 0.4s ease;
+
+    &--success { background: v.$success; }
+    &--warning { background: v.$warning; }
+    &--danger  { background: v.$danger; }
+  }
+}
+
+// ── Toast notifications ───────────────────────────────────────────────────────
+.toast-container {
+  position: fixed;
+  bottom: v.$space-6;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-2;
+  pointer-events: none;
+  width: calc(100% - 2rem);
+  max-width: 400px;
+}
+
+.toast {
+  background: v.$text-primary;
+  color: white;
+  padding: v.$space-3 v.$space-4;
+  border-radius: v.$border-radius;
+  font-size: v.$font-size-sm;
+  font-weight: 500;
+  box-shadow: v.$shadow-lg;
+  animation: fade-in-up 0.25s ease;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: v.$space-3;
+
+  &--error   { background: v.$danger; }
+  &--warning { background: v.$warning; color: v.$text-primary; }
+  &--success { background: v.$success; }
+}
+
+// ── Divider ───────────────────────────────────────────────────────────────────
+.divider {
+  width: 100%;
+  height: 1px;
+  background: v.$border-color;
+  margin: v.$space-4 0;
+}
+
+// ── Spinner ───────────────────────────────────────────────────────────────────
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(v.$primary, 0.2);
+  border-top-color: v.$primary;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+
+  &--white {
+    border-color: rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+  }
+
+  &--sm { width: 16px; height: 16px; border-width: 2px; }
+  &--lg { width: 36px; height: 36px; border-width: 4px; }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translate(-50%, 12px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}

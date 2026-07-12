@@ -1,0 +1,206 @@
+syntax = "proto3";
+
+package sdlc.agents.v1;
+
+option csharp_namespace = "SDLCAgents.Proto";
+
+// =============================================================================
+// SDLC Agent gRPC Service Contracts
+// Used for synchronous .NET → Python calls (approval gate checks, status)
+// Async agent work is done via RabbitMQ; gRPC is for request/response queries
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Component 1: Requirements Gathering
+// ---------------------------------------------------------------------------
+service Component1Service {
+  rpc StartSession       (StartSessionRequest)   returns (StartSessionResponse);
+  rpc GetSessionStatus   (SessionStatusRequest)  returns (SessionStatusResponse);
+  rpc SubmitGateDecision (GateDecisionRequest)   returns (GateDecisionResponse);
+  rpc GetPlanDocument    (PlanDocumentRequest)   returns (PlanDocumentResponse);
+  rpc UploadPlanDocument (UploadPlanRequest)     returns (UploadPlanResponse);
+}
+
+// ---------------------------------------------------------------------------
+// Component 2: Design Automation
+// ---------------------------------------------------------------------------
+service Component2Service {
+  rpc StartSession       (StartSessionRequest)   returns (StartSessionResponse);
+  rpc GetSessionStatus   (SessionStatusRequest)  returns (SessionStatusResponse);
+  rpc SubmitGateDecision (GateDecisionRequest)   returns (GateDecisionResponse);
+  rpc GetFigmaUrl        (FigmaUrlRequest)       returns (FigmaUrlResponse);
+  rpc GetPlanDocument    (PlanDocumentRequest)   returns (PlanDocumentResponse);
+}
+
+// ---------------------------------------------------------------------------
+// Component 3: Development Automation
+// ---------------------------------------------------------------------------
+service Component3Service {
+  rpc StartSession          (StartSessionRequest)      returns (StartSessionResponse);
+  rpc GetSessionStatus      (SessionStatusRequest)     returns (SessionStatusResponse);
+  rpc SubmitGateDecision    (GateDecisionRequest)      returns (GateDecisionResponse);
+  rpc GetModuleSpec         (ModuleSpecRequest)        returns (ModuleSpecResponse);
+  rpc ApproveCodeGeneration (CodeGenApprovalRequest)   returns (CodeGenApprovalResponse);
+  rpc AssignModule          (ModuleAssignmentRequest)  returns (ModuleAssignmentResponse);
+}
+
+// ---------------------------------------------------------------------------
+// Component 4: Testing Automation
+// ---------------------------------------------------------------------------
+service Component4Service {
+  rpc StartSession         (StartSessionRequest)     returns (StartSessionResponse);
+  rpc GetSessionStatus     (SessionStatusRequest)    returns (SessionStatusResponse);
+  rpc SubmitGateDecision   (GateDecisionRequest)     returns (GateDecisionResponse);
+  rpc GetIterationReport   (IterationReportRequest)  returns (IterationReportResponse);
+  rpc SubmitIterationDecision (IterationDecisionRequest) returns (IterationDecisionResponse);
+}
+
+// ---------------------------------------------------------------------------
+// Shared Messages
+// ---------------------------------------------------------------------------
+message StartSessionRequest {
+  string session_id      = 1;
+  string project_id      = 2;
+  string operating_mode  = 3;
+  string llm_provider    = 4;
+  string model_tier      = 5;
+  string payload_json    = 6;   // Component-specific input as JSON string
+}
+
+message StartSessionResponse {
+  bool   accepted     = 1;
+  string message      = 2;
+  string queue_name   = 3;      // RabbitMQ queue where progress events flow
+}
+
+message SessionStatusRequest {
+  string session_id = 1;
+}
+
+message SessionStatusResponse {
+  string session_id    = 1;
+  string status        = 2;     // Active | Paused | Completed | SafeMode
+  string current_agent = 3;
+  int32  iteration     = 4;
+  string pending_gate  = 5;     // Which gate is waiting for client input, if any
+  string error_message = 6;
+}
+
+message GateDecisionRequest {
+  string session_id      = 1;
+  string gate_id         = 2;
+  string decision        = 3;   // approved | rejected
+  string feedback_json   = 4;   // Client feedback as JSON
+  string approved_by_user_id = 5;
+}
+
+message GateDecisionResponse {
+  bool   accepted     = 1;
+  string next_action  = 2;      // What the system will do next
+  string message      = 3;
+}
+
+message PlanDocumentRequest {
+  string session_id = 1;
+  string agent_name = 2;
+  string format     = 3;        // docx | json
+}
+
+message PlanDocumentResponse {
+  string minio_key    = 1;
+  string download_url = 2;
+  int32  version      = 3;
+}
+
+message UploadPlanRequest {
+  string session_id    = 1;
+  string agent_name    = 2;
+  string minio_key     = 3;     // Pre-uploaded by client to MinIO
+  string original_key  = 4;
+}
+
+message UploadPlanResponse {
+  bool   accepted       = 1;
+  string diff_summary   = 2;
+  string diff_minio_key = 3;
+  int32  changes_count  = 4;
+}
+
+message FigmaUrlRequest {
+  string session_id = 1;
+}
+
+message FigmaUrlResponse {
+  string figma_file_url   = 1;
+  string embed_url        = 2;
+  string workspace_status = 3;
+}
+
+message ModuleSpecRequest {
+  string session_id = 1;
+  string module_id  = 2;
+  string format     = 3;   // docx | json
+}
+
+message ModuleSpecResponse {
+  string module_id    = 1;
+  string layer        = 2;
+  string status       = 3;
+  string minio_key    = 4;
+  string download_url = 5;
+}
+
+message CodeGenApprovalRequest {
+  string session_id  = 1;
+  string module_id   = 2;
+  bool   approved    = 3;
+  string approved_by = 4;
+}
+
+message CodeGenApprovalResponse {
+  bool   accepted = 1;
+  string message  = 2;
+}
+
+message ModuleAssignmentRequest {
+  string session_id     = 1;
+  string module_id      = 2;
+  string assignment_type = 3;  // Developer | CodeAgent
+  string assignee_id    = 4;   // User ID or "code-agent"
+}
+
+message ModuleAssignmentResponse {
+  bool   accepted = 1;
+  string message  = 2;
+}
+
+message IterationReportRequest {
+  string session_id      = 1;
+  string track           = 2;   // unit|integration|system|performance|security
+  int32  iteration_number = 3;
+}
+
+message IterationReportResponse {
+  string session_id        = 1;
+  string track             = 2;
+  int32  iteration_number  = 3;
+  int32  scenarios_total   = 4;
+  int32  passed            = 5;
+  int32  failed            = 6;
+  int32  fixes_applied     = 7;
+  int32  unfixed_issues    = 8;
+  string report_minio_key  = 9;
+  string recommendation    = 10;  // continue | stop
+}
+
+message IterationDecisionRequest {
+  string session_id  = 1;
+  string track       = 2;
+  bool   continue_   = 3;       // true = run another iteration; false = move to next track
+  string decided_by  = 4;
+}
+
+message IterationDecisionResponse {
+  bool   accepted    = 1;
+  string next_action = 2;
+}

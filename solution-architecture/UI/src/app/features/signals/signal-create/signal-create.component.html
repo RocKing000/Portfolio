@@ -1,0 +1,71 @@
+<h2 mat-dialog-title>
+  <mat-icon>add_circle_outline</mat-icon> New Signal
+</h2>
+
+<mat-dialog-content [formGroup]="form">
+  <div class="form-grid">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Signal Type *</mat-label>
+      <mat-select formControlName="signalType">
+        <mat-option *ngFor="let t of signalTypes" [value]="t">{{ t }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('signalType')?.hasError('required')">Required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Source *</mat-label>
+      <mat-select formControlName="source">
+        <mat-option *ngFor="let s of sources" [value]="s">{{ s }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('source')?.hasError('required')">Required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Priority *</mat-label>
+      <mat-select formControlName="priority">
+        <mat-option *ngFor="let p of priorities" [value]="p">{{ p }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="severity-group">
+      <label class="field-label">Severity *</label>
+      <mat-radio-group formControlName="severity" class="severity-radios">
+        <mat-radio-button *ngFor="let s of severities" [value]="s.value">
+          {{ s.label }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Title *</mat-label>
+      <input matInput formControlName="title" placeholder="Brief description of the signal">
+      <mat-error *ngIf="form.get('title')?.hasError('required')">Required</mat-error>
+      <mat-error *ngIf="form.get('title')?.hasError('maxlength')">Max 200 characters</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" rows="2"
+                placeholder="Optional longer description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Payload (JSON)</mat-label>
+      <textarea matInput formControlName="payload" rows="5"
+                placeholder='{ "key": "value" }' class="mono"></textarea>
+      <mat-error *ngIf="form.get('payload')?.hasError('invalidJson')">
+        Invalid JSON
+      </mat-error>
+    </mat-form-field>
+
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()" [disabled]="saving()">Cancel</button>
+  <button mat-flat-button color="primary" (click)="submit()" [disabled]="saving()">
+    <mat-spinner *ngIf="saving()" diameter="18" class="inline-spinner"></mat-spinner>
+    <span *ngIf="!saving()">Create Signal</span>
+  </button>
+</mat-dialog-actions>

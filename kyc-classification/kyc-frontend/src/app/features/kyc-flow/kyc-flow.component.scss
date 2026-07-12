@@ -1,0 +1,47 @@
+@use 'variables' as v;
+
+.kyc-flow {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  background: v.$camera-bg;
+  overflow: hidden;
+
+  &__content {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    position: relative;
+  }
+}
+
+// On desktop, center the camera column
+@media (min-width: v.$bp-mobile) {
+  .kyc-flow {
+    background: v.$surface-dark;
+
+    app-progress-stepper {
+      background: white;
+    }
+
+    &__content {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: v.$space-6 v.$space-4;
+      overflow-y: auto;
+    }
+  }
+
+  app-document-scanner,
+  app-face-capture,
+  app-kyc-result {
+    width: 100%;
+    max-width: 480px;
+    border-radius: v.$border-radius-lg;
+    overflow: hidden;
+    box-shadow: v.$shadow-xl;
+    background: white;
+  }
+}

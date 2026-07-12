@@ -1,0 +1,61 @@
+<div class="sidenav-header">
+  <span class="sidenav-section-label">{{ langSvc.t('nav_navigation') }}</span>
+</div>
+
+<div class="nav-tree">
+
+  @if (loading()) {
+    <div class="loading-dots">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  } @else {
+
+    @for (tenant of tenants(); track tenant.code) {
+
+      <!-- Tenant -->
+      <button class="tenant-header"
+              (click)="toggleTenant(tenant)"
+              [class.expanded]="expandedTenantCode() === tenant.code">
+        <mat-icon class="tenant-icon">domain</mat-icon>
+        <span class="tenant-name">{{ tenant.name }}</span>
+        <mat-icon class="chevron">
+          {{ expandedTenantCode() === tenant.code ? 'expand_less' : 'expand_more' }}
+        </mat-icon>
+      </button>
+
+      @if (expandedTenantCode() === tenant.code) {
+        <div class="product-list">
+          @for (product of tenant.products; track product.hierarchyId) {
+            <button class="product-item"
+                    (click)="selectProduct(product)"
+                    [class.active]="selectedProductId() === product.hierarchyId">
+              <span class="product-dot"></span>
+              <span class="product-name">{{ product.name }}</span>
+            </button>
+          }
+        </div>
+      }
+
+    }
+
+  }
+
+</div>
+
+@if (isPlatformAdmin) {
+  <mat-nav-list class="admin-nav">
+    <mat-divider></mat-divider>
+    <a mat-list-item
+       routerLink="/admin"
+       routerLinkActive="active-link"
+       [routerLinkActiveOptions]="{ exact: false }"
+       [attr.aria-label]="langSvc.t('nav_admin')">
+      <mat-icon matListItemIcon>admin_panel_settings</mat-icon>
+      <span matListItemTitle [class.kannada-font]="langSvc.isKannada()">{{ langSvc.t('nav_admin') }}</span>
+    </a>
+  </mat-nav-list>
+}
+
+<div class="sidenav-footer">FedMithra v2.0</div>
