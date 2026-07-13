@@ -38,3 +38,26 @@ The core scoring mechanism is SRES (Strategic Resource Evaluation Score): a mult
 ## Demo
 
 [dire-x.vercel.app](https://dire-x.vercel.app)
+
+---
+
+## What's Here vs What Exists Privately
+
+This folder contains the public portion of DIRE-X. A private repository (`dire-x`) holds the complete codebase including components that aren't published here.
+
+**Available in this folder:**
+
+- `client/` — React/Vite frontend
+- `server/` — Node.js backend
+- `backend/` — supporting backend services
+- `supabase/` — database schema and edge functions
+- `scoring_engine/` — full SRES scoring logic, including all six calculators: adversarial, confidence, dependency, macro, risk, temporal
+- `scoring_engine_v1.py` — original single-file prototype of the scoring engine
+- `DIRE-X_Complete_Documentation.md` — full system documentation
+
+**In the private repo only:**
+
+- `scoring-engine/` — the scoring engine packaged as a standalone FastAPI microservice, independently deployable with its own API surface, `requirements.txt`, and test suite
+- `scoring_engine_v2/` — a second iteration of the engine module with a refined structure
+
+The private repo exists to keep the deployable service layer and in-progress iterations separate from the published snapshot. The core scoring logic and system architecture documented here are representative of the full build.
