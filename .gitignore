@@ -32,6 +32,9 @@ env/
 *.sqlite
 data/
 data_backup/
+# Allow sample data in prototypes
+!prototypes/*/data/
+!prototypes/*/data/**
 
 # Logs
 *.log
