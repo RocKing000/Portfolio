@@ -1,0 +1,19 @@
+<div class="duf-ms-wrap">
+  <div class="duf-ms-trigger" [class.duf-ms-trigger--active]="open" (click)="toggle()">
+    {{ triggerLabel }}
+  </div>
+  <div class="duf-ms-drop" *ngIf="open">
+    <input class="duf-ms-search" type="text" placeholder="Search..." [(ngModel)]="search" (click)="$event.stopPropagation()">
+    <div class="duf-ms-actions">
+      <button type="button" (click)="selectAll()">All</button>
+      <button type="button" (click)="selectNone()">None</button>
+    </div>
+    <cdk-virtual-scroll-viewport itemSize="26" class="duf-ms-list" *ngIf="filteredOptions.length; else noMatches">
+      <label class="duf-ms-item" *cdkVirtualFor="let o of filteredOptions; trackBy: trackByOption">
+        <input type="checkbox" [checked]="isChecked(o.ID)" (change)="onCheck(o.ID, $any($event.target).checked)">
+        <span>{{ o.Description }}</span>
+      </label>
+    </cdk-virtual-scroll-viewport>
+    <ng-template #noMatches><div class="duf-ms-empty">No matches</div></ng-template>
+  </div>
+</div>

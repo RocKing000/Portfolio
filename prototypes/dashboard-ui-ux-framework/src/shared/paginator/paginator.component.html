@@ -1,0 +1,22 @@
+<div class="duf-paginator" *ngIf="totalItems">
+  <div class="duf-page-info-group">
+    <div class="duf-page-size">
+      <label>Rows per page</label>
+      <select [ngModel]="pageSize" (ngModelChange)="onPageSizeChange($event)">
+        <option *ngFor="let n of pageSizeOptions" [ngValue]="n">{{ n }}</option>
+      </select>
+    </div>
+    <span class="duf-page-info">
+      Showing <strong>{{ showingFrom }}</strong> to <strong>{{ showingTo }}</strong> of <strong>{{ totalItems | number }}</strong> rows
+    </span>
+  </div>
+  <div class="duf-pagination-buttons">
+    <button class="duf-page-btn" (click)="prevPage()" [disabled]="page <= 1">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <span class="duf-current-page">Page {{ page }} of {{ totalPages }}</span>
+    <button class="duf-page-btn" (click)="nextPage()" [disabled]="page >= totalPages">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+</div>

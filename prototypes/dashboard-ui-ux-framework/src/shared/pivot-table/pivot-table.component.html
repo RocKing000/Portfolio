@@ -1,0 +1,55 @@
+<ng-container *ngIf="rows.length; else noData">
+<div class="duf-table-split">
+  <div class="duf-table-fixed">
+    <table class="duf-table duf-pivot-table">
+      <thead>
+        <tr>
+          <th *ngFor="let lbl of fixedLabels" rowspan="2" class="duf-pivot-left-head">{{ lbl }}</th>
+        </tr>
+        <!-- Empty spacer row — see pivot-table.component.ts's header
+             comment: the scrollable side's real 2-row header needs a real
+             2nd row on this side too for rowspan="2" to span into. -->
+        <tr></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of displayRows" [class.duf-pivot-total-row]="row['__total']">
+          <td *ngFor="let k of fixedKeys">{{ row[k] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="duf-table-container" #tblWrap>
+    <table class="duf-table duf-pivot-table">
+      <thead>
+        <tr>
+          <th *ngFor="let lbl of restLabels" rowspan="2" class="duf-pivot-left-head">{{ lbl }}</th>
+          <th *ngFor="let c of displayCategories" [attr.colspan]="subMetrics.length" class="duf-pivot-sep duf-pivot-group-head">{{ c }}</th>
+          <th [attr.colspan]="subMetrics.length" class="duf-pivot-total-head duf-pivot-sep duf-pivot-group-head">TOTAL</th>
+        </tr>
+        <tr>
+          <ng-container *ngFor="let c of displayCategories; let ci = index">
+            <th *ngFor="let m of subMetrics; let mi = index" [class.duf-pivot-sep]="mi === 0 && ci > 0">{{ m }}</th>
+          </ng-container>
+          <th *ngFor="let m of subMetrics; let mi = index" class="duf-pivot-total-head" [class.duf-pivot-sep]="mi === 0">{{ m }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of displayRows" [class.duf-pivot-total-row]="row['__total']">
+          <td *ngFor="let k of restKeys">{{ row[k] }}</td>
+          <ng-container *ngFor="let c of displayCategories; let ci = index">
+            <td *ngFor="let key of metricKeys; let mi = index" class="duf-font-mono" [class.duf-pivot-sep]="mi === 0 && ci > 0">{{ fmtN(metric(row, c + '_', key)) }}</td>
+            <td *ngIf="ratioNumeratorKey" class="duf-pivot-ratio" [attr.data-tone]="ratioTone(row, c + '_')">{{ fmtRatio(row, c + '_') }}</td>
+          </ng-container>
+          <td *ngFor="let key of metricKeys; let mi = index" class="duf-font-mono duf-font-semibold" [class.duf-pivot-sep]="mi === 0">{{ fmtN(metric(row, 'Total_', key)) }}</td>
+          <td *ngIf="ratioNumeratorKey" class="duf-pivot-ratio duf-font-semibold" [attr.data-tone]="ratioTone(row, 'Total_')">{{ fmtRatio(row, 'Total_') }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<app-table-hscroll [container]="tblWrap"></app-table-hscroll>
+</ng-container>
+<app-paginator *ngIf="rows.length" [(page)]="page" [(pageSize)]="pageSize" [totalItems]="rows.length"></app-paginator>
+<!-- A genuinely-empty result relies on the host view's own "no data"
+     messaging convention (see ../../../docs/Frontend.md §9) rather than a message here. -->
+<ng-template #noData></ng-template>

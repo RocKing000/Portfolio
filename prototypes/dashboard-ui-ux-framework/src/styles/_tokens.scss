@@ -1,0 +1,462 @@
+// ═════════════════════════════════════════════════════════════════════════════
+// _tokens.scss — Dashboard UI/UX Framework · Style Config
+//
+// Sole style authority for a module built on this framework. Every
+// component only does: @import '<path-to>/styles/tokens'. Deliberately its
+// own copy of any other module's tokens rather than a shared import — a
+// module built on this framework has no runtime dependency on any other,
+// so either can change independently.
+// ═════════════════════════════════════════════════════════════════════════════
+
+$duf-font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+// font-feature-settings: 'tnum' (kept wherever $duf-font-mono is used)
+// gives tabular-width digits for column alignment.
+$duf-font-mono: $duf-font-body;
+
+$duf-s1: 4px;  $duf-s2: 7px;  $duf-s3: 10px;  $duf-s4: 14px;  $duf-s5: 20px;  $duf-s6: 28px;
+
+$duf-radius-sm: 6px; $duf-radius-md: 8px; $duf-radius-lg: 12px;
+
+$duf-brand:      #00488E;
+$duf-brand-dark: #003366;
+$duf-brand-mid:  #0065C3;
+$duf-brand-soft: rgba(0, 72, 142, 0.08);
+$duf-brand-tint: #dce8f8;
+
+// Semantic color roles — reuse these names, not the raw hex, everywhere
+// that has meaning (positive/warning/negative), so a re-skin only touches
+// this one file.
+$duf-positive:      #547A5A; $duf-positive-soft: #E5EEE6;
+$duf-negative:      #B8514E; $duf-negative-soft: #F3DEDD;
+$duf-warning:        #E86B22; $duf-warning-soft: #FBE4D5; $duf-warning-dark: #B0521A;
+
+// Tier colors specifically — vivid, high-contrast colors for a
+// good/watch/risk-style ratio-metric legend, distinct from the muted
+// semantic palette above (which reads as desaturated green/red) since a
+// tiered legend typically wants to read unambiguously at a glance.
+$duf-tier-hi: #16A34A; // e.g. "Good"    — green
+$duf-tier-mi: #CA8A04; // e.g. "Watch"   — yellow/gold
+$duf-tier-lo: #DC2626; // e.g. "Risk"    — red
+
+$duf-ink:       #1A1A1A;
+$duf-ink-soft:  #3D3D3B;
+$duf-ink-mid:   #555553;
+$duf-mute:      #8B8B88;
+$duf-rule:      #E7E7E5;
+$duf-rule-soft: #F2F2EE;
+$duf-paper:     #F5F2EC;
+$duf-paper-card:#FFFFFF;
+$duf-silver:      #C2C2BF;
+$duf-silver-soft: #ECECE9;
+
+$duf-fs-xs: 10px; $duf-fs-sm: 11px; $duf-fs-base: 13px; $duf-fs-md: 14px; $duf-fs-lg: 18px; $duf-fs-xl: 22px;
+
+$duf-shadow-card: 0 1px 3px rgba(26, 26, 26, 0.08);
+$duf-tr-fast: 0.15s ease;
+
+// ── Outlet / page shell ──────────────────────────────────────────────────
+// A minimal, generic content area. A consuming app's own header/nav/
+// breadcrumb chrome sits outside this — this framework only styles what's
+// inside its own router-outlet.
+.duf-outlet { flex: 1; overflow: auto; padding: $duf-s4 $duf-s5; font-family: $duf-font-body; }
+
+// ── Landing cards (view picker) ──────────────────────────────────────────
+.duf-card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: $duf-s4; }
+.duf-card {
+  background: $duf-paper-card; border: 1px solid $duf-rule; border-radius: $duf-radius-lg;
+  box-shadow: $duf-shadow-card; padding: $duf-s5; cursor: pointer; text-align: left;
+  display: flex; flex-direction: column; gap: $duf-s2; transition: transform $duf-tr-fast, box-shadow $duf-tr-fast;
+  &:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.10); }
+}
+.duf-card__icon { font-size: 28px; width: 28px; height: 28px; }
+.duf-card__title { font-size: $duf-fs-lg; font-weight: 700; color: $duf-ink; }
+.duf-card__desc { font-size: $duf-fs-sm; color: $duf-mute; }
+
+// ── KPI strip ─────────────────────────────────────────────────────────────
+.duf-kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: $duf-s3; }
+.duf-kpi {
+  background: $duf-paper-card; border: 1px solid $duf-rule; border-radius: $duf-radius-md;
+  box-shadow: $duf-shadow-card; padding: $duf-s3 $duf-s4; display: flex; flex-direction: column; gap: $duf-s1;
+}
+.duf-kpi__label { font-size: $duf-fs-xs; font-weight: 600; color: $duf-mute; text-transform: uppercase; letter-spacing: 0.06em; }
+.duf-kpi__value { font-family: $duf-font-mono; font-size: $duf-fs-xl; font-weight: 700; color: $duf-ink; }
+
+.duf-section-title { font-size: $duf-fs-base; font-weight: 700; color: $duf-brand; margin: 0 0 $duf-s3; }
+
+// ── Breakdown cards (e.g. Overview's per-group cards) ────────────────────
+.duf-breakdown-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: $duf-s3; }
+.duf-breakdown-card {
+  background: $duf-paper-card; border: 1px solid $duf-rule; border-left: 4px solid $duf-brand;
+  border-radius: $duf-radius-md; box-shadow: $duf-shadow-card; padding: $duf-s3 $duf-s4;
+  h4 { font-size: $duf-fs-base; font-weight: 700; color: $duf-ink; margin: 0 0 $duf-s2; }
+}
+.duf-breakdown-row {
+  display: flex; justify-content: space-between; font-size: $duf-fs-sm; color: $duf-ink-soft; margin-bottom: 3px;
+  b { font-family: $duf-font-mono; font-feature-settings: 'tnum'; }
+}
+.duf-tone-hi { color: $duf-positive; }
+.duf-tone-mi { color: $duf-warning-dark; }
+.duf-tone-lo { color: $duf-negative; }
+.duf-breakdown-ratio {
+  &[data-tone='hi'] { color: $duf-tier-hi !important; }
+  &[data-tone='mi'] { color: $duf-tier-mi !important; }
+  &[data-tone='lo'] { color: $duf-tier-lo !important; }
+}
+
+// ── Tile / table ──────────────────────────────────────────────────────────
+.duf-tile { background: $duf-paper-card; border: 1px solid $duf-rule; border-radius: $duf-radius-md; box-shadow: $duf-shadow-card; margin-bottom: $duf-s4; overflow: hidden; }
+.duf-tile__head { display: flex; align-items: center; justify-content: space-between; padding: $duf-s3 $duf-s4; border-bottom: 1px solid $duf-rule-soft; }
+.duf-tile__title { font-size: $duf-fs-base; font-weight: 600; color: $duf-ink-soft; text-transform: uppercase; letter-spacing: 0.03em; margin: 0; }
+.duf-tile__body { padding: $duf-s3 $duf-s4; overflow-x: auto; }
+
+// Bordered card holding just the table — no title bar, no body padding —
+// the table's own th/td padding is the only spacing, and the pager sits
+// below it, not inside it.
+.duf-table-container {
+  overflow-x: auto; overflow-y: auto; border: 1px solid #000; border-radius: $duf-radius-md;
+  background: $duf-paper-card; -ms-overflow-style: none; scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; width: 0; height: 0; }
+}
+
+// shared/table-hscroll — restores a visible, grabbable horizontal scrollbar
+// (deliberately hidden on .duf-table-container above) between the table
+// and its paginator. Only rendered when the table actually overflows.
+.duf-hscroll {
+  overflow-x: auto; overflow-y: hidden; height: 14px; margin: $duf-s1 0;
+  scrollbar-width: thin; scrollbar-color: $duf-silver $duf-rule-soft;
+  &::-webkit-scrollbar { height: 10px; }
+  &::-webkit-scrollbar-track { background: $duf-rule-soft; border-radius: $duf-radius-sm; }
+  &::-webkit-scrollbar-thumb { background: $duf-silver; border-radius: $duf-radius-sm; &:hover { background: $duf-mute; } }
+}
+.duf-hscroll__spacer { height: 1px; }
+
+// width: 100% is a floor, not a fixed size — table-layout stays auto, so a
+// table whose columns need MORE than 100% still overflows past it exactly
+// as expected (white-space: nowrap won't let a column shrink below its
+// content, and .duf-table-container's overflow-x: auto scrolls the rest);
+// it only stretches columns when the real content is narrower than the
+// available width, so a short table fills the same 100% width as the
+// filters bar/KPI cards above it instead of leaving a dead gap next to a
+// shrink-wrapped box.
+.duf-table {
+  width: 100%; border-collapse: collapse; font-size: $duf-fs-base; text-align: center; font-family: $duf-font-body;
+}
+// Every header and body cell, including the left label columns, not just
+// numeric ones.
+.duf-table th, .duf-table td { text-align: center; }
+.duf-table thead {
+  position: sticky; top: 0; z-index: 10;
+}
+// Full grid — vertical rules between every column, on both header and body
+// cells — so individual rows AND columns read as distinct cells rather
+// than just horizontal stripes.
+.duf-table th {
+  // Height needs enough headroom for a worst-case 2-line wrap (a long
+  // header label over a narrow, data-driven column) plus an inline sort
+  // icon sharing that wrapped line — too tight and one of a split table's
+  // two independent <table>s can silently grow past this value while the
+  // other's shorter, unwrapped labels don't, desyncing their row heights.
+  padding: 2px 5px; height: 44px; font-weight: 600; color: $duf-paper-card; background: $duf-brand;
+  border-bottom: 2px solid #000; border-right: 1px solid #000;
+  cursor: pointer; user-select: none; font-family: $duf-font-body;
+  // Header text wraps at word boundaries (not mid-word) instead of
+  // forcing the column as wide as its full label — a numeric column's
+  // actual width need is driven by its data (still nowrap below), not by
+  // fitting a long label on one line.
+  white-space: normal; line-height: 1.15;
+  font-size: $duf-fs-xs; text-transform: uppercase; letter-spacing: 0.06em; transition: background 0.12s;
+
+  &:last-child { border-right: none; }
+  &:hover { background: $duf-brand-dark; }
+}
+// Sort icon dims unless it's the active sort column, brightens on header hover.
+.duf-table th .duf-sort-icon {
+  font-size: $duf-fs-md !important; width: $duf-fs-md !important; height: $duf-fs-md !important;
+  line-height: $duf-fs-md !important; vertical-align: middle; opacity: 0.35; margin-left: 2px;
+  transition: opacity 0.12s;
+  &.duf-sort-active { opacity: 1; }
+}
+.duf-table th:hover .duf-sort-icon { opacity: 0.75; }
+
+.duf-table tbody tr {
+  border-bottom: 1px solid #000; transition: background 0.12s; background: $duf-paper-card;
+  &:nth-child(even) { background: $duf-paper; }
+  &:hover td { background: $duf-silver-soft; }
+}
+.duf-table td {
+  padding: $duf-s2 $duf-s4; color: $duf-ink; white-space: nowrap; font-size: $duf-fs-base;
+  border-right: 1px solid #000;
+  &:last-child { border-right: none; }
+}
+
+// ── Split table (frozen left columns | scrollable rest) ─────────────────
+// Two independent <table> elements side by side, instead of one table with
+// sticky-positioned left columns (needs z-index juggling between the
+// frozen columns, the header, and the body, plus measuring one frozen
+// column's sticky offset off another's rendered width at runtime). A
+// genuine split needs none of that: the left table only ever contains its
+// own fixed columns, so it's never wider than its own content, and the
+// right table scrolls on its own via .duf-table-container +
+// shared/table-hscroll, completely independent of the left one.
+//
+// Rows/headers between the two tables line up by construction, not by
+// coordination — both use the exact same .duf-table th/td rules, so
+// matching row heights falls out naturally.
+.duf-table-split {
+  display: flex; align-items: flex-start; border: 2px solid #000; border-radius: $duf-radius-md;
+  background: $duf-paper-card; overflow: hidden;
+}
+.duf-table-fixed { flex: 0 0 auto; }
+.duf-table-split .duf-table-container { flex: 1 1 auto; min-width: 0; border: none; border-radius: 0; }
+// The fixed/scrollable divider is built from two ordinary 1px cell
+// borders meeting (fixed table's last column's own border-right + the
+// scrollable table's first column's own border-left), not a single
+// special-cased line — same construction as every other column divider in
+// these tables, just doubled up since it's the seam between two
+// independent <table>s (border-collapse only merges borders within one
+// table, not across two side-by-side ones).
+.duf-table-fixed .duf-table td:last-child, .duf-table-fixed .duf-table th:last-child {
+  border-right: 1px solid #000;
+}
+.duf-table-container .duf-table td:first-child, .duf-table-container .duf-table th:first-child {
+  border-left: 1px solid #000;
+}
+
+// A pivoted table's header is 2 rows (group header + sub-metric header)
+// with the fixed columns spanning both via rowspan="2" — but that only
+// works if a real 2nd row EXISTS for it to span into. The right (pivoted)
+// table always has real content in both rows; the left (fixed) table's own
+// 2nd row is an empty spacer <tr> that exists purely to give rowspan="2"
+// something to span, and needs its own explicit height since a cell-less
+// <tr> would otherwise collapse to 0.
+.duf-table thead tr { height: 44px; }
+
+// Utility classes.
+.duf-font-mono { font-family: $duf-font-mono !important; font-feature-settings: 'tnum'; }
+.duf-font-semibold { font-weight: 600 !important; }
+.duf-text-right { text-align: right; }
+
+// ── Category badge (e.g. a lifecycle-stage/tier pill rendered inline in a
+// raw row-browser view) ──────────────────────────────────────────────────
+// No vertical padding — any vertical padding here stacks on top of
+// .duf-table td's own padding just for this one column, making that row
+// taller than a plain-text row, row after row — the exact same kind of
+// per-row height drift the table-veil mixin's pinned line-height exists to
+// prevent, just from an inline-block's own padding instead of font-weight.
+.duf-badge {
+  display: inline-block; padding: 0 8px; border-radius: $duf-radius-sm;
+  font-size: $duf-fs-xs; font-weight: 700; letter-spacing: 0.05em; font-family: $duf-font-body;
+
+  background: $duf-positive-soft; color: $duf-positive; // default tone
+
+  &[data-tone='mi'] { background: $duf-warning-soft; color: $duf-warning-dark; }
+  &[data-tone='lo'] { background: $duf-negative-soft; color: $duf-negative; }
+  &[data-tone='lo-strong'] { background: $duf-negative; color: $duf-paper-card; }
+}
+
+// ── Filters ───────────────────────────────────────────────────────────────
+.duf-filters { display: flex; gap: $duf-s2; flex-wrap: wrap; align-items: flex-end; margin-bottom: $duf-s3; }
+.duf-filter-group { display: flex; flex-direction: column; gap: 4px; }
+.duf-filter-group label { font-size: $duf-fs-xs; font-weight: 600; color: $duf-mute; text-transform: uppercase; letter-spacing: 0.05em; }
+.duf-filter-group select, .duf-filter-group input {
+  padding: 5px $duf-s2; border: 1px solid $duf-rule; border-radius: $duf-radius-sm; font-size: $duf-fs-sm;
+  background: $duf-paper-card; color: $duf-ink; min-width: 130px;
+  &:focus { outline: 2px solid $duf-brand-mid; border-color: $duf-brand-mid; }
+}
+
+// ── Multi-select (checkbox dropdown) ─────────────────────────────────────
+// Styled to match .duf-filter-group select/input as closely as a <div>-
+// based trigger can: same min-width, same always-ink text color (a native
+// select shows its current option — even the default "All" — in normal
+// ink, never a dimmed placeholder color), and the same border/outline
+// highlight only while actively being interacted with (open), not just
+// because something happens to be selected — mirroring select's :focus
+// behavior, since a plain div has no real focus state of its own to key
+// off of.
+.duf-ms-wrap { position: relative; min-width: 130px; }
+.duf-ms-trigger {
+  padding: 5px 24px 5px $duf-s2; border: 1px solid $duf-rule; border-radius: $duf-radius-sm;
+  font-size: $duf-fs-sm; background: $duf-paper-card; color: $duf-ink; cursor: pointer; user-select: none;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; position: relative; min-height: 26px;
+  display: flex; align-items: center;
+
+  &::after {
+    content: '▾'; position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+    font-size: $duf-fs-sm; color: $duf-mute; line-height: 1;
+  }
+  &--active { outline: 2px solid $duf-brand-mid; border-color: $duf-brand-mid; }
+  &:hover { border-color: $duf-brand; }
+}
+.duf-ms-drop {
+  position: absolute; top: calc(100% + 2px); left: 0; min-width: 220px;
+  background: $duf-paper-card; border: 1px solid $duf-rule; border-radius: $duf-radius-md;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.14); z-index: 999;
+}
+.duf-ms-search {
+  padding: 6px $duf-s2; border: none; border-bottom: 1px solid $duf-rule-soft; width: 100%;
+  font-size: $duf-fs-sm; outline: none; box-sizing: border-box;
+}
+.duf-ms-actions {
+  display: flex; gap: $duf-s1; padding: 4px $duf-s2; border-bottom: 1px solid $duf-rule-soft;
+
+  // Same font-size as .duf-ms-item below — the All/None quick-action
+  // labels would read noticeably smaller than the checkbox item labels
+  // otherwise, an inconsistency within the same dropdown panel.
+  button {
+    font-size: $duf-fs-sm; padding: 2px $duf-s2; border: 1px solid $duf-rule; border-radius: $duf-radius-sm;
+    cursor: pointer; background: $duf-paper;
+    &:hover { background: $duf-brand-soft; border-color: $duf-brand; }
+  }
+}
+// Fixed height (not max-height) — cdk-virtual-scroll-viewport requires a
+// concrete size to compute which rows are actually in view; it owns its
+// own internal scrolling, so .duf-ms-drop above doesn't need overflow-y.
+.duf-ms-list { height: 220px; }
+.duf-ms-item {
+  display: flex; align-items: center; gap: $duf-s1; padding: 5px $duf-s2; cursor: pointer;
+  font-size: $duf-fs-sm; color: $duf-ink;
+  &:hover { background: $duf-brand-soft; }
+  input { accent-color: $duf-brand-mid; }
+}
+.duf-ms-empty { padding: $duf-s3; font-size: $duf-fs-sm; color: $duf-mute; text-align: center; font-style: italic; }
+
+// ── Buttons ───────────────────────────────────────────────────────────────
+.duf-btn {
+  height: 32px; padding: 0 $duf-s4; border-radius: $duf-radius-sm; border: none; cursor: pointer;
+  font-size: $duf-fs-sm; font-weight: 600; font-family: $duf-font-body;
+}
+.duf-btn--primary { background: $duf-brand; color: #fff; &:hover { background: $duf-brand-dark; } }
+.duf-btn--secondary { background: $duf-silver-soft; color: $duf-ink-mid; &:hover { background: $duf-silver; } }
+.duf-btn--export {
+  background: $duf-positive; color: #fff; &:hover { background: #3D5940; }
+  display: inline-flex; align-items: center; gap: $duf-s1;
+}
+.duf-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+// ── Upload zone / import status (optional, for a module with its own
+// ingestion screen) ──────────────────────────────────────────────────────
+.duf-upload-zone {
+  border: 2.5px dashed $duf-brand-mid; border-radius: $duf-radius-lg; background: $duf-paper-card;
+  padding: $duf-s6 $duf-s5; text-align: center; cursor: pointer; transition: all $duf-tr-fast; margin-bottom: $duf-s4;
+  &:hover, &.dragover { border-color: $duf-brand; background: $duf-brand-soft; }
+  &.disabled { opacity: 0.5; cursor: not-allowed; }
+}
+.duf-upload-zone .icon { font-size: 34px; margin-bottom: $duf-s2; color: $duf-brand-mid; }
+.duf-upload-zone h3 { font-size: $duf-fs-md; color: $duf-brand; margin: 0 0 4px; }
+.duf-upload-zone p { font-size: $duf-fs-sm; color: $duf-mute; margin: 0; }
+
+.duf-status-bar {
+  background: $duf-paper-card; border: 1px solid $duf-rule; border-radius: $duf-radius-md;
+  padding: $duf-s2 $duf-s3; font-size: $duf-fs-sm; margin-bottom: $duf-s3; display: flex; align-items: center; gap: $duf-s2;
+}
+.duf-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.duf-dot--wait { background: $duf-silver; }
+.duf-dot--loading { background: $duf-warning; animation: duf-pulse 1s infinite; }
+.duf-dot--ready { background: $duf-positive; }
+.duf-dot--error { background: $duf-negative; }
+@keyframes duf-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+.duf-progress-track { height: 6px; background: $duf-rule-soft; border-radius: 3px; overflow: hidden; }
+.duf-progress-fill { height: 100%; background: $duf-brand-mid; border-radius: 3px; transition: width 0.2s ease; }
+
+// ── Paginator ─────────────────────────────────────────────────────────────
+.duf-paginator {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: $duf-s2 $duf-s3; margin-top: $duf-s3;
+  background: $duf-paper-card; border: 1px solid $duf-rule; border-radius: $duf-radius-md;
+}
+.duf-page-info-group { display: flex; align-items: center; gap: $duf-s4; }
+.duf-page-info { font-size: $duf-fs-sm; color: $duf-mute; font-family: $duf-font-body; strong { color: $duf-ink-soft; } }
+.duf-page-size {
+  display: flex; align-items: center; gap: $duf-s2;
+  label { font-size: $duf-fs-xs; color: $duf-mute; text-transform: uppercase; letter-spacing: 0.05em; }
+  select {
+    padding: 3px 6px; border: 1px solid $duf-rule; border-radius: $duf-radius-sm;
+    font-size: $duf-fs-sm; background: $duf-paper-card; color: $duf-ink;
+    &:focus { outline: 2px solid $duf-brand-mid; border-color: $duf-brand-mid; }
+  }
+}
+.duf-pagination-buttons { display: flex; align-items: center; gap: $duf-s2; }
+.duf-page-btn {
+  background: $duf-paper-card; border: 1px solid $duf-rule; border-radius: $duf-radius-sm;
+  width: 28px; height: 28px; padding: 0; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: $duf-ink-mid; transition: border-color 0.12s, color 0.12s, background 0.12s;
+  mat-icon { font-size: 16px; height: 16px; width: 16px; line-height: 16px; }
+  &:hover:not(:disabled) { background: $duf-brand-soft; border-color: $duf-brand; color: $duf-brand; }
+  &:disabled { opacity: 0.35; cursor: not-allowed; }
+}
+.duf-current-page { font-size: $duf-fs-sm; color: $duf-mute; min-width: 80px; text-align: center; font-family: $duf-font-body; }
+
+// ── Pivot-table totals / group-separators (shared/pivot-table + any flat
+// view with the same ratio-metric-per-row pattern) ───────────────────────
+.duf-pivot-total-head { background: $duf-brand-dark; }
+
+.duf-pivot-sep { border-left: 1px solid #000; }
+thead .duf-pivot-sep { border-left: 1px solid #000; }
+
+.duf-pivot-ratio {
+  text-align: center; font-weight: 700; font-family: $duf-font-mono;
+  font-feature-settings: 'tnum'; color: $duf-brand;
+
+  // !important: guarantees the tier color always wins, including inside
+  // .duf-pivot-total-row (which sets its own color on every td in that
+  // row) — the GRAND TOTAL row's ratio cell should still show its own
+  // tier color, not the row's neutral tint color.
+  &[data-tone='hi'] { color: $duf-tier-hi !important; }
+  &[data-tone='mi'] { color: $duf-tier-mi !important; }
+  &[data-tone='lo'] { color: $duf-tier-lo !important; }
+}
+
+.duf-pivot-total-row td {
+  background: $duf-brand-tint !important; font-weight: 700; color: $duf-brand-dark;
+  border-top: 2px solid #000;
+}
+
+// ── Tier legend (shared/tier-legend) — same tone colors as .duf-pivot-ratio ─
+.duf-tier-legend {
+  display: flex; align-items: center; flex-wrap: wrap; gap: $duf-s4;
+  padding: $duf-s2 $duf-s3; margin-bottom: $duf-s3; background: $duf-paper-card;
+  border: 1px solid $duf-rule; border-radius: $duf-radius-sm; font-size: $duf-fs-sm;
+}
+.duf-tier-legend__caption {
+  font-size: $duf-fs-xs; font-weight: 700; color: $duf-mute; text-transform: uppercase; letter-spacing: 0.06em;
+}
+// A plain <span> (not <button>) specifically to avoid a browser's native
+// button face (e.g. an accent-colored background) surviving even a
+// background:none/border:none/appearance:none reset.
+.duf-tier-legend__item {
+  display: inline-flex; align-items: center; gap: 5px; color: $duf-ink-soft; font-weight: 600;
+  font-size: $duf-fs-sm; font-family: $duf-font-body; cursor: pointer;
+}
+.duf-tier-legend__range { color: $duf-mute; font-weight: 400; }
+.duf-tier-legend__dot {
+  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; background: $duf-brand;
+  &[data-tone='hi'] { background: $duf-tier-hi; }
+  &[data-tone='mi'] { background: $duf-tier-mi; }
+  &[data-tone='lo'] { background: $duf-tier-lo; }
+}
+
+// ── Raw-row status cells (a raw row-browser view's own derived-status
+// column, colored by value) ──────────────────────────────────────────────
+.duf-status-cell, .duf-category-cell { text-align: center; }
+.duf-status-cell { font-weight: 700; }
+.duf-status-positive { background: $duf-positive-soft; color: $duf-positive; }
+.duf-status-negative { background: $duf-negative-soft; color: $duf-negative; }
+.duf-status-warning { background: $duf-warning-soft; color: $duf-warning-dark; }
+
+.duf-error { padding: $duf-s3 $duf-s4; background: $duf-negative-soft; color: $duf-negative; border-left: 3px solid $duf-negative; border-radius: $duf-radius-sm; font-size: $duf-fs-base; margin-bottom: $duf-s3; }
+// Sits directly in .duf-outlet's flow (loading/no-data/error states),
+// never nested inside an existing card — needs its own opaque surface if
+// the outlet has any backdrop treatment behind it (see styles/table-veil).
+.duf-no-data {
+  text-align: center; color: $duf-silver; font-style: italic; padding: $duf-s5;
+  background: $duf-paper-card; border: 1px solid $duf-rule; border-radius: $duf-radius-md;
+}
+
+// Modifier for .duf-page-info when used standalone (e.g. a "showing first
+// N rows, narrow your filters" notice) rather than inline inside
+// .duf-paginator's already-opaque .duf-page-info-group.
+.duf-page-info--card {
+  display: inline-block; background: $duf-paper-card; border: 1px solid $duf-rule;
+  border-radius: $duf-radius-md; padding: $duf-s2 $duf-s3;
+}

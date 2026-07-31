@@ -1,0 +1,9 @@
+<div class="duf-tier-legend">
+  <span class="duf-tier-legend__caption" *ngIf="caption">{{ caption }}</span>
+  <span class="duf-tier-legend__item" *ngFor="let t of tiers"
+    role="button" tabindex="0"
+    (click)="toggle(t.tone)" (keydown.enter)="toggle(t.tone)" (keydown.space)="toggle(t.tone)">
+    <span class="duf-tier-legend__dot" [attr.data-tone]="t.tone"></span>
+    {{ t.label }} <span class="duf-tier-legend__range" *ngIf="t.range">({{ t.range }})</span>
+  </span>
+</div>

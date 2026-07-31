@@ -1,0 +1,22 @@
+@import '../../styles/tokens';
+@import '../../styles/table-veil';
+// Pass your own backdrop image path to enable the veil treatment, e.g.
+// @include duf-table-veil(url('/assets/backdrop.png')); — omit the
+// argument (or don't include the mixin at all) for a plain, non-veiled
+// table on a flat card background.
+@include duf-table-veil;
+
+// Centered (not bottom-aligned) so the left label columns sit level
+// within the merged two-row header block instead of looking like a
+// disconnected third row underneath the category/TOTAL group header.
+.duf-pivot-left-head { vertical-align: middle; }
+
+// Every cell in this table — header and body — is center-aligned,
+// including the left label columns, not just the numeric ones.
+.duf-pivot-table th, .duf-pivot-table td { text-align: center; }
+
+// Divider under the category/TOTAL group headers (row 1) — separates the
+// group header from its own sub-metric header row (row 2) underneath it.
+// Doesn't apply to the left label headers, which use rowspan="2" and have
+// no "row 1 only" bottom edge of their own.
+.duf-pivot-group-head { border-bottom: 1px solid #000; }

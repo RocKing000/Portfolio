@@ -1,0 +1,43 @@
+@import '../../styles/tokens';
+
+// "Sticker" treatment — the bar itself submerges into any backdrop instead
+// of staying one solid strip; only the individual pieces (rows-per-page
+// select, the "Showing X to Y of Z" text, prev/next buttons, "Page N of
+// M") carry their own white background + shadow, since they're the parts
+// that actually need to stay readable. Scoped to this component's own
+// template via Angular's view encapsulation, so it overrides
+// styles/tokens' .duf-paginator rules (used by every view through
+// <app-paginator>) without editing that file. Skip this whole block if
+// your outlet has no backdrop treatment — .duf-paginator's own opaque-card
+// styling in styles/tokens already looks correct on a flat background.
+.duf-paginator {
+  background: transparent; border: none;
+}
+
+.duf-page-info {
+  background: $duf-paper-card; box-shadow: $duf-shadow-card;
+  padding: 4px $duf-s2; border-radius: $duf-radius-sm; font-size: $duf-fs-xs;
+}
+
+.duf-page-size label {
+  background: $duf-paper-card; box-shadow: $duf-shadow-card;
+  padding: 4px $duf-s2; border-radius: $duf-radius-sm;
+  // Overrides styles/tokens' uppercase transform — "Rows per page" as
+  // typed, not "ROWS PER PAGE".
+  text-transform: none; letter-spacing: normal;
+}
+
+.duf-page-size select {
+  border: none; box-shadow: $duf-shadow-card; padding: 3px 6px; font-size: $duf-fs-xs;
+  &:focus { outline: 2px solid $duf-brand-mid; }
+}
+
+.duf-page-btn {
+  border: none; box-shadow: $duf-shadow-card; width: 24px; height: 24px;
+  &:hover:not(:disabled) { box-shadow: $duf-shadow-card; }
+}
+
+.duf-current-page {
+  background: $duf-paper-card; box-shadow: $duf-shadow-card;
+  padding: 4px $duf-s2; border-radius: $duf-radius-sm; font-size: $duf-fs-xs; min-width: 0;
+}

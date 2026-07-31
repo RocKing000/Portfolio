@@ -1,0 +1,77 @@
+@import 'tokens';
+
+// Optional backdrop treatment: a table submerges into a page-level
+// backdrop image instead of sitting on a flat card fill, plus the row-
+// height-parity fixes a split table (styles/tokens' .duf-table-split)
+// needs to stay pixel-aligned between its two independent <table>s.
+//
+// One definition here, `@include`d per component that wants it, rather
+// than folded into styles/tokens — matching an "opt-in per component"
+// pattern for anything backdrop-related, so a plain (non-veiled) table
+// stays available too.
+@mixin duf-table-veil($backdrop-image: null) {
+  .duf-table-split { background: transparent; border-color: #000; }
+  .duf-table-fixed, .duf-table-container {
+    position: relative;
+    background: transparent;
+
+    // inset:0, not overhung — .duf-table-container has overflow-x/y:auto
+    // (needed for its real scrolling; shared/table-hscroll's scroll-range
+    // math depends on measuring its exact scrollWidth/clientWidth), and an
+    // absolutely-positioned child that overhangs its box gets counted into
+    // that scrollWidth too, which would silently break that measurement.
+    // A flush inset can leave a faint lighter edge where the blur has
+    // nothing beyond the box to sample from, but that's the safer
+    // tradeoff.
+    @if $backdrop-image {
+      &::before {
+        content: '';
+        position: absolute; inset: 0;
+        background: $backdrop-image no-repeat center / cover fixed;
+        filter: blur(40px);
+        pointer-events: none;
+      }
+    }
+  }
+  .duf-table-fixed > .duf-table, .duf-table-container > .duf-table { position: relative; z-index: 1; }
+
+  .duf-table th { border-right-color: #000; }
+  // line-height pinned to an explicit px value, not left as "normal" — a
+  // browser's default "normal" line-height can compute slightly
+  // differently per element even at the same font-weight, and that
+  // sub-pixel-per-row difference compounds down the table (invisible on
+  // row 1, a visible seam by row 10) if left unpinned — this, not a
+  // border color/z-index issue, is what actually causes a split table's
+  // two halves to drift out of alignment over many rows.
+  .duf-table td { border-right-color: #000; padding: 4px 5px; font-size: 10px; line-height: 10px; }
+
+  // Fixed and scrollable columns render at the same weight — a
+  // frozen-column side that's visibly bolder than the data next to it
+  // reads as an inconsistency, not a helpful "frozen" cue.
+  .duf-table-container td { font-weight: 500; }
+  .duf-table-fixed td { font-weight: 500; }
+
+  .duf-table tbody tr {
+    background: transparent;
+    &:nth-child(even) { background: transparent; }
+    &:hover td { background: rgba($duf-silver-soft, 0.4); }
+  }
+  // Same visible black row-divider on both sides — keeping one side's
+  // border-bottom transparent (a "columnar" look) only needs to match the
+  // other side's WIDTH to keep row heights in sync, not its color; a
+  // transparent divider on one side alone reads as a washed-out gap next
+  // to the other side's solid ones.
+  .duf-table-fixed .duf-table tbody tr { border-bottom: 1px solid #000; }
+  .duf-table-container .duf-table tbody tr { border-bottom: 1px solid #000; }
+  // The last row's own border-bottom would otherwise stack against
+  // .duf-table-split's outer 2px border right below it (two separate
+  // boxes, not merged by border-collapse, which only applies within the
+  // table itself), making the bottom edge look thicker than the clean
+  // single 2px top edge. Dropped on both sides equally so fixed/scrollable
+  // row heights stay in sync with each other.
+  .duf-table-fixed .duf-table tbody tr:last-child,
+  .duf-table-container .duf-table tbody tr:last-child { border-bottom: none; }
+  .duf-pivot-total-row td { background: rgba($duf-brand-tint, 0.35) !important; }
+
+  .duf-table-fixed th, .duf-table-fixed td { text-align: center; }
+}
