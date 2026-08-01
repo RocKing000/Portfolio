@@ -87,3 +87,9 @@ infrastructure/
 ## Notes
 
 Each agent exposes a gRPC interface and is independently deployable. The gateway routes client requests to the appropriate agent. Documents are stored in MinIO; diffs are computed by DocumentService. The audit trail is consumed by AuditService independently of the agent execution path.
+
+---
+
+## Structural Reading
+
+Read through triNetra's PaaF/XYZP criteria: Domain (X) is the software development lifecycle itself; Scale (Y) runs from a single agent's output to the full four-phase pipeline; Use Case (Z) is coordinated automation with a reviewable trail, not unsupervised generation. Perception (P) is what the independent AuditService is for: a diff or a test report only becomes trustworthy once a human reviewer can see why the agent produced it, not just what it produced. See [triNetra's methodology](../../triNetra/methodology/paaf-four-phases.md) for the XYZP criteria in full.

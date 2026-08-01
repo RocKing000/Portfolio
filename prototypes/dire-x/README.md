@@ -61,3 +61,9 @@ This folder contains the public portion of DIRE-X. A private repository (`dire-x
 - `scoring_engine_v2/` — a second iteration of the engine module with a refined structure
 
 The private repo exists to keep the deployable service layer and in-progress iterations separate from the published snapshot. The core scoring logic and system architecture documented here are representative of the full build.
+
+---
+
+## Structural Reading
+
+DIRE-X is a triNetra reference build: applying PaaF's XYZP criteria to its own domain. Domain (X) is country-to-company geopolitical and supply-chain dependency; Scale (Y) runs from a single entity's exposure to the full 92-country network; Use Case (Z) is live decision support under shifting conditions, not a static report. SRES is the Perception layer (P): the single composite score is what turns a multi-dimensional dependency graph into something a decision-maker can act on under pressure. See [triNetra's methodology](../../triNetra/methodology/paaf-four-phases.md) for the XYZP criteria in full.

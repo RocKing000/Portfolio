@@ -10,7 +10,9 @@ PaaF is a recursive structural assessment methodology. It operates through cycle
 
 The methodology is built on a single principle: observe first, derive second. Patterns are extracted from observed system reality. They are not drawn from theoretical models, generic best practice, or industry benchmarks. The framework that emerges is specific to the system it was derived from.
 
-[See full four-phase specification →](paaf-four-phases.md)
+Structural Interpretation, the methodology's third phase, is conducted against the XYZP criteria: Domain (X), Scale (Y), and Use Case (Z) describe the structure; Perception (P) is the binding element that makes it legible to the humans who have to decide.
+
+[See full four-phase specification, including the XYZP criteria →](paaf-four-phases.md)
 
 ---
 

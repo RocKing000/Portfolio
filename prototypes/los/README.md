@@ -52,3 +52,9 @@ enrich_from_files.py    ← Enriches records from monthly upload files
 - Models are trained independently and scored per record, then aggregated into a composite portfolio view.
 - A rolling data window feeds training; the most recent snapshot feeds inference.
 - The system was designed for a monthly data cadence, not real-time streaming.
+
+---
+
+## Structural Reading
+
+Read through triNetra's PaaF/XYZP criteria: Domain (X) is loan portfolio risk; Scale (Y) runs from a single account's risk score to the composite portfolio view five models roll up into; Use Case (Z) is monthly decision support for collections and portfolio action, not real-time scoring. Perception (P) is the Angular dashboard: five independent model outputs only become a decision when a portfolio manager can read them as one coherent structural picture. See [triNetra's methodology](../../triNetra/methodology/paaf-four-phases.md) for the XYZP criteria in full.

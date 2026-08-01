@@ -54,16 +54,4 @@ Retained by the evaluating party. Contains:
 
 ---
 
-## Optional Research Artifacts
-
-Available to active Insight Cycle clients. Not part of the base Assessment Report.
-
-| Artifact | Description | Price |
-|---|---|---|
-| Change Analysis | Structural comparison between two assessment inputs with impact analysis and projected score change | USD 99 per submission |
-| Evolution Analysis | Structural evolution tracking across a calendar day with trajectory mapping | USD 249 per day |
-| Executive Intelligence Dossier | Executive-level structured intelligence deliverable across a calendar week | USD 999 per week |
-
----
-
 See [sample-reports.md](sample-reports.md) to view live examples of Assessment Report output.

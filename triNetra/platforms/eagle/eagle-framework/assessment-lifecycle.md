@@ -1,30 +1,20 @@
 # Assessment Lifecycle
 
-An Eagle Insight Platform Insight Cycle runs from initial engagement through report delivery. The lifecycle has ten phases.
+Eagle Insight Platform is retired as a commercial offering; this describes how an assessment worked, as a reference for what the Eagle Framework's evaluation process produces. triNetra's current commercial offer is Framework Building — applying PaaF directly so an organisation builds its own governing component, rather than receiving a fixed assessment product. See [trinetrarv.com/engage](https://trinetrarv.com/engage).
+
+An assessment ran from Input Manifest submission through report delivery, in five structural stages.
 
 ---
 
-## Phase 1: Intake
+## 1. Domain Classification and Manifest Template
 
-The client contacts research@trinetra.life. No intake form. No qualification call. The client provides: deployment domain, system under assessment, and deployment context. triNetra confirms domain coverage and begins onboarding.
-
----
-
-## Phase 2: Onboarding
-
-Platform Access (USD 3,999, one-time) covers onboarding configuration, Research Catalogue setup, and access to the triNetra Research Studio. This phase is completed once and does not repeat for subsequent Insight Cycles.
+The system under assessment was classified against the Eagle Framework's 30-domain library. The appropriate domain-specific Input Manifest template was delivered. For systems spanning multiple domains or falling outside the library, a generic template was provided.
 
 ---
 
-## Phase 3: Domain Classification and Manifest Template Delivery
+## 2. Input Manifest Completion
 
-The system under assessment is classified against the Eagle Framework's 30-domain library. The appropriate domain-specific Input Manifest template is delivered. For systems spanning multiple domains or falling outside the library, a generic template is provided.
-
----
-
-## Phase 4: Input Manifest Completion
-
-The client completes the Input Manifest. The Input Manifest is a structured specification defining the system under assessment across the following fields:
+The client completed the Input Manifest: a structured specification defining the system under assessment across the following fields:
 
 | Field | Description |
 |---|---|
@@ -38,47 +28,25 @@ The client completes the Input Manifest. The Input Manifest is a structured spec
 
 ---
 
-## Phase 5: Manifest Validation
+## 3. Manifest Validation
 
-The submitted Input Manifest is validated against structural requirements before corpus generation begins. Validation checks include field completeness, domain compatibility, evidence taxonomy consistency, and decision space definition. Validation errors are returned to the client for correction. A validated manifest is a prerequisite for corpus generation.
-
----
-
-## Phase 6: Corpus Generation
-
-The validated Input Manifest is processed by the USGE v2.6 engine (Unified Scenario Generation Engine). USGE v2.6 generates the benchmark corpus deterministically from the manifest parameters. No large language model or AI system is involved at any stage. The same manifest produces the same corpus on every evaluation.
-
-See [usge-specification.md](usge-specification.md) for engine detail.
+The submitted Input Manifest was validated against structural requirements before evaluation began. Validation checks included field completeness, domain compatibility, evidence taxonomy consistency, and decision space definition. A validated manifest was a prerequisite for evaluation.
 
 ---
 
-## Phase 7: Structural Evaluation
+## 4. Structural Evaluation and Scoring
 
-The benchmark corpus is evaluated across all seven Eagle Framework dimensions. Each dimension is scored independently. The evaluation tests structural resilience under epistemic uncertainty, partial observability, conflicting signals, and adversarial obfuscation.
+The validated Input Manifest was evaluated across all seven Eagle Framework dimensions, deterministically. Each dimension was scored independently. Pattern scores aggregated to dimension scores; dimension scores aggregated to the composite Eagle Score (0–100) using domain-specific weighting parameters. The same manifest produced the same Eagle Score on every evaluation.
 
-See [seven-dimensions.md](seven-dimensions.md) for dimension definitions.
-
----
-
-## Phase 8: Scoring
-
-Observations aggregate to pattern scores across 35 Eagle Framework patterns. Pattern scores aggregate to dimension scores. Dimension scores aggregate to the composite Eagle Score (0–100) using domain-specific weighting parameters. The same manifest produces the same Eagle Score on every evaluation.
-
-See [scoring.md](scoring.md) for the full scoring model.
+See [seven-dimensions.md](seven-dimensions.md) for dimension definitions and [scoring.md](scoring.md) for the full scoring model.
 
 ---
 
-## Phase 9: Report Generation
+## 5. Report Delivery
 
-The Assessment Report is generated from the scored evaluation. The report contains: Eagle Score, maturity level classification, dimension-level scores with evidence chains, findings register, contradiction register, and remediation roadmap. The Evaluation Package (evaluation dataset, grading key, prompt template) is retained by the evaluating party.
+The Assessment Report was generated from the scored evaluation: Eagle Score, maturity level classification, dimension-level scores with evidence chains, findings register, contradiction register, and remediation roadmap.
 
 See [organisation-intelligence/what-you-receive.md](../organisation-intelligence/what-you-receive.md) for full report contents.
-
----
-
-## Phase 10: Delivery and Decision Support
-
-The Assessment Report is delivered to the client. The remediation roadmap specifies structural improvements by dimension, ordered by severity, with projected maturity level impact for each item. Decision support is available through the triNetra Research Studio for clients requiring interpretation of specific findings.
 
 ---
 

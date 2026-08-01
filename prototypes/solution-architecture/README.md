@@ -66,3 +66,9 @@ Architecture decisions are documented across three layers with implementation gu
 - Search is handled by the Python service; CRUD and business logic by the .NET API.
 - Hierarchy browsing is a dedicated feature module, not a generic tree component.
 - Cypress provides E2E coverage of the core user flows.
+
+---
+
+## Structural Reading
+
+Read through triNetra's PaaF/XYZP criteria: Domain (X) is enterprise organisational knowledge; Scale (Y) runs from a single conversational query to org-wide hierarchy browsing; Use Case (Z) is decision support through search and dashboard-building, not a generic chatbot. Perception (P) is the dashboard-builder module: search results and hierarchy data only become useful once a user can configure how they're read, not just retrieve them. See [triNetra's methodology](../../triNetra/methodology/paaf-four-phases.md) for the XYZP criteria in full.

@@ -48,3 +48,9 @@ ocr/
 ## Notes
 
 This was a prototype built to understand the classification problem structure and data requirements. No production deployment was intended or built.
+
+---
+
+## Structural Reading
+
+Read through triNetra's PaaF/XYZP criteria: Domain (X) is identity-document image classification; Scale (Y) is per-document, across five classes and three tasks; Use Case (Z) is understanding what the classification problem structurally requires before building for it, not shipping a production classifier. Perception (P) is the layer this prototype deliberately stops short of: a classifier output is not a decision until a reviewer interprets what "class_a, low confidence" actually means for the document in front of them. See [triNetra's methodology](../../triNetra/methodology/paaf-four-phases.md) for the XYZP criteria in full.

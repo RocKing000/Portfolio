@@ -4,7 +4,7 @@
 
 Alignment Intelligence enables institutional clients to define their investment criteria and structural expectations once. It then evaluates portfolio companies against that standard consistently across every assessment cycle.
 
-Available in the Eagle Strategic Suite (ESS) and Eagle Portfolio Suite (EPS) bundles.
+Eagle Insight Platform is retired as a commercial offering; this documents it as a reference knowledge asset. triNetra's current commercial offer is Framework Building — see [trinetrarv.com/engage](https://trinetrarv.com/engage).
 
 ---
 
@@ -24,7 +24,6 @@ Available in the Eagle Strategic Suite (ESS) and Eagle Portfolio Suite (EPS) bun
 | [what-you-receive.md](what-you-receive.md) | Full specification of deliverables |
 | [reference-manifest.md](reference-manifest.md) | The Reference Manifest: how institutional criteria are encoded |
 | [how-it-works.md](how-it-works.md) | End-to-end process for institutional clients |
-| [licensing.md](licensing.md) | ESS pricing and bundle details |
 
 ---
 

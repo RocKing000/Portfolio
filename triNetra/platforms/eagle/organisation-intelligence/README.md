@@ -2,9 +2,9 @@
 
 > What exists. What works. What breaks under pressure. Where does improvement matter most.
 
-Organisation Intelligence is the foundational domain of the Eagle Insight Platform (EIP). It evaluates a deployed system across seven dimensions of the Eagle Framework and produces a complete Assessment Report with an Eagle Score, maturity level classification, and a structured remediation roadmap.
+Organisation Intelligence is the foundational domain of the Eagle Insight Platform. It evaluates a deployed system across seven dimensions of the Eagle Framework and produces a complete Assessment Report with an Eagle Score, maturity level classification, and a structured remediation roadmap.
 
-Available in the EIP, Eagle Strategic Suite (ESS), and Eagle Portfolio Suite (EPS) bundles.
+Eagle Insight Platform is retired as a commercial offering; this documents it as a reference knowledge asset. triNetra's current commercial offer is Framework Building — see [trinetrarv.com/engage](https://trinetrarv.com/engage).
 
 ---
 
@@ -24,7 +24,6 @@ Available in the EIP, Eagle Strategic Suite (ESS), and Eagle Portfolio Suite (EP
 | [what-you-receive.md](what-you-receive.md) | Full specification of deliverables |
 | [how-the-assessment-works.md](how-the-assessment-works.md) | Assessment process end to end |
 | [sample-reports.md](sample-reports.md) | Live interactive samples |
-| [licensing.md](licensing.md) | EIP pricing and bundle details |
 
 ---
 

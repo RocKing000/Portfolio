@@ -2,9 +2,9 @@
 
 > How does the portfolio perform as a system. Where are the correlated risks. What structural patterns repeat across investments.
 
-Portfolio Intelligence is the highest-tier domain of the Eagle Insight Platform (EIP). It synthesises Organisation Intelligence and Alignment Intelligence assessments across an entire portfolio to produce a portfolio-level structural view. Individual company assessments cannot produce this view in isolation.
+Portfolio Intelligence is the highest-tier domain of the Eagle Insight Platform. It synthesises Organisation Intelligence and Alignment Intelligence assessments across an entire portfolio to produce a portfolio-level structural view. Individual company assessments cannot produce this view in isolation.
 
-Available exclusively in the Eagle Portfolio Suite (EPS) bundle.
+Eagle Insight Platform is retired as a commercial offering; this documents it as a reference knowledge asset. triNetra's current commercial offer is Framework Building — see [trinetrarv.com/engage](https://trinetrarv.com/engage).
 
 ---
 
@@ -22,7 +22,6 @@ Available exclusively in the Eagle Portfolio Suite (EPS) bundle.
 | Document | Purpose |
 |---|---|
 | [what-you-receive.md](what-you-receive.md) | Full specification of deliverables |
-| [licensing.md](licensing.md) | EPS pricing and bundle details |
 
 ---
 

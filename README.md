@@ -7,6 +7,8 @@ research@trinetra.life · [LinkedIn](https://linkedin.com/in/shubham-agarwal-roc
 
 The work here spans data science, ML engineering, enterprise architecture, multi-agent automation, applied competition, and building an independent research company. Each project represents a distinct phase. This repository is a record of that journey.
 
+Read through triNetra's own methodology, each engineering project below reflects the same structural signal: a domain (X), a scale (Y), and a use case (Z) resolved into something a decision-maker can act on (P). See [triNetra/methodology/](triNetra/methodology/paaf-four-phases.md) for the XYZP criteria in full, and each project's own README for its specific reading.
+
 ---
 
 ## Data Science and Machine Learning
@@ -39,9 +41,9 @@ Geopolitics and supply chain risk simulation built independently on a problem st
 ## Company
 
 **[triNetra — Research Ecosystem](triNetra/)**  
-triNetra builds domain-specific Insight Platforms for structured reasoning across complex systems. Eagle Insight Platform is the first: a structural assessment platform for AI and Organisational Intelligence, evaluating decision-making systems across seven auditability dimensions and producing a deterministic Eagle Score and maturity classification. No AI is involved in evaluation or scoring at any stage.
+triNetra is an independent research venture building intellectual-property assets for institutional decision-making. Its methodology, PaaF (Patterns as a Framework), interprets structure through the XYZP criteria — Domain (X), Scale (Y), and Use Case (Z) define the structural context; Perception (P) is the binding element that interprets how they interact for the humans who have to decide. Eagle Insight Platform, a seven-dimension structural assessment applied to AI and Organisational Intelligence, is one reference knowledge asset PaaF has produced — proof of what the methodology builds, not the only thing it can build. triNetra's current commercial offer is Framework Building: applying PaaF directly so an organisation builds a governing component of its own.
 
-[trinetra.life](https://trinetra.life)
+Research: [trinetra.life](https://trinetra.life) · Venture: [trinetrarv.com](https://trinetrarv.com)
 
 ---
 

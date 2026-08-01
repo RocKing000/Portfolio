@@ -8,25 +8,25 @@ The platform evaluates high-consequence decision-making systems across seven dim
 
 ## Three Questions
 
-Every engagement begins with three questions. Each question maps to an intelligence domain and a license bundle.
+Every assessment answered three questions. Each question maps to an intelligence domain.
 
-| Buyer Question | Intelligence Domain | Bundle |
-|---|---|---|
-| What is this organisation? | [Organisation Intelligence](organisation-intelligence/) | EIP · Eagle Strategic Suite (ESS) · Eagle Portfolio Suite (EPS) |
-| Does it align with our investment objectives? | [Alignment Intelligence](alignment-intelligence/) | ESS · EPS |
-| Where should portfolio attention belong? | [Portfolio Intelligence](portfolio-intelligence/) | EPS |
+| Buyer Question | Intelligence Domain |
+|---|---|
+| What is this organisation? | [Organisation Intelligence](organisation-intelligence/) |
+| Does it align with our investment objectives? | [Alignment Intelligence](alignment-intelligence/) |
+| Where should portfolio attention belong? | [Portfolio Intelligence](portfolio-intelligence/) |
 
 ---
 
 ## Intelligence Domains
 
-EIP operates across three intelligence domains. Each domain is a distinct set of deliverables.
+EIP operated across three intelligence domains. Each domain is a distinct set of deliverables.
 
-| Domain | What It Answers | Bundle |
-|---|---|---|
-| [Organisation Intelligence](organisation-intelligence/) | What exists. What works. What breaks under pressure. | EIP · ESS · EPS |
-| [Alignment Intelligence](alignment-intelligence/) | Are we aligned. Where are the gaps. What diverges. | ESS · EPS |
-| [Portfolio Intelligence](portfolio-intelligence/) | How the portfolio performs as a system. Correlated risks. | EPS |
+| Domain | What It Answers |
+|---|---|
+| [Organisation Intelligence](organisation-intelligence/) | What exists. What works. What breaks under pressure. |
+| [Alignment Intelligence](alignment-intelligence/) | Are we aligned. Where are the gaps. What diverges. |
+| [Portfolio Intelligence](portfolio-intelligence/) | How the portfolio performs as a system. Correlated risks. |
 
 ---
 
@@ -40,9 +40,8 @@ EIP operates across three intelligence domains. Each domain is a distinct set of
 
 ---
 
-## Access
+## Status
 
-Eagle Insight Platform is currently available through the Founding Validation Programme (invitation-only, until 01 January 2027). Platform Access: USD 3,999 (one-time). Insight Cycle: USD 999 per engagement. Enterprise bundle licensing (EIP, ESS, EPS) begins 01 January 2027.
+Eagle Insight Platform is retired as a commercial offering. It remains documented here as a reference knowledge asset — proof of what triNetra's PaaF methodology produces, not the primary offering. triNetra's current commercial offer is Framework Building: applying PaaF directly so an organisation builds its own governing component, available now, terms agreed per engagement. See [trinetrarv.com/engage](https://trinetrarv.com/engage).
 
-Contact research@trinetra.life to initiate engagement.  
-Full platform: [trinetra.life](https://trinetra.life)
+Research: [trinetra.life](https://trinetra.life) · Contact: research@trinetra.life

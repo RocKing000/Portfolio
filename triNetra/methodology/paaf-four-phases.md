@@ -30,6 +30,17 @@ The framework is interpreted for the teams who will govern and evolve it.
 
 Contradictions, survivability pressures, and trajectory direction are made explicit. Structural Interpretation answers the questions that the pattern analysis raises: what does this mean for how the system operates under pressure? Where does the framework predict failure? What survivability pressures will cause the system to deviate from its stated governance posture?
 
+**The XYZP Criteria**
+
+Structural Interpretation is conducted against four criteria:
+
+- **X — Domain.** The structural context under examination: the system, market, or institutional environment the pattern was extracted from.
+- **Y — Scale.** The structural depth of that context: how far the pattern's implications extend, from a single decision point to an entire governance architecture.
+- **Z — Use Case.** The structural intent behind the interpretation: what the derived framework is actually meant to do for the organisation that will govern it.
+- **P — Perception.** The binding element. X, Y, and Z do not interpret themselves — Perception is how their interaction is read for the humans who have to decide, turning a structural map into something a governing team can act on.
+
+X, Y, and Z describe the structure. P is what makes the structure legible to a decision-maker. A framework derived without an explicit account of P is a diagram, not a governing instrument.
+
 ---
 
 ## Phase 4: Evolution Direction

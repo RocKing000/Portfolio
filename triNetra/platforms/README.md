@@ -6,11 +6,11 @@ A platform is not a product feature or a software module. It is a complete resea
 
 ---
 
-## Active Platforms
+## Reference Platform
 
 | Platform | Domain | Status |
 |---|---|---|
-| [Eagle Insight Platform](eagle/) | AI and Organisational Intelligence | Active: founding partner access until 01 January 2027 |
+| [Eagle Insight Platform](eagle/) | AI and Organisational Intelligence | Retired as a commercial offering; documented as a reference knowledge asset. See [Framework Building](https://trinetrarv.com/engage) for triNetra's current offer. |
 
 ---
 

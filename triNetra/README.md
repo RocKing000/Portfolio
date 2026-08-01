@@ -8,12 +8,12 @@ triNetra is a research ecosystem developing domain-specific Insight Platforms. T
 
 ## Platforms
 
-triNetra develops one Insight Platform at a time, grounded in domain research before launch. Eagle Insight Platform is the first.
+Eagle Insight Platform was triNetra's first Insight Platform, applying PaaF and the Eagle Framework to AI and Organisational Intelligence. It is retired as a commercial offering and now stands as a reference knowledge asset: proof of what PaaF produces, not the primary offering.
 
 ```
 triNetra Research Ecosystem
 │
-├── Eagle Insight Platform          ← Active
+├── Eagle Insight Platform          ← Reference knowledge asset (retired as a commercial offering)
 │   ├── Organisation Intelligence
 │   ├── Alignment Intelligence
 │   └── Portfolio Intelligence
@@ -24,30 +24,18 @@ triNetra Research Ecosystem
 └── Defence Insight Platform        ← Research phase
 ```
 
-See [ecosystem/](ecosystem/) for the full platform map and research directions.  
+See [ecosystem/](ecosystem/) for the full platform map and research directions.
 See [platforms/](platforms/) for full documentation of Eagle Insight Platform.
 
 ---
 
-## Eagle Insight Platform: Access
+## Current Commercial Offer: Framework Building
 
-**Current access (until 01 January 2027):** Founding Validation Programme (invitation-only).
+Applying PaaF, triNetra's own research methodology, directly: an organisation builds a validated framework or plugin of its own — for example a governance framework or plugin for an internal LLM or agent system — rather than receiving the Eagle Framework as a fixed instrument. PaaF interprets a structure through the XYZP criteria (see [methodology/](methodology/)): Domain (X), Scale (Y), and Use Case (Z) define the structural context; Perception (P) is the binding element that interprets how they interact for the humans who have to decide.
 
-| Item | Price | Notes |
-|---|---|---|
-| Platform Access | USD 3,999 | One-time |
-| Insight Cycle | USD 999 | Per engagement |
-| Founding Partner Reservation | Optional | Locks founding rates for post-2027 enterprise licensing |
+Available now. Terms are agreed per engagement, not fixed in advance.
 
-**Enterprise licensing (from 01 January 2027):**
-
-| Bundle | Domains | Billing | Founding Rate | Standard Rate |
-|---|---|---|---|---|
-| Eagle Insight Platform (EIP) | Organisation Intelligence | Quarterly | USD 14,999 | USD 24,999 |
-| Eagle Strategic Suite (ESS) | Organisation + Alignment Intelligence | Annual | USD 99,999 | USD 149,999 |
-| Eagle Portfolio Suite (EPS) | Organisation + Alignment + Portfolio Intelligence | Annual | USD 199,999 | USD 249,999 |
-
-See [roadmap/2026.md](roadmap/2026.md) for current access detail. See [roadmap/2027.md](roadmap/2027.md) for enterprise licensing.
+Contact: research@trinetra.life · [trinetrarv.com/engage](https://trinetrarv.com/engage)
 
 ---
 
@@ -56,14 +44,13 @@ See [roadmap/2026.md](roadmap/2026.md) for current access detail. See [roadmap/2
 | Section | Purpose |
 |---|---|
 | [platforms/](platforms/) | Eagle Insight Platform: three intelligence domains, full documentation |
-| [ecosystem/](ecosystem/) | All five platforms: active and research-phase |
+| [ecosystem/](ecosystem/) | All five platforms: reference and research-phase |
 | [architecture/](architecture/) | Why triNetra is built the way it is |
 | [research-philosophy/](research-philosophy/) | The principles governing the research and methodology |
-| [methodology/](methodology/) | Patterns as a Framework (PaaF), four phases, TPRS |
+| [methodology/](methodology/) | Patterns as a Framework (PaaF), four phases, XYZP criteria, TPRS |
 | [research/](research/) | Active and submitted research studies |
 | [case-studies/](case-studies/) | Eagle assessment output: structural change and evolution scenarios |
-| [roadmap/](roadmap/) | Research directions and access programme timelines |
-| [riskopsbench/](riskopsbench/) | RiskOpsBench 1.0: AI reasoning benchmark and scoring engine |
+| [roadmap/](roadmap/) | Research directions |
 | [contact.md](contact.md) | research@trinetra.life |
 
 ---
@@ -72,4 +59,4 @@ See [roadmap/2026.md](roadmap/2026.md) for current access detail. See [roadmap/2
 
 Email: research@trinetra.life  
 WhatsApp: +91 95282 15988  
-Website: [trinetra.life](https://trinetra.life)
+Research: [trinetra.life](https://trinetra.life) · Venture: [trinetrarv.com](https://trinetrarv.com)
