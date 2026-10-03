@@ -34,7 +34,7 @@ async function runSeed() {
   console.log('║  DIRE-X — Waiting for database tables to be ready   ║');
   console.log('╚══════════════════════════════════════════════════════╝');
   console.log('');
-  console.log('1. Open: https://supabase.com/dashboard/project/xywqmkjklapfdfkcffox/sql/new');
+  console.log('1. Open: https://supabase.com/dashboard/project/<your-project-id>/sql/new');
   console.log('2. Paste the contents of:  dire-x/supabase/dire-x-setup.sql');
   console.log('3. Click RUN');
   console.log('');

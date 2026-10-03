@@ -13,7 +13,7 @@ export interface Employee {
   id: string;
   name: string;
   designation: string;
-  bank: string;
+  organisation: string;
   state: string;
   branch: string;
   attendance: AttendanceRecord[];
@@ -23,8 +23,8 @@ export const employees: Employee[] = [
   {
     id: "1001",
     name: "Sample Employee A",
-    designation: "RM",
-    bank: "BANK_A",
+    designation: "Field Agent",
+    organisation: "ORG_A",
     state: "State A",
     branch: "Branch North",
     attendance: [
@@ -41,8 +41,8 @@ export const employees: Employee[] = [
   {
     id: "1002",
     name: "Sample Employee B",
-    designation: "SRM",
-    bank: "BANK_B",
+    designation: "Senior Field Agent",
+    organisation: "ORG_B",
     state: "State B",
     branch: "Branch East",
     attendance: [
@@ -57,8 +57,8 @@ export const employees: Employee[] = [
   {
     id: "1003",
     name: "Sample Employee C",
-    designation: "TM",
-    bank: "BANK_A",
+    designation: "Team Member",
+    organisation: "ORG_A",
     state: "State C",
     branch: "Branch South",
     // Sparse attendance — triggers LOW_ATTENDANCE flag in /api/stats

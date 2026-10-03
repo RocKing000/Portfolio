@@ -4,7 +4,7 @@
 services:
   # ── Node.js game server ─────────────────────────────────────────────────────
   - type: web
-    name: dire-x-api
+    name: <your-game-server-service>
     env: node
     region: oregon
     plan: free
@@ -26,12 +26,12 @@ services:
       - key: OPENROUTER_API_KEY
         sync: false
       - key: CORS_ORIGIN
-        value: https://your-dire-x.vercel.app
+        value: https://<your-vercel-domain>
     autoDeploy: true
 
   # ── FastAPI scoring backend ──────────────────────────────────────────────────
   - type: web
-    name: dire-x-backend
+    name: <your-scoring-backend-service>
     runtime: python
     region: oregon
     plan: free

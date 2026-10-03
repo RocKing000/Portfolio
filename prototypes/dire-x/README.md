@@ -37,7 +37,7 @@ The core scoring mechanism is SRES (Strategic Resource Evaluation Score): a mult
 
 ## Demo
 
-[dire-x.vercel.app](https://dire-x.vercel.app)
+Live deployment is private. The full codebase and architecture are documented in `DIRE-X_Complete_Documentation.md`.
 
 ---
 

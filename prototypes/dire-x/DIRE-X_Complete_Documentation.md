@@ -41,7 +41,7 @@ DIRE-X is a **real-time geopolitical supply chain simulation platform** that mod
 ### Core Formula: SRES (Strategic Resource Evaluation Score)
 
 ```
-SRES = 0.35 x Demand + 0.30 x Supply + 0.20 x Geopolitical + 0.15 x Environmental
+SRES = w1 x Demand + w2 x Supply + w3 x Geopolitical + w4 x Environmental
 ```
 
 Each dimension scored 0-100, clamped. Company SRES = weighted average across all resource dependencies.
@@ -61,7 +61,7 @@ RiskScore = 0.30 x ResourceCriticality
 ## 2. Architecture
 
 ```
-                    [Vercel - dire-x.vercel.app]
+                    [Vercel - <frontend-domain>]
                               |
                         React/Vite SPA
                      (3D Globe, Recharts)
@@ -430,7 +430,7 @@ Manual chunk splitting: vendor (React), charts (Recharts), animation (Framer Mot
 ### 8.1 SRES Engine (sresEngine.js)
 
 ```
-SRES_resource = 0.35 x Demand + 0.30 x Supply + 0.20 x Geopolitical + 0.15 x Environmental
+SRES_resource = w1 x Demand + w2 x Supply + w3 x Geopolitical + w4 x Environmental
 SRES_company  = Sum(dependency_i x sres_i) / Sum(dependency_i)
 ```
 
@@ -813,16 +813,16 @@ Combined v1 + v2 = **6,394 total rows** across **31 sheets** with module-to-shee
 
 ### 13.1 Frontend (Vercel)
 
-- **Domain:** dire-x.vercel.app
+- **Domain:** `<your-vercel-domain>`
 - **Root Directory:** client/
 - **Build:** `npm run build` (Vite)
 - **Output:** dist/
 - **Rewrites:** `/(.*) -> /index.html` (SPA)
-- **Env Vars:** `VITE_DIREX_API_URL=https://dire-x-backend.onrender.com`
+- **Env Vars:** `VITE_DIREX_API_URL=https://<your-render-backend>.onrender.com`
 
 ### 13.2 Game Server (Render)
 
-- **Service:** dire-x-api
+- **Service:** `<your-game-server-service>`
 - **Runtime:** Node.js 18+
 - **Root:** server/
 - **Build:** `npm install`
@@ -832,7 +832,7 @@ Combined v1 + v2 = **6,394 total rows** across **31 sheets** with module-to-shee
 
 ### 13.3 Scoring Backend (Render)
 
-- **Service:** dire-x-backend
+- **Service:** `<your-scoring-backend-service>`
 - **Runtime:** Python 3.10
 - **Root:** backend/
 - **Build:** `pip install -r requirements.txt`
@@ -842,7 +842,7 @@ Combined v1 + v2 = **6,394 total rows** across **31 sheets** with module-to-shee
 
 ### 13.4 Database (Supabase)
 
-- **Project:** xywqmkjklapfdfkcffox.supabase.co
+- **Project:** `<your-project>.supabase.co`
 - **Tables:** 20+ (core + data product + kaggle enrichment)
 - **Auth:** Anon key (frontend) + Service role key (backend)
 
@@ -868,7 +868,7 @@ npm run dev                          # Uses concurrently
 ```bash
 PORT=4000
 NODE_ENV=development
-SUPABASE_URL=https://xywqmkjklapfdfkcffox.supabase.co
+SUPABASE_URL=https://<your-project>.supabase.co
 SUPABASE_ANON_KEY=<key>
 SUPABASE_SERVICE_ROLE_KEY=<key>
 OPENROUTER_API_KEY=sk-or-v1-<key>
@@ -880,7 +880,7 @@ ADMIN_API_KEY=direx-admin-2026-secure-key
 
 ```bash
 VITE_API_URL=                                         # Empty for dev (Vite proxy)
-VITE_DIREX_API_URL=https://dire-x-backend.onrender.com
+VITE_DIREX_API_URL=https://<your-scoring-backend>.onrender.com
 VITE_DIREX_DEV_URL=http://localhost:8000
 ```
 

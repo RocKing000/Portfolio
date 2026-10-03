@@ -114,7 +114,7 @@ export async function GET() {
       id: emp.id,
       name: emp.name,
       designation: emp.designation,
-      bank: emp.bank,
+      organisation: emp.organisation,
       state: emp.state,
       branch: emp.branch,
       totalCheckIns: attendanceDays,

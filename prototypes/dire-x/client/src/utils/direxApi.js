@@ -6,7 +6,7 @@
  * URL routing:
  *   Development  — Vite proxies /direx/* → http://localhost:8000/*
  *                  (VITE_DIREX_API_URL is empty, so baseURL = '/direx')
- *   Production   — VITE_DIREX_API_URL = 'https://dire-x-backend.onrender.com'
+ *   Production   — VITE_DIREX_API_URL = 'https://<your-scoring-backend>.onrender.com'
  *                  (calls go directly to Render; CORS is open)
  *
  * Endpoints covered:
@@ -26,7 +26,7 @@ import { API_TIMEOUT_MS } from '../config';
 
 const direxClient = axios.create({
   // Dev: '' → use /direx (Vite proxy strips prefix and forwards to localhost:8000)
-  // Prod: 'https://dire-x-backend.onrender.com' → direct HTTPS call
+  // Prod: 'https://<your-scoring-backend>.onrender.com' → direct HTTPS call
   baseURL: import.meta.env.VITE_DIREX_API_URL || '/direx',
   timeout: API_TIMEOUT_MS,
   headers: { 'Content-Type': 'application/json' },
