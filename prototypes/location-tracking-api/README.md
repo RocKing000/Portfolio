@@ -1,12 +1,12 @@
-# geo-api
+# Location Tracking API
 
-A Next.js API service that ingests field-agent GPS check-in data and exposes structured endpoints for location tracking and compliance analysis.
+A Next.js API service that ingests GPS check-in data and exposes structured endpoints for location tracking and compliance analysis.
 
 ---
 
 ## What It Does
 
-Takes check-in records — each containing a timestamp and GPS coordinate — and computes per-agent and branch-level compliance metrics: attendance rate, late check-ins, off-hours activity, and GPS spoofing detection (static coordinates across all records).
+Takes check-in records — each containing a timestamp and GPS coordinate — and computes per-user and branch-level compliance metrics: attendance rate, late check-ins, off-hours activity, and GPS spoofing detection (static coordinates across all records).
 
 ---
 
@@ -14,9 +14,9 @@ Takes check-in records — each containing a timestamp and GPS coordinate — an
 
 | Method | Route | Description |
 |--------|-------|-------------|
-| GET | `/api/employees` | List all agents with latest location and record count |
-| GET | `/api/employees/:id` | Full agent profile with complete check-in history |
-| GET | `/api/stats` | Aggregate compliance report: per-agent flags, risk scores, branch centroids |
+| GET | `/api/employees` | List all users with latest location and record count |
+| GET | `/api/employees/:id` | Full user profile with complete check-in history |
+| GET | `/api/stats` | Aggregate compliance report: per-user flags, risk scores, branch centroids |
 
 ### Stats response shape
 
@@ -97,4 +97,4 @@ Open [http://localhost:3000/api/stats](http://localhost:3000/api/stats) to see t
 
 ## Data
 
-`data/employees.ts` in this public copy contains three synthetic sample records. The production version loads real check-in data from an external source. Real agent and organisational data is kept private.
+`data/employees.ts` in this public copy contains three synthetic sample records. The production version loads real check-in data from an external source. Real user and organisational data is kept private.
