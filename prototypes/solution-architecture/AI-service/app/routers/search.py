@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from typing import Optional
 
 import numpy as np
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, Header, HTTPException, Request
 from pydantic import BaseModel, Field
 
 from app.config import get_settings
@@ -232,7 +232,13 @@ async def search_v2(request: _V2SearchRequest, http_request: Request):
 
 
 @router.post("/reload-cache", tags=["Admin"])
-async def reload_cache(http_request: Request, tenant_code: Optional[str] = None):
+async def reload_cache(
+    http_request: Request,
+    tenant_code: Optional[str] = None,
+    x_admin_token: str = Header(...),
+):
+    if not settings.admin_reload_token or x_admin_token != settings.admin_reload_token:
+        raise HTTPException(status_code=403, detail="Forbidden")
     try:
         from app.main import _initialise_engine
         await asyncio.to_thread(_initialise_engine, http_request.app)

@@ -41,7 +41,7 @@ function rateLimiter(category = 'default') {
   const limit = LIMITS[category] || LIMITS.default;
 
   return (req, res, next) => {
-    const sessionId = req.session?.id || req.ip || 'anonymous';
+    const sessionId = req.ip || req.session?.id || 'anonymous';
     const key = `${sessionId}:${category}`;
     const now = Date.now();
 

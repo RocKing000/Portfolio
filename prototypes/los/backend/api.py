@@ -156,7 +156,7 @@ def bucket_movement():
 @app.route("/api/top-critical")
 def top_critical():
     df = get_df()
-    n  = int(request.args.get("n", 10))
+    n  = min(int(request.args.get("n", 10)), 500)
     return ok(get_top_critical_loans(df, n))
 
 
@@ -197,7 +197,7 @@ def loans():
     bucket = request.args.get("bucket")
     search = request.args.get("search", "").strip().lower()
     page   = int(request.args.get("page", 1))
-    size   = int(request.args.get("size", 50))
+    size   = min(int(request.args.get("size", 50)), 200)
 
     subset = df.copy()
     if month:

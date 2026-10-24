@@ -42,7 +42,7 @@ const PORT = process.env.PORT || 4000;
 
 // ─── Global middleware ─────────────────────────────────────────────
 app.use(compression());
-app.use(cors());
+app.use(cors({ origin: process.env.CORS_ORIGIN || 'http://localhost:5173' }));
 app.use(express.json({ limit: '10mb' }));
 
 // Session management (auto-creates sessions for new clients)
@@ -140,7 +140,7 @@ app.listen(PORT, async () => {
   console.log(`  Auth     : ✓ session + ownership + admin`);
   console.log(`  Rate Limit: ✓ per-session sliding window`);
   console.log(`  Sanitizer: ✓ XSS + prompt injection defense`);
-  console.log(`  Admin Key: ${ADMIN_KEY.slice(0, 8)}...`);
+  console.log('  Admin Key: configured');
   console.log(`  Health   : http://localhost:${PORT}/health`);
   console.log(`  ScoringEngine: ${process.env.SCORING_ENGINE_URL || 'http://localhost:8001'}`);
   console.log('');
