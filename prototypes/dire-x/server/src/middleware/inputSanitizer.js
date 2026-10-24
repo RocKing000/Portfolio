@@ -83,6 +83,7 @@ function sanitizeQueryParam(param, maxLen = 100) {
   if (!param || typeof param !== 'string') return '';
   return param
     .slice(0, maxLen)
+    .replace(/[\r\n\t]/g, ' ')
     .replace(/[<>"'&;{}()\\/`]/g, '')
     .replace(/ignore\s+previous/gi, '')
     .replace(/system\s*note/gi, '')

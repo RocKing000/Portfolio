@@ -171,16 +171,14 @@ class Database:
             if not error_ids:
                 return 0
 
-            # Convert list to comma-separated string for IN clause
-            ids_str = "','".join(error_ids)
-
+            placeholders = ", ".join(["%s"] * len(error_ids))
             query = f"""
                 UPDATE kb.error_library
                 SET search_impressions = search_impressions + 1
-                WHERE CONVERT(VARCHAR(50), error_id) IN ('{ids_str}')
+                WHERE CONVERT(VARCHAR(50), error_id) IN ({placeholders})
             """
 
-            cursor.execute(query)
+            cursor.execute(query, tuple(error_ids))
             rows_affected = cursor.rowcount
             conn.commit()
 
@@ -407,7 +405,7 @@ class Database:
             conn = Database.get_connection()
             cursor = conn.cursor(as_dict=True)
 
-            where_clause = f"WHERE tenant_code = '{tenant_code}'" if tenant_code else ""
+            where_clause = "WHERE tenant_code = %s" if tenant_code else ""
 
             query = f"""
                 SELECT TOP {limit}
@@ -425,7 +423,10 @@ class Database:
                 ORDER BY query_count DESC
             """
 
-            cursor.execute(query)
+            if tenant_code:
+                cursor.execute(query, (tenant_code,))
+            else:
+                cursor.execute(query)
             results = cursor.fetchall()
 
             return results

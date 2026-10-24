@@ -65,7 +65,10 @@ class Settings(BaseSettings):
     analytics_cache_ttl_seconds: int = 300
 
     # ── CORS ───────────────────────────────────────────────────────────────────
-    cors_origins: list = ["*"]
+    cors_origins: list = []
+
+    # ── Admin ──────────────────────────────────────────────────────────────────
+    admin_reload_token: str = ""
 
     # ── Feature flags ──────────────────────────────────────────────────────────
     feature_semantic_search: bool = True

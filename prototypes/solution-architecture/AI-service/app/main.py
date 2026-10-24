@@ -4,7 +4,7 @@ Port 8000 — BM25 + semantic search via sentence-transformers
 """
 import asyncio
 import logging
-import pickle
+import os
 from contextlib import asynccontextmanager
 from typing import Any, Dict, List, Optional
 
@@ -61,7 +61,7 @@ def _load_embeddings_matrix(
         missing_idx = []
         for i, eid in enumerate(error_ids):
             if eid in stored:
-                embs.append(pickle.loads(stored[eid]))
+                embs.append(np.frombuffer(stored[eid], dtype=np.float32))
             else:
                 missing_idx.append(i)
                 embs.append(None)
@@ -84,7 +84,7 @@ def _load_embeddings_matrix(
 
     # Persist
     if settings.embedding_cache_enabled:
-        to_save = [(eid, pickle.dumps(matrix[i])) for i, eid in enumerate(error_ids)]
+        to_save = [(eid, matrix[i].astype(np.float32).tobytes()) for i, eid in enumerate(error_ids)]
         Database.save_embeddings_batch(to_save)
 
     return matrix
@@ -180,12 +180,13 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+_cors_origins = [o.strip() for o in os.getenv("CORS_ORIGINS", "http://localhost:3000").split(",") if o.strip()]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=_cors_origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type"],
 )
 
 app.include_router(search_router.router)
@@ -212,7 +213,7 @@ async def global_exception_handler(request, exc):
     logger.error(f"Unhandled exception: {exc}", exc_info=True)
     return JSONResponse(
         status_code=500,
-        content={"success": False, "error": str(exc), "type": type(exc).__name__},
+        content={"success": False, "error": "An internal error occurred."},
     )
 
 

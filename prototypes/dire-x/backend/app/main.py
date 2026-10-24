@@ -99,20 +99,21 @@ app = FastAPI(
     ),
     version="2.0.0",
     lifespan=lifespan,
-    docs_url="/docs",
-    redoc_url="/redoc",
+    docs_url="/docs" if os.getenv("ENVIRONMENT", "development") != "production" else None,
+    redoc_url="/redoc" if os.getenv("ENVIRONMENT", "development") != "production" else None,
 )
 
 # GZip: compress responses larger than 1 KB (helps with large explanation blobs)
 app.add_middleware(GZipMiddleware, minimum_size=1024)
 
-# CORS — restrict allow_origins in production
+# CORS — origin allowlist driven by CORS_ORIGINS env var
+_cors_origins = [o.strip() for o in os.getenv("CORS_ORIGINS", "http://localhost:5173").split(",") if o.strip()]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=_cors_origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type"],
 )
 
 # ---------------------------------------------------------------------------
